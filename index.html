@@ -17,7 +17,8 @@ a{text-decoration:none;color:inherit}
 .container{width:min(1160px,92%);margin:auto}
 header{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(8,8,8,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
 .nav{height:78px;display:flex;align-items:center;justify-content:space-between}
-.logo{font-size:27px;font-weight:800;letter-spacing:4px;color:var(--cream)}
+.logo{display:flex;align-items:center;width:150px;height:58px}
+.logo img{display:block;width:150px;height:58px;object-fit:contain;object-position:center}
 nav{display:flex;gap:30px}
 nav a{font-size:13px;font-weight:600;color:#eee}
 nav a:hover{color:var(--gold)}
@@ -62,106 +63,109 @@ textarea{min-height:130px;resize:vertical}
 footer{padding:30px 0;border-top:1px solid #202020;color:#888;font-size:12px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px}
 @media(max-width:800px){
- nav{display:none}.menu{display:block}.grid{grid-template-columns:1fr 1fr}.brand-grid{grid-template-columns:1fr 1fr}.about,.contact-box{grid-template-columns:1fr}.about-img{min-height:350px}.section-head{display:block}.section-head p{margin-top:15px}
+nav{display:none}.menu{display:block}.grid{grid-template-columns:1fr 1fr}.brand-grid{grid-template-columns:1fr 1fr}.about,.contact-box{grid-template-columns:1fr}.about-img{min-height:350px}.section-head{display:block}.section-head p{margin-top:15px}
+.logo{width:125px;height:54px}.logo img{width:125px;height:54px}
 }
-@media(max-width:520px){.grid{grid-template-columns:1fr}.brand-grid{grid-template-columns:1fr 1fr}section{padding:70px 0}.hero p{font-size:16px}h1{letter-spacing:-2px}.contact-box{padding:25px}}
+@media(max-width:520px){
+.grid{grid-template-columns:1fr}.brand-grid{grid-template-columns:1fr 1fr}section{padding:70px 0}.hero p{font-size:16px}h1{letter-spacing:-2px}.contact-box{padding:25px}.logo{width:110px;height:50px}.logo img{width:110px;height:50px}
+}
 </style>
 </head>
 <body>
 <header>
-  <div class="container nav">
-    <a class="logo" href="#accueil">HIRA</a>
-    <nav>
-      <a href="#accueil">Accueil</a>
-      <a href="#produits">Produits</a>
-      <a href="#marques">Marques</a>
-      <a href="#apropos">À propos</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <button class="menu" aria-label="Menu">☰</button>
-  </div>
+<div class="container nav">
+<a class="logo" href="#accueil"><img src="Capture d'écran 2026-09-26 221645.png" alt="HIRA COSMETIC"></a>
+<nav>
+<a href="#accueil">Accueil</a>
+<a href="#produits">Produits</a>
+<a href="#marques">Marques</a>
+<a href="#apropos">À propos</a>
+<a href="#contact">Contact</a>
+</nav>
+<button class="menu" aria-label="Menu">☰</button>
+</div>
 </header>
 
 <main>
 <section class="hero" id="accueil">
-  <div class="container hero-content">
-    <span class="kicker">Barber • Beauty • Professional</span>
-    <h1>HIRA<br>COSMETIC</h1>
-    <p>Produits premium pour cheveux, barbe, skincare et accessoires. Une sélection professionnelle pensée pour les passionnés de beauté et les barbiers exigeants.</p>
-    <div class="buttons">
-      <a class="btn primary" href="#produits">Découvrir les produits</a>
-      <a class="btn secondary" href="#contact">Nous contacter</a>
-    </div>
-  </div>
+<div class="container hero-content">
+<span class="kicker">Barber • Beauty • Professional</span>
+<h1>HIRA<br>COSMETIC</h1>
+<p>Produits premium pour cheveux, barbe, skincare et accessoires. Une sélection professionnelle pensée pour les passionnés de beauté et les barbiers exigeants.</p>
+<div class="buttons">
+<a class="btn primary" href="#produits">Découvrir les produits</a>
+<a class="btn secondary" href="#contact">Nous contacter</a>
+</div>
+</div>
 </section>
 
 <section class="products" id="produits">
-  <div class="container">
-    <div class="section-head">
-      <div><div class="eyebrow">Notre sélection</div><h2>Tout pour votre routine.</h2></div>
-      <p>Des essentiels choisis pour offrir une expérience professionnelle, du soin quotidien au travail du barbier.</p>
-    </div>
-    <div class="grid">
-      <article class="card"><div class="card-img"></div><div class="card-body"><h3>Hair Care</h3><p>Shampoings, soins et produits de coiffage.</p></div></article>
-      <article class="card"><div class="card-img"></div><div class="card-body"><h3>Skincare</h3><p>Nettoyage, hydratation et soins du visage.</p></div></article>
-      <article class="card"><div class="card-img"></div><div class="card-body"><h3>Barbe</h3><p>Huiles, baumes et soins pour une barbe impeccable.</p></div></article>
-      <article class="card"><div class="card-img"></div><div class="card-body"><h3>Accessoires</h3><p>Les outils indispensables du professionnel.</p></div></article>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head">
+<div><div class="eyebrow">Notre sélection</div><h2>Tout pour votre routine.</h2></div>
+<p>Des essentiels choisis pour offrir une expérience professionnelle, du soin quotidien au travail du barbier.</p>
+</div>
+<div class="grid">
+<article class="card"><div class="card-img"></div><div class="card-body"><h3>Hair Care</h3><p>Shampoings, soins et produits de coiffage.</p></div></article>
+<article class="card"><div class="card-img"></div><div class="card-body"><h3>Skincare</h3><p>Nettoyage, hydratation et soins du visage.</p></div></article>
+<article class="card"><div class="card-img"></div><div class="card-body"><h3>Barbe</h3><p>Huiles, baumes et soins pour une barbe impeccable.</p></div></article>
+<article class="card"><div class="card-img"></div><div class="card-body"><h3>Accessoires</h3><p>Les outils indispensables du professionnel.</p></div></article>
+</div>
+</div>
 </section>
 
 <section class="brands" id="marques">
-  <div class="container">
-    <div class="section-head">
-      <div><div class="eyebrow">Sélection professionnelle</div><h2>Nos marques</h2></div>
-      <p>Une sélection de références reconnues pour leur qualité et leur usage professionnel.</p>
-    </div>
-    <div class="brand-grid">
-      <div class="brand">WAHL</div><div class="brand">ANDIS</div><div class="brand">UPPERCUT</div><div class="brand">REUZEL</div><div class="brand">PRORASO</div>
-    </div>
-  </div>
+<div class="container">
+<div class="section-head">
+<div><div class="eyebrow">Sélection professionnelle</div><h2>Nos marques</h2></div>
+<p>Une sélection de références reconnues pour leur qualité et leur usage professionnel.</p>
+</div>
+<div class="brand-grid">
+<div class="brand">WAHL</div><div class="brand">ANDIS</div><div class="brand">UPPERCUT</div><div class="brand">REUZEL</div><div class="brand">PRORASO</div>
+</div>
+</div>
 </section>
 
 <section id="apropos">
-  <div class="container about">
-    <div class="about-img"></div>
-    <div>
-      <div class="eyebrow">HIRA COSMETIC</div>
-      <h2>Le style commence par les bons produits.</h2>
-      <p>HIRA COSMETIC met en avant une sélection de produits barber et beauté destinée aussi bien aux professionnels qu'aux particuliers.</p>
-      <p>Notre objectif : réunir qualité, style et simplicité dans une expérience d'achat moderne.</p>
-      <a class="btn primary" href="#contact">Parler avec nous</a>
-    </div>
-  </div>
+<div class="container about">
+<div class="about-img"></div>
+<div>
+<div class="eyebrow">HIRA COSMETIC</div>
+<h2>Le style commence par les bons produits.</h2>
+<p>HIRA COSMETIC met en avant une sélection de produits barber et beauté destinée aussi bien aux professionnels qu'aux particuliers.</p>
+<p>Notre objectif : réunir qualité, style et simplicité dans une expérience d'achat moderne.</p>
+<a class="btn primary" href="#contact">Parler avec nous</a>
+</div>
+</div>
 </section>
 
 <section class="contact" id="contact">
-  <div class="container">
-    <div class="contact-box">
-      <div class="contact-info">
-        <div class="eyebrow">Contact</div>
-        <h2>Une question ?</h2>
-        <p>Écrivez-nous pour obtenir des informations sur les produits, les marques ou les commandes.</p>
-        <br>
-        <p><strong>Email :</strong> contact@hiracosmetic.be</p>
-        <p><strong>Instagram :</strong> @hiracosmetic</p>
-      </div>
-      <form action="mailto:contact@hiracosmetic.be" method="post" enctype="text/plain">
-        <input name="nom" placeholder="Votre nom" required>
-        <input type="email" name="email" placeholder="Votre email" required>
-        <textarea name="message" placeholder="Votre message" required></textarea>
-        <button class="btn primary" type="submit">Envoyer le message</button>
-      </form>
-    </div>
-  </div>
+<div class="container">
+<div class="contact-box">
+<div class="contact-info">
+<div class="eyebrow">Contact</div>
+<h2>Une question ?</h2>
+<p>Écrivez-nous pour obtenir des informations sur les produits, les marques ou les commandes.</p>
+<br>
+<p><strong>Email :</strong> contact@hiracosmetic.be</p>
+<p><strong>Instagram :</strong> @hiracosmetic</p>
+</div>
+<form action="mailto:contact@hiracosmetic.be" method="post" enctype="text/plain">
+<input name="nom" placeholder="Votre nom" required>
+<input type="email" name="email" placeholder="Votre email" required>
+<textarea name="message" placeholder="Votre message" required></textarea>
+<button class="btn primary" type="submit">Envoyer le message</button>
+</form>
+</div>
+</div>
 </section>
 </main>
 
 <footer>
-  <div class="container footer-inner">
-    <span>© 2026 HIRA COSMETIC</span>
-    <span>Barber & Beauty • Belgique</span>
-  </div>
+<div class="container footer-inner">
+<span>© 2026 HIRA COSMETIC</span>
+<span>Barber & Beauty • Belgique</span>
+</div>
 </footer>
 </body>
 </html>
