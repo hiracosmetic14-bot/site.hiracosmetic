@@ -3,83 +3,561 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HIRA COSMETIC — Barber & Beauté</title>
-<meta name="description" content="HIRA COSMETIC — produits professionnels pour cheveux, barbe, skincare et accessoires.">
+
+<title>HIRA COSMETIC — Produits professionnels</title>
+
+<meta name="description" content="HIRA COSMETIC — produits professionnels pour cheveux, barbe, beauté et accessoires.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
-:root{--gold:#e9c978;--cream:#fff8e7;--dark:#080808;--panel:#121212;--muted:#b8b8b8}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:Montserrat,Arial,sans-serif;background:var(--dark);color:#fff;line-height:1.6}
-a{text-decoration:none;color:inherit}
-.container{width:min(1160px,92%);margin:auto}
-header{position:fixed;top:0;left:0;right:0;z-index:20;background:rgba(8,8,8,.86);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
-.nav{height:78px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;width:320px;height:90px}
-.logo img{display:block;width:320px;height:90px;object-fit:contain;object-position:center}
-nav{display:flex;gap:30px}
-nav a{font-size:13px;font-weight:600;color:#eee}
-nav a:hover{color:var(--gold)}
-.menu{display:none;background:none;border:0;color:#fff;font-size:25px}
-.hero{min-height:100vh;display:flex;align-items:center;background:linear-gradient(90deg,rgba(0,0,0,.9) 0%,rgba(0,0,0,.68) 42%,rgba(0,0,0,.35) 100%),url("https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1800&q=85") center/cover}
-.hero-content{padding-top:78px;max-width:760px}
-.kicker{display:inline-block;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px}
-h1{font-size:clamp(48px,8vw,92px);line-height:.95;letter-spacing:-4px;margin-bottom:25px}
-.hero p{font-size:18px;color:#ddd;max-width:650px;margin-bottom:34px}
-.buttons{display:flex;gap:14px;flex-wrap:wrap}
-.btn{display:inline-block;padding:15px 25px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid var(--gold);transition:.2s}
-.btn.primary{background:var(--cream);color:#111}
-.btn:hover{transform:translateY(-2px)}
-.btn.secondary{color:#fff}
-section{padding:95px 0}
-.section-head{display:flex;justify-content:space-between;gap:30px;align-items:end;margin-bottom:40px}
-.eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-h2{font-size:clamp(30px,5vw,48px);line-height:1.05;margin-top:8px}
-.section-head p{max-width:470px;color:var(--muted);font-size:14px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.card{background:var(--panel);border:1px solid #242424;border-radius:18px;overflow:hidden}
-.card-img{height:250px;background-size:cover;background-position:center}
-.card-body{padding:22px}
-.card h3{font-size:17px;margin-bottom:7px}
-.card p{font-size:13px;color:var(--muted)}
-.products .card:nth-child(1) .card-img{background-image:url("gummy-hair.png");background-size:cover;background-position:center}
-.products .card:nth-child(1) .card-img{background-image:url("Capture d'écran 2026-09-27 144434.png");background-size:cover;background-position:center}
-.products .card:nth-child(3) .card-img{background-image:url("Mr rebel.png");background-size:cover;background-position:center}
-.products .card:nth-child(4) .card-img{background-image:url("hexagone led.png");background-size:cover;background-position:center}
-.brands{background:#0e0e0e}
-.brand-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
-.brand{padding:25px 15px;border:1px solid #282828;border-radius:14px;text-align:center;font-weight:700;letter-spacing:1px;color:#ddd}
-.about{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.about-img{min-height:500px;border-radius:22px;background:linear-gradient(0deg,rgba(0,0,0,.3),rgba(0,0,0,.1)),url("https://images.unsplash.com/photo-1599351431202-1e0f0d5e7a6f?auto=format&fit=crop&w=1100&q=85") center/cover}
-.about p{color:#bbb;margin:22px 0}
-.contact{background:linear-gradient(135deg,#17130b,#0b0b0b)}
-.contact-box{display:grid;grid-template-columns:1fr 1fr;gap:45px;padding:45px;border:1px solid #302817;border-radius:24px}
-.contact-info p{color:#aaa;margin:8px 0}
-form{display:grid;gap:12px}
-input,textarea{width:100%;background:#101010;border:1px solid #303030;color:#fff;border-radius:10px;padding:14px;font:inherit}
-textarea{min-height:130px;resize:vertical}
-footer{padding:30px 0;border-top:1px solid #202020;color:#888;font-size:12px}
-.footer-inner{display:flex;justify-content:space-between;gap:20px}
-.social-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.social-links a{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid #302817;border-radius:999px;color:#e9c978;font-size:13px;font-weight:600;transition:.2s}
-.social-links a:hover{background:#e9c978;color:#111;transform:translateY(-2px)}
-.social-links a span{font-size:17px}
-@media(max-width:800px){
-nav{display:none}.menu{display:block}.grid{grid-template-columns:1fr 1fr}.brand-grid{grid-template-columns:1fr 1fr}.about,.contact-box{grid-template-columns:1fr}.about-img{min-height:350px}.section-head{display:block}.section-head p{margin-top:15px}
-.logo{width:125px;height:54px}.logo img{width:125px;height:54px}
+
+:root{
+    --gold:#e9c978;
+    --cream:#fff8e7;
+    --dark:#080808;
+    --panel:#111111;
+    --panel2:#161616;
+    --border:#292929;
+    --muted:#a9a9a9;
+    --white:#ffffff;
 }
-@media(max-width:520px){
-.grid{grid-template-columns:1fr}.brand-grid{grid-template-columns:1fr 1fr}section{padding:70px 0}.hero p{font-size:16px}h1{letter-spacing:-2px}.contact-box{padding:25px}.logo{width:110px;height:50px}.logo img{width:110px;height:50px}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Montserrat,Arial,sans-serif;
+    background:var(--dark);
+    color:white;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+img{
+    max-width:100%;
+    display:block;
+}
+
+.container{
+    width:min(1180px,92%);
+    margin:auto;
+}
+
+/* ================= HEADER ================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:100;
+    background:rgba(8,8,8,.94);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav{
+    min-height:88px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    width:260px;
+    height:82px;
+}
+
+.logo img{
+    width:260px;
+    height:82px;
+    object-fit:contain;
+    object-position:center;
+}
+
+nav{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+nav a{
+    font-size:13px;
+    font-weight:600;
+    color:#eeeeee;
+    transition:.2s;
+}
+
+nav a:hover{
+    color:var(--gold);
+}
+
+.menu{
+    display:none;
+    background:none;
+    border:0;
+    color:white;
+    font-size:25px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(0,0,0,.92) 0%,
+        rgba(0,0,0,.72) 48%,
+        rgba(0,0,0,.38) 100%
+    ),
+    url("https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+}
+
+.hero-content{
+    padding-top:100px;
+    max-width:760px;
+}
+
+.kicker{
+    display:inline-block;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+}
+
+h1{
+    font-size:clamp(52px,8vw,96px);
+    line-height:.94;
+    letter-spacing:-4px;
+    margin-bottom:25px;
+}
+
+.hero p{
+    font-size:18px;
+    color:#ddd;
+    max-width:650px;
+    margin-bottom:34px;
+}
+
+.buttons{
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:14px 24px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:700;
+    border:1px solid var(--gold);
+    transition:.2s;
+}
+
+.btn.primary{
+    background:var(--cream);
+    color:#111;
+}
+
+.btn.secondary{
+    color:white;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:95px 0;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:30px;
+    margin-bottom:42px;
+}
+
+.eyebrow{
+    color:var(--gold);
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+h2{
+    font-size:clamp(30px,5vw,48px);
+    line-height:1.05;
+    margin-top:8px;
+}
+
+.section-head p{
+    max-width:470px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+/* ================= PRODUITS ================= */
+
+.products{
+    background:#0a0a0a;
+}
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.product-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.product-card:hover{
+    transform:translateY(-6px);
+    border-color:#51452a;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+}
+
+.product-image{
+    height:300px;
+    background:#f5f5f5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.35s;
+}
+
+.product-card:hover .product-image img{
+    transform:scale(1.04);
+}
+
+.product-info{
+    padding:20px;
+}
+
+.product-category{
+    color:var(--gold);
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    margin-bottom:7px;
+}
+
+.product-info h3{
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.product-info p{
+    color:var(--muted);
+    font-size:13px;
+    min-height:42px;
+}
+
+.product-link{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-top:17px;
+    color:var(--gold);
+    font-size:12px;
+    font-weight:700;
+}
+
+.product-link:hover{
+    text-decoration:underline;
+}
+
+/* ================= MARQUES ================= */
+
+.brands{
+    background:#0e0e0e;
+}
+
+.brand-grid{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+}
+
+.brand{
+    padding:25px 15px;
+    border:1px solid #282828;
+    border-radius:14px;
+    text-align:center;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#ddd;
+}
+
+/* ================= ABOUT ================= */
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+.about-img{
+    min-height:480px;
+    border-radius:22px;
+
+    background:
+    linear-gradient(
+        0deg,
+        rgba(0,0,0,.25),
+        rgba(0,0,0,.1)
+    ),
+    url("https://images.unsplash.com/photo-1599351431202-1e0f0d5e7a6f?auto=format&fit=crop&w=1100&q=85")
+    center/cover;
+}
+
+.about p{
+    color:#bbb;
+    margin:22px 0;
+}
+
+/* ================= CONTACT ================= */
+
+.contact{
+    background:linear-gradient(135deg,#17130b,#0b0b0b);
+}
+
+.contact-box{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:45px;
+    padding:45px;
+    border:1px solid #302817;
+    border-radius:24px;
+}
+
+.contact-info p{
+    color:#aaa;
+    margin:8px 0;
+}
+
+.social-links{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.social-links a{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 15px;
+    border:1px solid #302817;
+    border-radius:999px;
+    color:var(--gold);
+    font-size:13px;
+    font-weight:600;
+    transition:.2s;
+}
+
+.social-links a:hover{
+    background:var(--gold);
+    color:#111;
+    transform:translateY(-2px);
+}
+
+form{
+    display:grid;
+    gap:12px;
+}
+
+input,
+textarea{
+    width:100%;
+    background:#101010;
+    border:1px solid #303030;
+    color:white;
+    border-radius:10px;
+    padding:14px;
+    font:inherit;
+}
+
+textarea{
+    min-height:130px;
+    resize:vertical;
+}
+
+form button{
+    cursor:pointer;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:30px 0;
+    border-top:1px solid #202020;
+    color:#888;
+    font-size:12px;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    nav{
+        display:none;
+    }
+
+    .menu{
+        display:block;
+    }
+
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .brand-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .about,
+    .contact-box{
+        grid-template-columns:1fr;
+    }
+
+    .logo{
+        width:200px;
+        height:70px;
+    }
+
+    .logo img{
+        width:200px;
+        height:70px;
+    }
+
+}
+
+@media(max-width:560px){
+
+    section{
+        padding:70px 0;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .brand-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .product-image{
+        height:320px;
+    }
+
+    .section-head{
+        display:block;
+    }
+
+    .section-head p{
+        margin-top:15px;
+    }
+
+    .contact-box{
+        padding:25px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    h1{
+        letter-spacing:-2px;
+    }
+
+    .logo{
+        width:145px;
+        height:58px;
+    }
+
+    .logo img{
+        width:145px;
+        height:58px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+    }
+
+}
+
 </style>
 </head>
+
 <body>
+
+<!-- ================= HEADER ================= -->
+
 <header>
+
 <div class="container nav">
-<a class="logo" href="#accueil"><img src="logo-hira-cosmetic.png" alt="HIRA COSMETIC"></a>
+
+<a class="logo" href="#accueil">
+<img src="logo-hira-cosmetic.png" alt="HIRA COSMETIC">
+</a>
+
 <nav>
 <a href="#accueil">Accueil</a>
 <a href="#produits">Produits</a>
@@ -87,98 +565,400 @@ nav{display:none}.menu{display:block}.grid{grid-template-columns:1fr 1fr}.brand-
 <a href="#apropos">À propos</a>
 <a href="#contact">Contact</a>
 </nav>
-<button class="menu" aria-label="Menu">☰</button>
+
+<button class="menu" aria-label="Menu">
+☰
+</button>
+
 </div>
+
 </header>
 
+
 <main>
+
+<!-- ================= HERO ================= -->
+
 <section class="hero" id="accueil">
+
 <div class="container hero-content">
-<span class="kicker">Barber • Beauty • Professional</span>
-<h1>HIRA<br>COSMETIC</h1>
-<p>Produits premium pour cheveux, barbe, skincare et accessoires. Une sélection professionnelle pensée pour les passionnés de beauté et les barbiers exigeants.</p>
-<div class="buttons">
-<a class="btn primary" href="#produits">Découvrir les produits</a>
-<a class="btn secondary" href="#contact">Nous contacter</a>
-</div>
-</div>
-</section>
 
-<section class="products" id="produits">
-<div class="container">
-<div class="section-head">
-<div><div class="eyebrow">Notre sélection</div><h2>Tout pour votre routine.</h2></div>
-<p>Des essentiels choisis pour offrir une expérience professionnelle, du soin quotidien au travail du barbier.</p>
-</div>
-<div class="grid">
-<article class="card"><div class="card-img"></div><div class="card-body"><h3>Hair Care</h3><p>Shampoings, soins et produits de coiffage.</p></div></article>
-<article class="card"><div class="card-img"></div><div class="card-body"><h3>Skincare</h3><p>Nettoyage, hydratation et soins du visage.</p></div></article>
-<article class="card"><div class="card-img"></div><div class="card-body"><h3>Barbe</h3><p>Huiles, baumes et soins pour une barbe impeccable.</p></div></article>
-<article class="card"><div class="card-img"></div><div class="card-body"><h3>Accessoires</h3><p>Les outils indispensables du professionnel.</p></div></article>
-</div>
-</div>
-</section>
+<span class="kicker">
+Barber • Beauty • Professional
+</span>
 
-<section class="brands" id="marques">
-<div class="container">
-<div class="section-head">
-<div><div class="eyebrow">Sélection professionnelle</div><h2>Nos marques</h2></div>
-<p>Une sélection de références reconnues pour leur qualité et leur usage professionnel.</p>
-</div>
-<div class="brand-grid">
-<div class="brand">WAHL</div><div class="brand">ANDIS</div><div class="brand">UPPERCUT</div><div class="brand">REUZEL</div><div class="brand">PRORASO</div>
-</div>
-</div>
-</section>
+<h1>
+HIRA<br>COSMETIC
+</h1>
 
-<section id="apropos">
-<div class="container about">
-<div class="about-img"></div>
-<div>
-<div class="eyebrow">HIRA COSMETIC</div>
-<h2>Le style commence par les bons produits.</h2>
-<p>HIRA COSMETIC met en avant une sélection de produits barber et beauté destinée aussi bien aux professionnels qu'aux particuliers.</p>
-<p>Notre objectif : réunir qualité, style et simplicité dans une expérience d'achat moderne.</p>
-<a class="btn primary" href="#contact">Parler avec nous</a>
-</div>
-</div>
-</section>
-
-<section class="contact" id="contact">
-<div class="container">
-<div class="contact-box">
-<div class="contact-info">
-<div class="eyebrow">Contact</div>
-<h2>Une question ?</h2>
-<p>Écrivez-nous pour obtenir des informations sur les produits, les marques ou les commandes.</p>
-<br>
-<p><strong>Email :</strong>
-<a href="mailto:hiracosmetic14@gmail.com">hiracosmetic14@gmail.com</a>
+<p>
+Produits professionnels pour cheveux, barbe, beauté et accessoires.
+Une sélection pensée pour les professionnels et les passionnés.
 </p>
 
-<div class="social-links">
-<a href="https://call.whatsapp.com/voice/6PnhpHiWJlqRz8ELcD10Ep" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-<a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>
-<a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+<div class="buttons">
+
+<a class="btn primary" href="#produits">
+Découvrir les produits
+</a>
+
+<a class="btn secondary" href="#contact">
+Nous contacter
+</a>
+
 </div>
 
 </div>
-<form action="mailto:hiracosmetic14@gmail.com" method="post" enctype="text/pla
-<input name="nom" placeholder="Votre nom" required>
-<input type="email" name="email" placeholder="Votre email" required>
-<textarea name="message" placeholder="Votre message" required></textarea>
-<button class="btn primary" type="submit">Envoyer le message</button>
-</form>
-</div>
-</div>
+
 </section>
+
+
+<!-- ================= PRODUITS ================= -->
+
+<section class="products" id="produits">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">
+Notre catalogue
+</div>
+
+<h2>
+Nos produits
+</h2>
+
+</div>
+
+<p>
+Découvrez notre sélection de produits professionnels HIRA COSMETIC.
+</p>
+
+</div>
+
+
+<div class="product-grid">
+
+
+<!-- PRODUIT 1 -->
+
+<article class="product-card">
+
+<div class="product-image">
+<img src="gummy-hair.png" alt="Gummy Hair">
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+Hair Care
+</div>
+
+<h3>
+Gummy Hair
+</h3>
+
+<p>
+Produits professionnels pour le coiffage et la tenue.
+</p>
+
+<a class="product-link" href="#contact">
+Demander ce produit
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+<!-- PRODUIT 2 -->
+
+<article class="product-card">
+
+<div class="product-image">
+<img src="cologne%20vert.png" alt="Modus Professional Cologne">
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+Skincare
+</div>
+
+<h3>
+Modus Professional
+</h3>
+
+<p>
+After Shave Cologne pour une finition professionnelle.
+</p>
+
+<a class="product-link" href="#contact">
+Demander ce produit
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+<!-- PRODUIT 3 -->
+
+<article class="product-card">
+
+<div class="product-image">
+<img src="Mr%20rebel.png" alt="Mr Rebel">
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+Barbe
+</div>
+
+<h3>
+Mr Rebel
+</h3>
+
+<p>
+Produits et soins sélectionnés pour l'entretien de la barbe.
+</p>
+
+<a class="product-link" href="#contact">
+Demander ce produit
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+<!-- PRODUIT 4 -->
+
+<article class="product-card">
+
+<div class="product-image">
+<img src="hexagone%20led.png" alt="Accessoire professionnel">
+</div>
+
+<div class="product-info">
+
+<div class="product-category">
+Accessoires
+</div>
+
+<h3>
+Accessoire professionnel
+</h3>
+
+<p>
+Équipement et accessoires pour votre espace professionnel.
+</p>
+
+<a class="product-link" href="#contact">
+Demander ce produit
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= MARQUES ================= -->
+
+<section class="brands" id="marques">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">
+Sélection professionnelle
+</div>
+
+<h2>
+Nos marques
+</h2>
+
+</div>
+
+<p>
+Une sélection de références reconnues pour leur qualité.
+</p>
+
+</div>
+
+
+<div class="brand-grid">
+
+<div class="brand">WAHL</div>
+<div class="brand">ANDIS</div>
+<div class="brand">UPPERCUT</div>
+<div class="brand">REUZEL</div>
+<div class="brand">PRORASO</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= A PROPOS ================= -->
+
+<section id="apropos">
+
+<div class="container about">
+
+<div class="about-img"></div>
+
+<div>
+
+<div class="eyebrow">
+HIRA COSMETIC
+</div>
+
+<h2>
+Le style commence par les bons produits.
+</h2>
+
+<p>
+HIRA COSMETIC met en avant une sélection de produits barber et beauté destinée aussi bien aux professionnels qu'aux particuliers.
+</p>
+
+<p>
+Notre objectif : réunir qualité, style et simplicité dans une expérience moderne.
+</p>
+
+<a class="btn primary" href="#contact">
+Nous contacter
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+<div class="container">
+
+<div class="contact-box">
+
+<div class="contact-info">
+
+<div class="eyebrow">
+Contact
+</div>
+
+<h2>
+Parlons de votre projet.
+</h2>
+
+<p>
+Pour toute demande concernant nos produits, contactez HIRA COSMETIC.
+</p>
+
+<p>
+<strong>Email :</strong>
+hiracosmetic14@gmail.com
+</p>
+
+
+<div class="social-links">
+
+<a href="https://call.whatsapp.com/voice/6PnhpHiWJlqRz8ELcD10Ep" target="_blank" rel="noopener">
+<i class="fa-brands fa-whatsapp"></i>
+WhatsApp
+</a>
+
+<a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener">
+<i class="fa-brands fa-instagram"></i>
+Instagram
+</a>
+
+<a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener">
+<i class="fa-brands fa-tiktok"></i>
+TikTok
+</a>
+
+</div>
+
+</div>
+
+
+<form action="mailto:hiracosmetic14@gmail.com" method="post" enctype="text/plain">
+
+<input
+type="text"
+name="Nom"
+placeholder="Votre nom"
+required
+>
+
+<input
+type="email"
+name="Email"
+placeholder="Votre email"
+required
+>
+
+<textarea
+name="Message"
+placeholder="Votre message"
+required
+></textarea>
+
+<button class="btn primary" type="submit">
+Envoyer le message
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
 </main>
 
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
+
 <div class="container footer-inner">
-<span>© 2026 HIRA COSMETIC</span>
-<span>Barber & Beauty • Belgique</span>
+
+<div>
+© 2026 HIRA COSMETIC — Tous droits réservés.
 </div>
+
+<div>
+Barber • Beauty • Professional
+</div>
+
+</div>
+
 </footer>
+
 </body>
 </html>
