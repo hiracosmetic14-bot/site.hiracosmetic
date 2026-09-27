@@ -61,7 +61,11 @@ form{display:grid;gap:12px}
 input,textarea{width:100%;background:#101010;border:1px solid #303030;color:#fff;border-radius:10px;padding:14px;font:inherit}
 textarea{min-height:130px;resize:vertical}
 footer{padding:30px 0;border-top:1px solid #202020;color:#888;font-size:12px}
-.footer-inner{display:flex;justify-content:space-between;gap:20px}
+.footer-inner{display:flex;justify-content:space-between;gap:20p
+.social-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.social-links a{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid #302817;border-radius:999px;color:#e9c978;font-size:13px;font-weight:600;transition:.2s}
+.social-links a:hover{background:#e9c978;color:#111;transform:translateY(-2px)}
+.social-links a span{font-size:17px}
 @media(max-width:800px){
 nav{display:none}.menu{display:block}.grid{grid-template-columns:1fr 1fr}.brand-grid{grid-template-columns:1fr 1fr}.about,.contact-box{grid-template-columns:1fr}.about-img{min-height:350px}.section-head{display:block}.section-head p{margin-top:15px}
 .logo{width:125px;height:54px}.logo img{width:125px;height:54px}
@@ -147,8 +151,15 @@ nav{display:none}.menu{display:block}.grid{grid-template-columns:1fr 1fr}.brand-
 <h2>Une question ?</h2>
 <p>Écrivez-nous pour obtenir des informations sur les produits, les marques ou les commandes.</p>
 <br>
-<p><strong>Email :</strong> hiracosmetic14@gmail.com</p>
-<p><strong>Instagram :</strong> @hira_.cosmetic</p>
+<p><strong>Email :</strong>
+<a href="mailto:hiracosmetic14@gmail.com">hiracosmetic14@gmail.com</a>
+</p>
+
+<div class="social-links">
+<a href="https://call.whatsapp.com/voice/6PnhpHiWJlqRz8ELcD10Ep" target="_blank" rel="noopener">◉ WhatsApp</a>
+<a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener">◎ Instagram</a>
+<a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener">♪ TikTok</a>
+</div>
 </div>
 <form action="mailto:contact@hiracosmetic.be" method="post" enctype="text/plain">
 <input name="nom" placeholder="Votre nom" required>
