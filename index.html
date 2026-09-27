@@ -616,7 +616,280 @@ Nous contacter
 <!-- ================= PRODUITS ================= -->
 
 <section class="products" id="produits">
+<style>
+.premium-products{
+    background:#0b0b0b;
+    padding:100px 0;
+}
 
+.premium-products .section-head{
+    margin-bottom:50px;
+}
+
+.premium-products .product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:24px;
+}
+
+.premium-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #222;
+    transition:.25s ease;
+}
+
+.premium-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+.premium-photo{
+    height:330px;
+    background:#f7f7f7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.premium-photo img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    transition:.3s ease;
+}
+
+.premium-card:hover .premium-photo img{
+    transform:scale(1.04);
+}
+
+.premium-info{
+    padding:22px 22px 24px;
+    color:#111;
+}
+
+.premium-category{
+    color:#a7832d;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.8px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.premium-info h3{
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.premium-info p{
+    color:#777;
+    font-size:13px;
+    line-height:1.6;
+    min-height:42px;
+}
+
+.premium-button{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:18px;
+    padding:10px 16px;
+    border-radius:999px;
+    background:#111;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.premium-button:hover{
+    background:#e9c978;
+    color:#111;
+}
+
+@media(max-width:950px){
+    .premium-products .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:560px){
+    .premium-products{
+        padding:70px 0;
+    }
+
+    .premium-products .product-grid{
+        grid-template-columns:1fr;
+    }
+
+    .premium-photo{
+        height:330px;
+    }
+}
+</style>
+
+<section class="premium-products" id="produits">
+
+<div class="container">
+
+<div class="section-head">
+
+<div>
+<div class="eyebrow">
+Notre catalogue
+</div>
+
+<h2>
+Nos produits
+</h2>
+</div>
+
+<p>
+Une sélection professionnelle pour les cheveux, la barbe, les soins et les accessoires.
+</p>
+
+</div>
+
+
+<div class="product-grid">
+
+
+<!-- GUMMY -->
+
+<article class="premium-card">
+
+<div class="premium-photo">
+<img src="gummy-hair.png" alt="Gummy Hair">
+</div>
+
+<div class="premium-info">
+
+<div class="premium-category">
+Hair Care
+</div>
+
+<h3>
+Gummy Hair
+</h3>
+
+<p>
+Produits professionnels pour le coiffage et la tenue.
+</p>
+
+<a class="premium-button" href="#contact">
+Demander
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+<!-- MODUS -->
+
+<article class="premium-card">
+
+<div class="premium-photo">
+<img src="cologne%20vert.png" alt="Modus Professional">
+</div>
+
+<div class="premium-info">
+
+<div class="premium-category">
+Skincare
+</div>
+
+<h3>
+Modus Professional
+</h3>
+
+<p>
+After Shave Cologne pour une finition professionnelle.
+</p>
+
+<a class="premium-button" href="#contact">
+Demander
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+<!-- MR REBEL -->
+
+<article class="premium-card">
+
+<div class="premium-photo">
+<img src="Mr%20rebel.png" alt="Mr Rebel">
+</div>
+
+<div class="premium-info">
+
+<div class="premium-category">
+Barbe
+</div>
+
+<h3>
+Mr Rebel
+</h3>
+
+<p>
+Produits et soins sélectionnés pour l'entretien de la barbe.
+</p>
+
+<a class="premium-button" href="#contact">
+Demander
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+<!-- LED -->
+
+<article class="premium-card">
+
+<div class="premium-photo">
+<img src="hexagone%20led.png" alt="Accessoire professionnel">
+</div>
+
+<div class="premium-info">
+
+<div class="premium-category">
+Accessoires
+</div>
+
+<h3>
+Accessoire professionnel
+</h3>
+
+<p>
+Équipement et accessoires pour votre espace professionnel.
+</p>
+
+<a class="premium-button" href="#contact">
+Demander
+<i class="fa-solid fa-arrow-right"></i>
+</a>
+
+</div>
+
+</article>
+
+
+</div>
+
+</div>
+
+</section>
 <div class="container">
 
 <div class="section-head">
