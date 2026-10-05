@@ -607,6 +607,35 @@ footer{border-top-color:#e8e4dc;color:#777;}
 
 /* Contraste du titre sur la photo */
 .hero h1{color:#fff;}
+
+
+/* Assistance client HIRA COSMETIC */
+.chat-launcher{position:fixed;right:24px;bottom:22px;z-index:3000;display:flex;align-items:center;gap:10px;padding:14px 19px;border:0;border-radius:999px;background:#171717;color:#fff;box-shadow:0 10px 30px rgba(0,0,0,.22);font:700 13px Montserrat,Arial,sans-serif;cursor:pointer;}
+.chat-launcher i{color:#e3c987;font-size:17px;}
+.chat-panel{position:fixed;right:24px;bottom:86px;z-index:3001;width:min(370px,calc(100vw - 28px));max-height:min(570px,calc(100dvh - 110px));display:flex;flex-direction:column;overflow:hidden;border:1px solid #e8e4dc;border-radius:22px;background:#fff;color:#171717;box-shadow:0 22px 70px rgba(0,0,0,.22);font-family:Montserrat,Arial,sans-serif;}
+.chat-panel[hidden]{display:none;}
+.chat-head{display:flex;align-items:center;justify-content:space-between;padding:17px 19px;background:#171717;color:#fff;}
+.chat-head-brand{font-size:13px;font-weight:800;letter-spacing:.8px;}
+.chat-head-sub{margin-top:3px;color:#d6c08f;font-size:10px;}
+.chat-close{width:34px;height:34px;border:1px solid #555;border-radius:50%;background:transparent;color:#fff;font-size:20px;cursor:pointer;}
+.chat-content{overflow:auto;padding:18px;}
+.chat-greeting{margin:0 0 14px;padding:13px 14px;border-radius:14px 14px 14px 4px;background:#f6f4ef;color:#292720;font-size:13px;line-height:1.55;}
+.chat-links{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:0 0 17px;}
+.chat-links a{display:flex;align-items:center;justify-content:center;min-height:42px;padding:8px 10px;border:1px solid #e5dece;border-radius:12px;color:#5c4824;font-size:11px;font-weight:700;text-align:center;}
+.chat-products-label{margin:0 0 8px;color:#777;font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;}
+.chat-products{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:15px;}
+.chat-product{display:flex;align-items:center;gap:9px;min-width:0;padding:7px;border:1px solid #eeeae2;border-radius:12px;color:#222;}
+.chat-product img{width:48px;height:52px;flex:none;border-radius:7px;object-fit:cover;}
+.chat-product span{font-size:10px;font-weight:700;line-height:1.3;}
+.chat-form{padding:12px 14px 14px;border-top:1px solid #eeeae2;background:#fff;}
+.chat-form textarea{width:100%;min-height:67px;resize:vertical;padding:11px 12px;border:1px solid #dcd7cc;border-radius:12px;background:#fff;color:#171717;font:12px Montserrat,Arial,sans-serif;}
+.chat-form textarea:focus{outline:2px solid #c8a45d;outline-offset:1px;}
+.chat-form-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px;}
+.chat-email-note{color:#777;font-size:9px;line-height:1.35;}
+.chat-send{padding:10px 14px;border:0;border-radius:999px;background:#c8a45d;color:#17130b;font:700 11px Montserrat,Arial,sans-serif;cursor:pointer;}
+@media(max-width:520px){.chat-launcher{right:15px;bottom:15px;padding:13px 16px}.chat-panel{right:10px;bottom:75px;max-height:calc(100dvh - 88px)}}
+
+.chat-form .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
 </style>
 </head>
 
@@ -1121,6 +1150,52 @@ document.querySelector('.menu').addEventListener('click', function(){
 
 });
 
+</script>
+
+
+
+<div class="chat-panel" id="hira-chat-panel" role="dialog" aria-label="Assistance HIRA COSMETIC" hidden>
+  <div class="chat-head">
+    <div><div class="chat-head-brand">HIRA COSMETIC</div><div class="chat-head-sub">Comment peut-on vous aider ?</div></div>
+    <button class="chat-close" type="button" aria-label="Fermer le chat">×</button>
+  </div>
+  <div class="chat-content">
+    <p class="chat-greeting">Bonjour ! Pour toute question sur nos produits ou votre commande, écrivez-nous.</p>
+    <div class="chat-links">
+      <a href="https://hiracosmetic-store.myshopify.com/account/orders" target="_blank" rel="noopener">Suivre ma commande</a>
+      <a href="https://hiracosmetic-store.myshopify.com/account/login" target="_blank" rel="noopener">Se connecter</a>
+    </div>
+    <p class="chat-products-label">À découvrir</p>
+    <div class="chat-products">
+      <a class="chat-product" href="#produits"><img src="gummy-hair-pro.jpg" alt=""><span>Gummy Hair</span></a>
+      <a class="chat-product" href="#produits"><img src="modus-cologne-pro.jpg" alt=""><span>Modus Professional</span></a>
+    </div>
+  </div>
+  <form class="chat-form" id="hira-chat-form">
+    <label for="hira-chat-message" class="sr-only">Votre question</label>
+    <textarea id="hira-chat-message" name="message" placeholder="Posez votre question…" required></textarea>
+    <div class="chat-form-row"><span class="chat-email-note">Votre message sera préparé dans votre messagerie.</span><button class="chat-send" type="submit">Écrire à HIRA</button></div>
+  </form>
+</div>
+<button class="chat-launcher" id="hira-chat-launcher" type="button" aria-controls="hira-chat-panel" aria-expanded="false"><i class="fa-solid fa-message" aria-hidden="true"></i><span>Besoin d’aide ?</span></button>
+<script>
+(function(){
+  const panel=document.getElementById('hira-chat-panel');
+  const launcher=document.getElementById('hira-chat-launcher');
+  const close=panel.querySelector('.chat-close');
+  function setOpen(open){panel.hidden=!open;launcher.setAttribute('aria-expanded',String(open));if(open)document.getElementById('hira-chat-message').focus();}
+  launcher.addEventListener('click',function(){setOpen(panel.hidden);});
+  close.addEventListener('click',function(){setOpen(false);launcher.focus();});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!panel.hidden){setOpen(false);launcher.focus();}});
+  document.getElementById('hira-chat-form').addEventListener('submit',function(event){
+    event.preventDefault();
+    const message=document.getElementById('hira-chat-message').value.trim();
+    if(!message)return;
+    const subject=encodeURIComponent('Question depuis HIRA COSMETIC');
+    const body=encodeURIComponent(message);
+    window.location.href='mailto:info@hiracosmetic.be?subject='+subject+'&body='+body;
+  });
+})();
 </script>
 
 </body>
