@@ -106,6 +106,35 @@ nav a:hover{
     color:var(--gold-light);
 }
 
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex:none;
+}
+
+.header-icon{
+    width:38px;
+    height:38px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    color:#222;
+    font-size:19px;
+    transition:color .2s,background .2s;
+}
+
+.header-icon:hover{
+    color:var(--gold);
+    background:#f7f4ed;
+}
+
+.header-icon:focus-visible{
+    outline:2px solid var(--gold);
+    outline-offset:2px;
+}
+
 .menu{
     display:none;
     background:none;
@@ -477,6 +506,7 @@ footer{
 
     .nav{
         min-height:80px;
+        gap:12px;
     }
 
     .logo{
@@ -539,13 +569,28 @@ footer{
 @media(max-width:480px){
 
     .logo{
-        width:150px;
+        width:130px;
         height:58px;
+        flex:none;
     }
 
     .logo img{
-        width:150px;
+        width:130px;
         height:58px;
+    }
+
+    .header-actions{
+        gap:2px;
+    }
+
+    .header-icon{
+        width:32px;
+        height:36px;
+        font-size:17px;
+    }
+
+    .nav{
+        gap:8px;
     }
 
     .hero h1{
@@ -673,6 +718,12 @@ footer{border-top-color:#e8e4dc;color:#777;}
 <a href="#apropos">À propos</a>
 <a href="#contact">Contact</a>
 </nav>
+
+<div class="header-actions" aria-label="Raccourcis boutique">
+<a class="header-icon" href="https://hiracosmetic-store.myshopify.com/search" aria-label="Rechercher" title="Rechercher"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
+<a class="header-icon" href="https://hiracosmetic-store.myshopify.com/account/login" aria-label="Mon compte" title="Mon compte"><i class="fa-regular fa-user" aria-hidden="true"></i></a>
+<a class="header-icon" href="https://hiracosmetic-store.myshopify.com/cart" aria-label="Panier" title="Panier"><i class="fa-solid fa-bag-shopping" aria-hidden="true"></i></a>
+</div>
 
 <button class="menu" aria-label="Menu">
 ☰
