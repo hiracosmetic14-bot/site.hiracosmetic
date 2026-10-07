@@ -1267,4 +1267,58 @@ document.querySelector('.menu').addEventListener('click', function(){
 </script>
 
 <div class="cookie-consent" id="hira-cookie-consent" hidden><section class="cookie-card" role="dialog" aria-modal="true" aria-labelledby="hira-cookie-title"><span class="eyebrow">Confidentialité</span><h2 id="hira-cookie-title">Vos préférences cookies</h2><p>Le site n’utilise actuellement aucun outil de mesure d’audience ou de publicité. Les cookies nécessaires restent actifs. Votre choix est mémorisé et modifiable à tout moment.</p><div class="cookie-actions"><button type="button" data-cookie-action="accept">Tout accepter</button><button type="button" data-cookie-action="reject">Tout refuser</button><button type="button" data-cookie-action="customize">Personnaliser</button></div><div class="cookie-detail" id="hira-cookie-detail" hidden>
-<p>Cookies nécessaires : toujours actifs.</p><label><input id="hira-cookie-analytics" type="checkbox"> Mesure d’audience</label><label><input id="hira-cookie-marketing" type="checkbox"> Publicité personnalisée</label><button type="button" class="cookie-save" data-cookie-action="save">Enregistrer mes choix</button></div></section></div><button id="hira-cookie-settings" type="button" class="cookie-save">Gérer les cookies</button><script>(function(){var k="hira-cookie-v1",b=document.getElementById("hira-cookie-consent"),d=document.getElementById("hira-cookie-detail"),a=document.getElementById("hira-cookie-analytics"),m=document.getElementById("hira-cookie-marketing"),c={};try{c=JSON.parse(localStorage.getItem(k)||"{}")}catch(e){}function save(x){c=x;localStorage.setItem(k,JSON.stringify(x));b.hidden=true}if(!localStorage.getItem(k))b.hidden=false;document.querySelector("[data-cookie-action=accept]").onclick=function(){save({necessary:true,analytics:true,marketing:true})};document.querySelector("[data-cookie-action=reject]").onclick=function(){save({necessary:true,analytics:false,marketing:false})};document.querySelector("[data-cookie-action=customize]").onclick=function(){d.hidden=false};document.querySelector("[data-cookie-action=save]").onclick=function(){save({necessary:true,analytics:a.checked,marketing:m.checked})};document.getElementById("hira-cookie-settings").onclick=function(){b.hidden=false;d.hidden=false;a.checked=!!c.analytics;m.checked=!!c.marketing}})();</script></body></html>
+<p>Cookies nécessaires : toujours actifs.</p><label><input id="hira-cookie-analytics" type="checkbox"> Mesure d’audience</label><label><input id="hira-cookie-marketing" type="checkbox"> Publicité personnalisée</label><button type="button" class="cookie-save" data-cookie-action="save">Enregistrer mes choix</button></div></section></div><button id="hira-cookie-settings" type="button" class="cookie-save">Gérer les cookies</button><script>(function(){var k="hira-cookie-v1",b=document.getElementById("hira-cookie-consent"),d=document.getElementById("hira-cookie-detail"),a=document.getElementById("hira-cookie-analytics"),m=document.getElementById("hira-cookie-marketing"),c={};try{c=JSON.parse(localStorage.getItem(k)||"{}")}catch(e){}function save(x){c=x;localStorage.setItem(k,JSON.stringify(x));b.hidden=true}if(!localStorage.getItem(k))b.hidden=false;document.querySelector("[data-cookie-action=accept]").onclick=function(){save({necessary:true,analytics:true,marketing:true})};document.querySelector("[data-cookie-action=reject]").onclick=function(){save({necessary:true,analytics:false,marketing:false})};document.querySelector("[data-cookie-action=customize]").onclick=function(){d.hidden=false};document.querySelector("[data-cookie-action=save]").onclick=function(){save({necessary:true,analytics:a.checked,marketing:m.checked})};document.getElementById("hira-cookie-settings").onclick=function(){b.hidden=false;d.hidden=false;a.checked=!!c.analytics;m.checked=!!c.marketing}})();</script>
+<style>
+.product-details-button{display:inline-flex;align-items:center;justify-content:center;margin:14px 8px 0 0;padding:10px 14px;border:1px solid #1e4d8c;border-radius:999px;background:#fff;color:#1e4d8c;font:700 12px Montserrat,Arial,sans-serif;cursor:pointer}.product-details-button:hover{background:#1e4d8c;color:#fff}.product-detail-dialog{width:min(560px,calc(100% - 28px));max-height:85vh;margin:auto;padding:0;border:1px solid #dce6f2;border-radius:20px;background:#fff;color:#17202b;box-shadow:0 24px 80px #102b4a40}.product-detail-dialog::backdrop{background:#0d1b2acc;backdrop-filter:blur(3px)}.product-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px 26px 10px}.product-detail-category{color:#1e4d8c;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.product-detail-dialog h2{margin-top:7px;font-size:clamp(22px,5vw,30px);line-height:1.2}.product-detail-close{width:38px;height:38px;flex:none;border:1px solid #dce6f2;border-radius:50%;background:#f5f8fc;color:#17202b;font-size:23px;cursor:pointer}.product-detail-content{padding:8px 26px 26px}.product-detail-content p{margin:0 0 13px;color:#526174;font-size:14px;line-height:1.8}.product-detail-format{font-size:12px!important;font-weight:700;color:#1e4d8c!important}.product-detail-buy{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:12px 18px;border-radius:999px;background:#1e4d8c;color:#fff;font-size:12px;font-weight:800}.product-detail-buy:hover{background:#173b67}@media(max-width:600px){.product-detail-head{padding:20px 18px 8px}.product-detail-content{padding:8px 18px 20px}}
+</style>
+<dialog class="product-detail-dialog" id="product-detail-dialog" aria-labelledby="product-detail-title">
+  <div class="product-detail-head"><div><div class="product-detail-category" id="product-detail-category"></div><h2 id="product-detail-title"></h2></div><button class="product-detail-close" type="button" aria-label="Fermer">×</button></div>
+  <div class="product-detail-content"><p id="product-detail-summary"></p><p id="product-detail-extra"></p><p class="product-detail-format" id="product-detail-format"></p><a class="product-detail-buy" id="product-detail-buy" href="#" target="_blank" rel="noopener noreferrer">Voir le produit <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
+</dialog>
+<script>
+(function(){
+ const dialog=document.getElementById('product-detail-dialog');
+ const extraDetails=[
+  'La fixation de niveau 5 est le repère de tenue indiqué pour ce spray. Il accompagne la mise en forme et la finition de la coiffure. Suivez les conseils d’utilisation inscrits sur l’emballage.',
+  'Cette mousse associe le volume à une fixation ultra-forte. Elle s’intègre à une routine de coiffage pour donner plus de corps à la chevelure. Consultez l’étiquette pour le mode d’application.',
+  'Une huile dédiée au soin de la barbe, conçue pour aider à assouplir le poil et lui donner un aspect doux et brillant. Utilisez-la selon les indications figurant sur le flacon.',
+  'La poudre coiffante aide à créer du volume et de la texture avec un effet mat. Elle convient pour travailler une coiffure texturisée sans fini brillant.',
+  'Une poudre coiffante orientée volume et texture. Elle permet de donner du relief à la coiffure avec le rendu indiqué par Gummy. Référez-vous à l’emballage pour les conseils d’utilisation.',
+  'Le gel Bloom est une référence de rasage de la gamme Gummy. Retrouvez le format et les indications d’utilisation directement sur son emballage.',
+  'Un gel coiffant Gummy conçu pour structurer les cheveux avec une fixation forte. Choisissez la quantité et la finition selon le style souhaité, en suivant les instructions du produit.',
+  'Ce gel coiffant à la kératine est présenté pour structurer la coiffure et apporter une tenue forte. Les détails d’utilisation figurent sur l’emballage.',
+  'Cette cire coiffante de 150 ml est destinée à créer une coiffure texturisée avec une finition mate. Elle convient aux styles où l’on souhaite limiter l’effet brillant.',
+  'Cette cire à la kératine de 150 ml est conçue pour une tenue ferme. Elle aide à structurer la coiffure et à garder un style défini.',
+  'Cette cire de 150 ml associe une tenue forte à un fini brillant. Une option pour structurer la coiffure tout en conservant un aspect lumineux.',
+  'Cette cire à la kératine de 150 ml met l’accent sur un fini extra brillant. Elle permet de structurer la coiffure avec l’effet gloss indiqué par Gummy.'
+ ];
+ const title=document.getElementById('product-detail-title');
+ const category=document.getElementById('product-detail-category');
+ const summary=document.getElementById('product-detail-summary');
+ const extra=document.getElementById('product-detail-extra');
+ const format=document.getElementById('product-detail-format');
+ const buy=document.getElementById('product-detail-buy');
+ document.querySelectorAll('.product-card').forEach(function(card,index){
+  const info=card.querySelector('.product-info');
+  const existingLink=card.querySelector('.product-link');
+  if(!info||!existingLink)return;
+  const button=document.createElement('button');
+  button.type='button';button.className='product-details-button';button.textContent='Voir la description';button.setAttribute('aria-haspopup','dialog');
+  button.addEventListener('click',function(){
+   title.textContent=card.querySelector('h3')?.textContent.trim()||'Détails du produit';
+   category.textContent=card.querySelector('.product-category')?.textContent.trim()||'Gummy Professional';
+   summary.textContent=card.querySelector('.product-info p')?.textContent.trim()||'';
+   extra.textContent=extraDetails[index]||'Consultez l’emballage pour les caractéristiques et les conseils d’utilisation de ce produit.';
+   const productFormat=(title.textContent.match(/[0-9]+ ?(?:ml|g)/i)||[])[0];
+   format.textContent=productFormat?'Format : '+productFormat+'.':'Consultez le format sur l’emballage.';
+   buy.href=existingLink.href;
+   buy.firstChild.textContent=existingLink.textContent.trim().toUpperCase()==='ACHETER'?'ACHETER':'VOIR LA GAMME';
+   dialog.showModal();
+  });
+  info.insertBefore(button,existingLink);
+ });
+ dialog.querySelector('.product-detail-close').addEventListener('click',function(){dialog.close();});
+ dialog.addEventListener('click',function(event){if(event.target===dialog)dialog.close();});
+})();
+</script>
+</body></html>
