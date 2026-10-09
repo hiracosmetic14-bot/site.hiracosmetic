@@ -1323,4 +1323,13 @@ h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:clamp(3
 @media(max-width:1000px){.hero{background-position:center;background-image:linear-gradient(90deg,#f4ede1ed 0%,#f4ede1b3 48%,#f4ede100 78%),url('hira-hero-ivory.png')}.hero p{max-width:480px}}
 @media(max-width:600px){.hero{display:block;min-height:0;background:#f4ede5}.hero-content{padding:48px 0 32px}.hero::after{content:'';display:block;height:230px;background:url('hira-hero-ivory.png') right center/auto 100% no-repeat}.hero p{max-width:100%}.hero .buttons{max-width:100%}}
 </style>
+<style id="hira-promo-marquee">
+.promo-bar{padding:11px 0;overflow:hidden;background:#252525;color:#fff;text-align:left}
+.promo-track{display:flex;width:max-content;animation:hira-promo-loop 32s linear infinite;will-change:transform}
+.promo-track span,.promo-track span[aria-hidden="true"]{display:block;flex:none;white-space:nowrap;padding:0 44px 0 0;font-size:10px;line-height:1.6;font-weight:500;letter-spacing:.08em}
+.promo-track b{padding:0 14px;color:#cfc8bd}
+.promo-bar:hover .promo-track,.promo-bar:focus-visible .promo-track{animation-play-state:paused}
+@keyframes hira-promo-loop{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.promo-track{animation:none!important;width:auto}.promo-track span{white-space:normal;padding:0 18px;text-align:center}.promo-track span[aria-hidden="true"]{display:none}}
+</style>
 </body></html>
