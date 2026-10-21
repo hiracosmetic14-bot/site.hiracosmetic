@@ -1185,60 +1185,136 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
 <style>
 .product-details-button{display:inline-flex;align-items:center;justify-content:center;margin:14px 8px 0 0;padding:10px 14px;border:1px solid #1e4d8c;border-radius:999px;background:#fff;color:#1e4d8c;font:700 12px Montserrat,Arial,sans-serif;cursor:pointer}.product-details-button:hover{background:#1e4d8c;color:#fff}.product-detail-dialog{width:min(560px,calc(100% - 28px));max-height:85vh;margin:auto;padding:0;border:1px solid #dce6f2;border-radius:20px;background:#fff;color:#17202b;box-shadow:0 24px 80px #102b4a40}.product-detail-dialog::backdrop{background:#0d1b2acc;backdrop-filter:blur(3px)}.product-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px 26px 10px}.product-detail-category{color:#1e4d8c;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.product-detail-dialog h2{margin-top:7px;font-size:clamp(22px,5vw,30px);line-height:1.2}.product-detail-close{width:38px;height:38px;flex:none;border:1px solid #dce6f2;border-radius:50%;background:#f5f8fc;color:#17202b;font-size:23px;cursor:pointer}.product-detail-content{padding:8px 26px 26px}.product-detail-content p{margin:0 0 13px;color:#526174;font-size:14px;line-height:1.8}.product-detail-format{font-size:12px!important;font-weight:700;color:#1e4d8c!important}.product-detail-buy{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:12px 18px;border-radius:999px;background:#1e4d8c;color:#fff;font-size:12px;font-weight:800}.product-detail-buy:hover{background:#173b67}@media(max-width:600px){.product-detail-head{padding:20px 18px 8px}.product-detail-content{padding:8px 18px 20px}}
 </style>
-<dialog class="product-detail-dialog" id="product-detail-dialog" aria-labelledby="product-detail-title">
-  <div class="product-detail-head"><div><div class="product-detail-category" id="product-detail-category"></div><h2 id="product-detail-title"></h2></div><button class="product-detail-close" type="button" aria-label="Fermer">×</button></div>
-  <div class="product-detail-content"><p id="product-detail-summary"></p><p id="product-detail-extra"></p><p class="product-detail-format" id="product-detail-format"></p><a class="product-detail-buy" id="product-detail-buy" href="#" target="_blank" rel="noopener noreferrer">Voir le produit <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a><a class="product-detail-buy product-detail-shopify" id="product-detail-shopify" href="#" target="_blank" rel="noopener noreferrer" hidden>Acheter en ligne <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div>
-</dialog>
-<script>
-(function(){
- const dialog=document.getElementById('product-detail-dialog');
- const extraDetails=[
-  'La fixation de niveau 5 est le repère de tenue indiqué pour ce spray. Il accompagne la mise en forme et la finition de la coiffure. Suivez les conseils d’utilisation inscrits sur l’emballage.',
-  'Cette mousse associe le volume à une fixation ultra-forte. Elle s’intègre à une routine de coiffage pour donner plus de corps à la chevelure. Consultez l’étiquette pour le mode d’application.',
-  'Une huile dédiée au soin de la barbe, conçue pour aider à assouplir le poil et lui donner un aspect doux et brillant. Utilisez-la selon les indications figurant sur le flacon.',
-  'La poudre coiffante aide à créer du volume et de la texture avec un effet mat. Elle convient pour travailler une coiffure texturisée sans fini brillant.',
-  'Une poudre coiffante orientée volume et texture. Elle permet de donner du relief à la coiffure avec le rendu indiqué par Gummy. Référez-vous à l’emballage pour les conseils d’utilisation.',
-  'Le gel Bloom est une référence de rasage de la gamme Gummy. Retrouvez le format et les indications d’utilisation directement sur son emballage.',
-  'Un gel coiffant Gummy conçu pour structurer les cheveux avec une fixation forte. Choisissez la quantité et la finition selon le style souhaité, en suivant les instructions du produit.',
-  'Ce gel coiffant à la kératine est présenté pour structurer la coiffure et apporter une tenue forte. Les détails d’utilisation figurent sur l’emballage.',
-  'Cette cire coiffante de 150 ml est destinée à créer une coiffure texturisée avec une finition mate. Elle convient aux styles où l’on souhaite limiter l’effet brillant.',
-  'Cette cire à la kératine de 150 ml est conçue pour une tenue ferme. Elle aide à structurer la coiffure et à garder un style défini.',
-  'Cette cire de 150 ml associe une tenue forte à un fini brillant. Une option pour structurer la coiffure tout en conservant un aspect lumineux.',
-  'Cette cire à la kératine de 150 ml met l’accent sur un fini extra brillant. Elle permet de structurer la coiffure avec l’effet gloss indiqué par Gummy.', 'Cette cire coiffante de 150 ml est destinée aux coiffures qui demandent une fixation très forte. Elle permet de structurer le style selon l’effet annoncé sur l’emballage.', 'Cette cire de 150 ml est pensée pour obtenir un style naturel. Elle aide à mettre en forme les cheveux avec le rendu annoncé sur la fiche produit.', 'Le gel-cire coiffant de 220 ml offre une option de coiffage entre la texture d’un gel et celle d’une cire, pour structurer le style souhaité.', 'Ce gel coiffant de 220 ml est indiqué pour une fixation maximale. Il aide à mettre en forme une coiffure structurée; suivez les conseils d’utilisation sur l’emballage.'
- ];
- const title=document.getElementById('product-detail-title');
- const category=document.getElementById('product-detail-category');
- const summary=document.getElementById('product-detail-summary');
- const extra=document.getElementById('product-detail-extra');
- const format=document.getElementById('product-detail-format');
- const buy=document.getElementById('product-detail-buy');
- document.querySelectorAll('.product-card').forEach(function(card,index){
-  const info=card.querySelector('.product-info');
-  const existingLink=card.querySelector('.product-link');
-  if(!info||!existingLink)return;
-  const button=document.createElement('button');
-  button.type='button';button.className='product-details-button';button.textContent='Voir la description';button.setAttribute('aria-haspopup','dialog');
-  button.addEventListener('click',function(){
-   title.textContent=card.querySelector('h3')?.textContent.trim()||'Détails du produit';
-   category.textContent=card.querySelector('.product-category')?.textContent.trim()||'Gummy Professional';
-   summary.textContent=card.querySelector('.product-info p')?.textContent.trim()||'';
-   extra.textContent=card.dataset.detailExtra||extraDetails[index]||'Consultez l’emballage pour les caractéristiques et les conseils d’utilisation de ce produit.';
-   const productFormat=(title.textContent.match(/[0-9]+ ?(?:ml|g)/i)||[])[0];
-   format.textContent=card.dataset.detailFormat||(productFormat?'Format : '+productFormat+'.':'Consultez le format sur l’emballage.');
-   buy.href=existingLink.href;
-   const shopifyLink=Array.from(card.querySelectorAll('.product-link')).find(link=>link.href.includes('myshopify.com'));
-   const shopifyButton=document.getElementById('product-detail-shopify');
-   shopifyButton.hidden=!shopifyLink||shopifyLink===existingLink;
-   if(shopifyLink)shopifyButton.href=shopifyLink.href;
-   buy.firstChild.textContent=existingLink.href.includes('myshopify.com')?'ACHETER EN LIGNE':'VOIR LA GAMME';
-   dialog.showModal();
+<dialog class="product-detail-dialog" id="product-detail-dialog" aria-labelledby="product-detail-title" aria-describedby="product-detail-summary">
+<div class="product-detail-head"><div><div class="product-detail-category" id="product-detail-category"></div><h2 id="product-detail-title"></h2></div><button class="product-detail-close" type="button" aria-label="Fermer la fiche produit">×</button></div>
+<div class="product-detail-content"><img id="product-detail-photo" class="product-detail-photo" alt="" hidden><p id="product-detail-summary"></p><h3>Présentation</h3><p id="product-detail-extra"></p><p class="product-detail-format" id="product-detail-format"></p><h3>Quel résultat rechercher ?</h3><p id="product-detail-result"></p><h3>Conseils d’utilisation</h3><p id="product-detail-use"></p><p class="product-detail-note">Les ingrédients et les précautions propres à votre référence figurent sur son emballage.</p><a class="product-detail-buy" id="product-detail-buy" href="#" target="_blank" rel="noopener noreferrer">Acheter sur la boutique</a><a class="product-detail-buy product-detail-shopify" id="product-detail-shopify" href="#" target="_blank" rel="noopener noreferrer" hidden>Acheter en ligne</a></div></dialog>
+<script id="hira-product-details-script">\n(function () {
+  'use strict';
+  const dialog = document.getElementById('product-detail-dialog');
+  if (!dialog) return;
+  const title = document.getElementById('product-detail-title');
+  const category = document.getElementById('product-detail-category');
+  const summary = document.getElementById('product-detail-summary');
+  const extra = document.getElementById('product-detail-extra');
+  const format = document.getElementById('product-detail-format');
+  const use = document.getElementById('product-detail-use');
+  const result = document.getElementById('product-detail-result');
+  const photo = document.getElementById('product-detail-photo');
+  const buy = document.getElementById('product-detail-buy');
+  let opener = null;
+  function detailsFor(name) {
+    const n = name.toLocaleLowerCase('fr');
+    if (n.includes('lames')) return {
+      result: 'Pour le rasage avec un porte-lame compatible. Le conditionnement de 100 lames permet de disposer de consommables pour les prestations de rasage.',
+      use: 'Vérifiez la compatibilité avec votre rasoir avant l’achat. Installez et remplacez la lame conformément à la notice du porte-lame. Manipulez le tranchant avec précaution et éliminez les lames usagées dans un contenant adapté.'
+    };
+    if (n.includes('cologne')) return {
+      result: 'Une eau de Cologne au citron pour parfumer la peau. Le bidon de 5 litres est un grand conditionnement ; il ne s’agit pas d’un flacon de poche.',
+      use: 'Usage externe uniquement, selon les instructions de l’étiquette. Évitez les yeux et les muqueuses. Ne pas utiliser comme désinfectant et respecter les précautions figurant sur le bidon.'
+    };
+    if (n.includes('rasage')) return {
+      result: 'Pour préparer la zone à raser dans une routine de rasage. Cette référence Bloom est un gel de rasage : elle ne remplace pas un gel coiffant pour les cheveux.',
+      use: 'Appliquez et utilisez le gel conformément aux indications du flacon. Utilisez un rasoir adapté à votre pratique et respectez les précautions du fabricant.'
+    };
+    if (n.includes('huile')) return {
+      result: 'Pour compléter l’entretien de la barbe et obtenir un poil d’aspect plus doux et brillant. Un soin destiné à la barbe, à distinguer des produits de fixation pour cheveux.',
+      use: 'Dosez le produit et répartissez-le dans la barbe selon les indications du flacon. Commencez par une petite quantité afin d’ajuster le rendu à la longueur de votre barbe.'
+    };
+    if (n.includes('poudre')) return {
+      result: n.includes('mat') ? 'Pour donner de la texture et du relief à la coiffure avec un rendu mat, sans rechercher un effet brillant.' : 'Pour apporter du relief à une coiffure et travailler son volume. Le rendu dépend de la quantité utilisée et de la mise en forme.',
+      use: 'Déposez une petite quantité sur les cheveux secs, puis répartissez délicatement du bout des doigts et mettez en forme. Ajoutez progressivement si nécessaire. Ne pas appliquer sur cheveux mouillés ; suivez l’étiquette de votre référence.'
+    };
+    if (n.includes('laque')) return {
+      result: 'Pour fixer une coiffure une fois la mise en forme terminée. La fixation ultra-forte de niveau 5 est celle annoncée pour cette référence.',
+      use: 'Utilisez le spray à l’étape de finition, en respectant la distance de pulvérisation et les précautions indiquées sur le flacon. Évitez le visage et les yeux.'
+    };
+    if (n.includes('mousse')) return {
+      result: 'Pour accompagner un coiffage où l’on recherche du volume et de la tenue. La mousse se distingue d’une laque de finition par sa texture à répartir dans les cheveux.',
+      use: 'Répartissez la mousse et procédez au coiffage selon le mode d’emploi du flacon. Respectez la quantité et les conditions d’application indiquées par le fabricant.'
+    };
+    if (n.includes('gel-cire')) return {
+      result: 'Pour structurer les mèches avec une texture associant gel et cire. Une option pour travailler la définition de la coiffure.',
+      use: 'Répartissez une petite quantité entre les mains, appliquez sur les cheveux secs ou humides puis coiffez aux doigts ou au peigne. Ajustez progressivement la quantité ; les indications du pot restent la référence.'
+    };
+    if (n.includes('cire')) {
+      let finish = 'Pour travailler la forme de la coiffure et définir les mèches.';
+      if (n.includes('mate')) finish = 'Pour une coiffure texturisée avec une finition mate. À choisir lorsque vous souhaitez limiter le rendu brillant.';
+      else if (n.includes('extra-brillante')) finish = 'Pour structurer la coiffure tout en recherchant une brillance marquée et un effet gloss.';
+      else if (n.includes('brillance')) finish = 'Pour associer une coiffure structurée à un fini brillant et une tenue forte.';
+      else if (n.includes('ultra-forte')) finish = 'Pour les coiffures qui demandent une fixation très forte et une mise en forme définie.';
+      else if (n.includes('naturel')) finish = 'Pour une mise en forme au rendu naturel, adaptée à un style quotidien.';
+      else if (n.includes('ferme')) finish = 'Pour définir la forme et les mèches avec la tenue ferme annoncée pour cette cire à la kératine.';
+      return {result: finish, use: 'Commencez avec une petite quantité pour ajuster le rendu. Répartissez puis mettez en forme selon les indications du pot. Augmentez progressivement la quantité si nécessaire.'};
+    }
+    return {result: 'Pour structurer la coiffure avec le niveau de fixation annoncé pour cette référence. Ajustez la quantité et la mise en forme au style souhaité.', use: 'Appliquez le gel et procédez au coiffage conformément aux instructions du pot. Commencez par une petite quantité pour ajuster la tenue et le rendu.'};
+  }
+  document.querySelectorAll('.product-card').forEach(function (card) {
+    const info = card.querySelector('.product-info');
+    const existingLink = card.querySelector('.product-link');
+    const heading = card.querySelector('h3');
+    const imageArea = card.querySelector('.product-image');
+    if (!info || !existingLink || !heading) return;
+    const name = heading.textContent.trim();
+    const details = detailsFor(name);
+    function openDetails(event) {
+      opener = event.currentTarget;
+      title.textContent = name;
+      category.textContent = card.querySelector('.product-category')?.textContent.trim() || 'HIRA COSMETIC';
+      summary.textContent = card.querySelector('.product-info p')?.textContent.trim() || '';
+      extra.textContent = card.dataset.detailExtra || '';
+      result.textContent = details.result;
+      use.textContent = details.use;
+      const amount = (name.match(/[0-9]+\s*(?:ml|g|l)\b/i) || [])[0];
+      format.textContent = card.dataset.detailFormat || (amount ? 'Format : ' + amount + '.' : 'Format : consultez la fiche boutique ou contactez-nous.');
+      const image = card.querySelector('.product-image img');
+      photo.hidden = !image;
+      if (image) { photo.src = image.currentSrc || image.src; photo.alt = name; }
+      const links = Array.from(card.querySelectorAll('.product-link'));
+      const shopifyLink = links.find(link => link.href.includes('hiracosmetic-store.myshopify.com'));
+      buy.href = (shopifyLink || existingLink).href;
+      buy.textContent = shopifyLink ? 'Acheter sur la boutique' : 'Demander des informations';
+      document.getElementById('product-detail-shopify').hidden = true;
+      dialog.showModal();
+      dialog.querySelector('.product-detail-close').focus();
+    }
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'product-details-button';
+    button.textContent = 'Voir la fiche détaillée';
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.setAttribute('aria-controls', dialog.id);
+    button.setAttribute('aria-label', 'Voir la fiche détaillée : ' + name);
+    button.addEventListener('click', openDetails);
+    info.insertBefore(button, existingLink);
+    const titleButton = document.createElement('button');
+    titleButton.type = 'button';
+    titleButton.className = 'product-title-trigger';
+    titleButton.textContent = name;
+    titleButton.setAttribute('aria-haspopup', 'dialog');
+    titleButton.setAttribute('aria-controls', dialog.id);
+    heading.replaceChildren(titleButton);
+    titleButton.addEventListener('click', openDetails);
+    if (imageArea) {
+      imageArea.tabIndex = 0;
+      imageArea.setAttribute('role', 'button');
+      imageArea.setAttribute('aria-haspopup', 'dialog');
+      imageArea.setAttribute('aria-controls', dialog.id);
+      imageArea.setAttribute('aria-label', 'Voir la fiche détaillée : ' + name);
+      imageArea.addEventListener('click', openDetails);
+      imageArea.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openDetails(event); }
+      });
+    }
   });
-  info.insertBefore(button,existingLink);
- });
- dialog.querySelector('.product-detail-close').addEventListener('click',function(){dialog.close();});
- dialog.addEventListener('click',function(event){if(event.target===dialog)dialog.close();});
+  dialog.querySelector('.product-detail-close').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('click', function (event) {
+    if (event.target !== dialog) return;
+    const box = dialog.getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
+  });
+  dialog.addEventListener('close', function () { if (opener && opener.isConnected) opener.focus(); });
 })();
-</script>
+\n</script>
 
 <style id="hira-sober-design">
 :root{--gold:#252525;--gold-light:#d8d3cb;--dark:#f7f6f3;--border:#e5e2dc;--text:#202020;--muted:#686660}
@@ -1282,4 +1358,17 @@ section[id]{scroll-margin-top:120px}
 .hira-service-bar span{padding:0 10px}
 @media(max-width:600px){.hira-cover-photo{height:auto;object-fit:contain}.hira-cover-details h1{font-size:30px}.hira-cover-details>p{max-width:32ch;margin:0 auto 24px}.header-icon{min-width:44px;min-height:44px}.hira-service-bar{font-size:11px}.hira-service-bar span{padding:0 5px}section[id]{scroll-margin-top:100px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.promo-track{animation:none!important}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style><style id="hira-product-detail-20261021">
+.product-image[role=button]{cursor:pointer}
+.product-title-trigger{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;line-height:inherit;text-align:left;cursor:pointer}
+.product-title-trigger:hover{text-decoration:underline;text-underline-offset:4px}
+.product-detail-dialog{width:min(680px,calc(100% - 24px));max-height:90dvh;overflow-y:auto;overscroll-behavior:contain}
+.product-detail-head{position:sticky;top:0;background:#fff;z-index:1;border-bottom:1px solid #e5e7eb;padding-bottom:18px}
+.product-detail-photo{display:block;width:100%;height:210px;object-fit:contain;background:#f8f9fb;border-radius:8px;margin:16px 0 22px}
+.product-detail-photo[hidden]{display:none}
+.product-detail-content h3{font:700 15px Montserrat,Arial,sans-serif;margin:23px 0 9px;color:#26313d}
+.product-detail-content .product-detail-note{font-size:12px;color:#637083;border-top:1px solid #e5e7eb;padding-top:14px}
+.product-detail-close{min-width:44px;min-height:44px}
+.product-detail-buy{min-height:44px}
+@media(max-width:600px){.product-detail-photo{height:170px}.product-detail-dialog h2{font-size:22px}.product-detail-buy{width:100%;justify-content:center}.product-detail-content h3{font-size:14px}}
 </style></body></html>
