@@ -1188,7 +1188,8 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
 <dialog class="product-detail-dialog" id="product-detail-dialog" aria-labelledby="product-detail-title" aria-describedby="product-detail-summary">
 <div class="product-detail-head"><div><div class="product-detail-category" id="product-detail-category"></div><h2 id="product-detail-title"></h2></div><button class="product-detail-close" type="button" aria-label="Fermer la fiche produit">×</button></div>
 <div class="product-detail-content"><img id="product-detail-photo" class="product-detail-photo" alt="" hidden><p id="product-detail-summary"></p><h3>Présentation</h3><p id="product-detail-extra"></p><p class="product-detail-format" id="product-detail-format"></p><h3>Quel résultat rechercher ?</h3><p id="product-detail-result"></p><h3>Conseils d’utilisation</h3><p id="product-detail-use"></p><p class="product-detail-note">Les ingrédients et les précautions propres à votre référence figurent sur son emballage.</p><a class="product-detail-buy" id="product-detail-buy" href="#" target="_blank" rel="noopener noreferrer">Acheter sur la boutique</a><a class="product-detail-buy product-detail-shopify" id="product-detail-shopify" href="#" target="_blank" rel="noopener noreferrer" hidden>Acheter en ligne</a></div></dialog>
-<script id="hira-product-details-script">\n(function () {
+<script id="hira-product-details-script">
+(function () {
   'use strict';
   const dialog = document.getElementById('product-detail-dialog');
   if (!dialog) return;
@@ -1314,7 +1315,8 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
   });
   dialog.addEventListener('close', function () { if (opener && opener.isConnected) opener.focus(); });
 })();
-\n</script>
+
+</script>
 
 <style id="hira-sober-design">
 :root{--gold:#252525;--gold-light:#d8d3cb;--dark:#f7f6f3;--border:#e5e2dc;--text:#202020;--muted:#686660}
