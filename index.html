@@ -737,7 +737,7 @@ footer{border-top-color:#e8e4dc;color:#777;}
 
 </header>
 
-<div class="hira-announcement" aria-label="Informations HIRA COSMETIC"><a class="promo-bar" href="https://hiracosmetic-store.myshopify.com/collections/all" aria-label="Gummy Professional : coiffage et barbe pour particuliers et professionnels. Découvrir la boutique"><div class="hira-marquee-track"><span class="hira-marquee-group">GUMMY PROFESSIONAL <span aria-hidden="true">·</span> Coiffage &amp; barbe <span aria-hidden="true">·</span> Pour les particuliers et les professionnels</span><span class="hira-marquee-group" aria-hidden="true">GUMMY PROFESSIONAL <span aria-hidden="true">·</span> Coiffage &amp; barbe <span aria-hidden="true">·</span> Pour les particuliers et les professionnels</span></div></a><button class="hira-marquee-toggle" type="button" aria-label="Mettre le bandeau en pause" aria-pressed="false">Pause</button></div>
+<a class="hira-announcement-static" href="https://hiracosmetic-store.myshopify.com/collections/all">Gummy Professional <span aria-hidden="true">·</span> Coiffage &amp; barbe</a>
 
 <main id="contenu-principal" tabindex="-1">
 
@@ -1427,17 +1427,10 @@ input::placeholder,textarea::placeholder{color:#626b75;opacity:1}
 .hira-faq-answer p{font-size:15px;line-height:1.9;color:#4b5563}
 .hira-faq-answer a{color:#244d46;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:600px){.hira-faq-item summary{font-size:16px;padding-top:20px;padding-bottom:20px}.hira-faq-answer{padding-right:8px}.hira-faq-answer p{font-size:16px}}
-</style><style id="hira-scrolling-banner-20261021">
-.hira-announcement{display:flex;align-items:stretch;background:#243b36;color:#fff;overflow:hidden}
-.hira-announcement .promo-bar{flex:1;min-width:0;margin:0;padding:0;background:transparent;color:inherit;text-align:left;overflow:hidden}
-.hira-marquee-track{display:flex;width:max-content;animation:hira-marquee-scroll 30s linear infinite}
-.hira-marquee-group{display:inline-flex;align-items:center;flex:none;padding:12px 36px;font-size:13px;font-weight:600;line-height:1.6;letter-spacing:.04em;white-space:nowrap}
-.hira-marquee-group>span{padding:0 18px;color:#d3e6df}
-.hira-marquee-toggle{flex:none;min-height:44px;min-width:68px;padding:8px 12px;border:0;border-left:1px solid #ffffff40;background:#243b36;color:#fff;font:600 12px Arial,sans-serif;cursor:pointer}
-.hira-marquee-toggle[hidden]{display:none}
-.hira-announcement:hover .hira-marquee-track,.hira-announcement:focus-within .hira-marquee-track,.hira-announcement.is-paused .hira-marquee-track{animation-play-state:paused}
-.hira-announcement a:focus-visible,.hira-announcement button:focus-visible{outline:2px solid #fff;outline-offset:-4px}
-@keyframes hira-marquee-scroll{to{transform:translateX(-50%)}}
-@media(max-width:600px){.hira-marquee-group{font-size:12px;padding:12px 24px}.hira-marquee-group>span{padding:0 12px}}
-@media(prefers-reduced-motion:reduce){.hira-marquee-track{animation:none;width:auto}.hira-marquee-group{white-space:normal;padding:12px 18px}.hira-marquee-group[aria-hidden=true]{display:none}.hira-marquee-toggle{display:none}}
-</style><script id="hira-marquee-controls">(function(){const banner=document.querySelector('.hira-announcement');const toggle=banner.querySelector('.hira-marquee-toggle');toggle.addEventListener('click',function(){const paused=banner.classList.toggle('is-paused');toggle.setAttribute('aria-pressed',String(paused));toggle.setAttribute('aria-label',paused?'Relancer le bandeau défilant':'Mettre le bandeau en pause');toggle.textContent=paused?'Reprendre':'Pause';});})();</script></body></html>
+</style><style id="hira-static-banner-final">
+.hira-announcement-static{display:flex;align-items:center;justify-content:center;gap:14px;min-height:44px;padding:10px 18px;background:#243b36;color:#fff;font:600 13px/1.6 Montserrat,Arial,sans-serif;letter-spacing:.035em;text-align:center}
+.hira-announcement-static span{color:#d3e6df}
+.hira-announcement-static:hover{background:#1d302c}
+.hira-announcement-static:focus-visible{outline:2px solid #fff;outline-offset:-5px}
+@media(max-width:400px){.hira-announcement-static{gap:10px;font-size:12px;letter-spacing:0}}
+</style></body></html>
