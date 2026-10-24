@@ -11,3 +11,28 @@
 @media(max-width:480px){.catalogue-search-row{gap:8px}.catalogue-search-row button{padding-inline:12px}}
 
 .catalogue-return{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:20px;border-top:1px solid #dce1e7}.catalogue-return a{display:inline-flex;align-items:center;min-height:44px;color:#244d46;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px}.contact-info p>a{color:#174f70;text-decoration:underline;text-underline-offset:4px}
+
+
+body .btn { font-size:16px; line-height:1.5; min-height:48px; padding:12px 24px; }
+.products .product-info > p, .product-detail-content p { font-size:16px; line-height:1.8; }
+.products .product-info h3 { font-size:18px; line-height:1.5; }
+.products .product-link, .products .product-details-button { font-size:14px; line-height:1.5; min-height:48px; }
+.chat-panel .chat-greeting { font-size:16px; line-height:1.7; }
+.chat-panel .chat-head-sub, .chat-panel .chat-products-label, .chat-panel .chat-email-note { font-size:13px; line-height:1.6; }
+.chat-panel .chat-links a { font-size:14px; min-height:44px; line-height:1.5; }
+.chat-panel .chat-product span { font-size:14px; line-height:1.5; }
+.chat-panel .chat-form textarea { font-size:16px; line-height:1.6; min-height:88px; }
+.chat-panel .chat-send { font-size:15px; min-height:44px; }
+.chat-panel .chat-close { min-width:44px; min-height:44px; }
+.cookie-card p, .cookie-card label { font-size:16px; line-height:1.7; }
+.cookie-card .cookie-actions button, .cookie-card .cookie-save { font-size:15px; line-height:1.5; }
+.product-detail-content .product-detail-note { font-size:14px; line-height:1.75; }
+footer .footer-brand p, footer .footer-links a { font-size:15px; line-height:1.8; }
+footer .footer-links a { min-height:40px; display:inline-flex; align-items:center; }
+.brands-marquee .brand-name { font-size:14px; line-height:1.5; }
+@media (max-width:600px) {
+  .catalogue-shortcuts a { font-size:14px; }
+  .chat-panel { right:14px; width:min(390px,calc(100vw - 28px)); }
+  .chat-panel .chat-links { gap:8px; }
+  .chat-panel .chat-products { grid-template-columns:1fr; }
+}
