@@ -9,3 +9,5 @@
 .contact-mail-note a{color:#174f70;text-decoration:underline;text-underline-offset:3px}
 .gbs-stock{white-space:normal;overflow-wrap:anywhere;line-height:1.5}
 @media(max-width:480px){.catalogue-search-row{gap:8px}.catalogue-search-row button{padding-inline:12px}}
+
+.catalogue-return{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:20px;border-top:1px solid #dce1e7}.catalogue-return a{display:inline-flex;align-items:center;min-height:44px;color:#244d46;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:4px}.contact-info p>a{color:#174f70;text-decoration:underline;text-underline-offset:4px}
