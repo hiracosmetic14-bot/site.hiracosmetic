@@ -22,6 +22,8 @@
       status.textContent = count ? count + (count === 1 ? ' produit présenté' : ' produits présentés') : 'Aucun produit ne correspond. Essayez un autre mot ou effacez la recherche.';
     }
     search.closest('.catalogue-search').hidden = false;
+    const headerSearch = document.querySelector('a[href="#catalogue-search-input"]');
+    if (headerSearch) headerSearch.addEventListener('click', () => { search.focus({preventScroll:true}); });
     search.addEventListener('input', filter);
     document.getElementById('catalogue-search-reset').addEventListener('click', () => {search.value = ''; filter(); search.focus();});
     document.querySelectorAll('.catalogue-shortcuts a').forEach(link => link.addEventListener('click', () => {search.value = ''; filter();}));
