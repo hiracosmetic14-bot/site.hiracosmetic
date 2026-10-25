@@ -759,6 +759,15 @@ footer{border-top-color:#e8e4dc;color:#777;}
 </div></section>
 
 
+<section class="hira-style-guide" id="hira-style-guide" aria-labelledby="hira-style-guide-title">
+<div class="container">
+<div class="hira-guide-heading"><div><p class="eyebrow">À chaque style, son coiffant</p><h2 id="hira-style-guide-title">Quel résultat recherchez-vous ?</h2></div><p>Choisissez votre effet, puis comparez les produits de la gamme.</p></div>
+<div class="hira-guide-grid">
+<a class="hira-guide-card" href="#gamme-cires"><span class="hira-guide-number" aria-hidden="true">01</span><h3>Un effet mat ou brillant</h3><p>Explorez les cires et choisissez la finition indiquée sur chaque fiche.</p><span class="hira-guide-link">Voir les cires <span aria-hidden="true">↗</span></span></a>
+<a class="hira-guide-card" href="#gamme-poudres"><span class="hira-guide-number" aria-hidden="true">02</span><h3>Du volume et de la texture</h3><p>Découvrez les poudres coiffantes pour travailler le volume et la matière.</p><span class="hira-guide-link">Voir les poudres <span aria-hidden="true">↗</span></span></a>
+<a class="hira-guide-card" href="#gamme-gels"><span class="hira-guide-number" aria-hidden="true">03</span><h3>Une coiffure structurée</h3><p>Comparez les gels et leurs niveaux de fixation pour définir votre style.</p><span class="hira-guide-link">Voir les gels <span aria-hidden="true">↗</span></span></a>
+</div></div></section>
+
 <!-- ================= PRODUITS ================= -->
 
 <section class="products" id="produits">
@@ -1481,4 +1490,19 @@ input::placeholder,textarea::placeholder{color:#626b75;opacity:1}
 @media(prefers-reduced-motion:reduce){.hira-offer-track{animation:none}.hira-offer-window{overflow-x:auto}.hira-offer-group[aria-hidden]{display:none}.hira-offer-toggle{display:none}}
 </style>
 <script>(function(){const strip=document.querySelector('.hira-offer-strip');const button=strip.querySelector('.hira-offer-toggle');button.addEventListener('click',function(){const paused=strip.classList.toggle('is-paused');button.setAttribute('aria-pressed',String(paused));button.setAttribute('aria-label',paused?'Relancer le défilement des offres':'Mettre les offres en pause');button.textContent=paused?'Relancer':'Pause';});})();</script>
+<style id="hira-style-guide-css">
+.hira-style-guide{padding:52px 0 56px;background:#fff;border-top:1px solid #e5e2dc}
+.hira-guide-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:26px}
+.hira-guide-heading h2{font-size:clamp(27px,3vw,36px);color:#252525}
+.hira-guide-heading>p{max-width:310px;font-size:14px;line-height:1.8;color:#4b5563}
+.hira-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.hira-guide-card{display:flex;flex-direction:column;padding:26px;background:#f7f6f3;border:1px solid #e5e2dc;border-radius:5px;color:#252525;transition:border-color .2s,background .2s}
+.hira-guide-card:hover{border-color:#80796e;background:#f1efea}
+.hira-guide-card:focus-visible{outline:3px solid #252525;outline-offset:4px}
+.hira-guide-number{font-size:12px;line-height:1.5;color:#686660;letter-spacing:.12em;margin-bottom:16px}
+.hira-guide-card h3{font-size:18px;line-height:1.5;margin-bottom:10px}
+.hira-guide-card p{font-size:14px;line-height:1.8;color:#4b5563;margin:0 0 22px}
+.hira-guide-link{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:auto;padding-top:16px;border-top:1px solid #dcd7ce;font-size:13px;font-weight:600}
+@media(max-width:700px){.hira-style-guide{padding:36px 0}.hira-guide-heading{display:block}.hira-guide-heading>p{max-width:100%;margin-top:12px}.hira-guide-grid{grid-template-columns:1fr;gap:12px}.hira-guide-card{padding:20px}.hira-guide-number{margin-bottom:8px}.hira-guide-card p{margin-bottom:14px}}
+</style>
 </body></html>
