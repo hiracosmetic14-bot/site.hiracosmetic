@@ -23,7 +23,7 @@
         if(visible){count++;if(item.available)available++;}
       });
       document.querySelectorAll('#produits .product-grid').forEach(grid=>{
-        const visible=!!grid.querySelector('.product-card:not([hidden])');
+        const visible=!!grid.querySelector('.product-card:not([hidden]), .gbs-card:not([hidden])');
         grid.hidden=!visible;
         const heading=grid.previousElementSibling;
         if(heading && heading.classList.contains('section-head'))heading.hidden=!visible;
