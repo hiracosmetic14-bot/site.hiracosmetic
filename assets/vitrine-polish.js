@@ -40,7 +40,8 @@
       document.querySelectorAll('.hira-category-group').forEach(group=>{group.hidden=!group.querySelector('article:not([hidden])');});
       const catalogue=document.querySelector('.gbs-catalogue');
       if(catalogue)catalogue.hidden=!catalogue.querySelector('.gbs-card:not([hidden])');
-      status.textContent=count ? count+' références affichées · '+available+' en stock · '+(count-available-unconfirmed)+' indisponibles'+(unconfirmed?' · '+unconfirmed+' à confirmer':'') : 'Aucun produit ne correspond. Modifiez les filtres ou effacez la recherche.';
+      document.querySelectorAll('.hira-catalog-mode button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.catalogMode===stock.value)));
+      status.textContent=count ? (stock.value==='available' ? count+' produits disponibles à commander' : count+' références affichées'+(unconfirmed?' · '+unconfirmed+' disponibilités à confirmer':'')) : 'Aucun produit ne correspond. Modifiez les filtres ou effacez la recherche.';
     }
     search.closest('.catalogue-search').hidden=false;
     const headerSearch=document.querySelector('a[href="#catalogue-search-input"]');
@@ -48,6 +49,8 @@
     search.addEventListener('input',filter);stock.addEventListener('change',filter);brand.addEventListener('change',filter);category.addEventListener('change',filter);
     document.getElementById('catalogue-search-reset').addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();search.focus();});
     document.querySelectorAll('.hira-hero-brandline a, .hira-brand-nav a, .catalogue-shortcuts a, .hira-guide-card').forEach(link=>link.addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();}));
+    document.querySelectorAll('[data-catalog-mode]').forEach(button=>button.addEventListener('click',()=>{search.value='';brand.value='';category.value='';stock.value=button.dataset.catalogMode;filter();}));
+    stock.value='available';
     filter();
   }
   const form = document.getElementById('contact-form');
