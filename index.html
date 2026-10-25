@@ -744,7 +744,7 @@ footer{border-top-color:#e8e4dc;color:#777;}
 
 </header>
 
-<a class="hira-announcement-static" href="https://hiracosmetic-store.myshopify.com/collections/all">Gummy Professional <span aria-hidden="true">·</span> Coiffage &amp; barbe</a>
+<div class="hira-offer-strip" role="region" aria-label="Offres Gummy"><div class="hira-offer-window"><div class="hira-offer-track"><div class="hira-offer-group"><span class="hira-offer-item"><a href="https://hiracosmetic-store.myshopify.com/products/gummy-cire-coiffante-style-naturel-150-ml-lot-de-3-unites">OFFRE LOT · 3 cires Gummy à 12,90 €</a><span class="hira-offer-separator" aria-hidden="true">✦</span></span><span class="hira-offer-item"><a href="https://hiracosmetic-store.myshopify.com/products/gummy-cire-coiffante-style-naturel-150-ml-lot-de-6-unites">OFFRE LOT · 6 cires Gummy à 24,90 €</a><span class="hira-offer-separator" aria-hidden="true">✦</span></span><span class="hira-offer-item"><a href="https://hiracosmetic-store.myshopify.com/collections/all">Découvrez les offres à la pièce et en lots</a><span class="hira-offer-separator" aria-hidden="true">✦</span></span></div><div class="hira-offer-group" aria-hidden="true" inert><span class="hira-offer-item"><a href="https://hiracosmetic-store.myshopify.com/products/gummy-cire-coiffante-style-naturel-150-ml-lot-de-3-unites">OFFRE LOT · 3 cires Gummy à 12,90 €</a><span class="hira-offer-separator" aria-hidden="true">✦</span></span><span class="hira-offer-item"><a href="https://hiracosmetic-store.myshopify.com/products/gummy-cire-coiffante-style-naturel-150-ml-lot-de-6-unites">OFFRE LOT · 6 cires Gummy à 24,90 €</a><span class="hira-offer-separator" aria-hidden="true">✦</span></span><span class="hira-offer-item"><a href="https://hiracosmetic-store.myshopify.com/collections/all">Découvrez les offres à la pièce et en lots</a><span class="hira-offer-separator" aria-hidden="true">✦</span></span></div></div></div><button class="hira-offer-toggle" type="button" aria-label="Mettre les offres en pause" aria-pressed="false">Pause</button></div>
 
 <main id="contenu-principal" tabindex="-1">
 
@@ -1464,4 +1464,21 @@ input::placeholder,textarea::placeholder{color:#626b75;opacity:1}
 </style>
 <link rel="stylesheet" href="/assets/vitrine-polish.css">
 <script src="/assets/vitrine-polish.js"></script>
+<style id="hira-offer-marquee">
+.hira-offer-strip{display:flex;align-items:center;background:#243b36;color:#fff;min-height:52px;overflow:hidden}
+.hira-offer-window{flex:1;min-width:0;overflow:hidden}
+.hira-offer-track{display:flex;width:max-content;animation:hira-offer-drift 38s linear infinite}
+.hira-offer-group{display:flex;flex:none;align-items:center}
+.hira-offer-item{display:flex;flex:none;align-items:center;white-space:nowrap;font:600 13px/1.6 Montserrat,Arial,sans-serif;letter-spacing:.025em}
+.hira-offer-item a{display:inline-flex;align-items:center;min-height:52px;padding:8px 12px;color:#fff}
+.hira-offer-item a:hover{text-decoration:underline;text-underline-offset:4px}
+.hira-offer-separator{color:#c8dfd5;padding:0 20px;font-size:12px}
+.hira-offer-toggle{align-self:stretch;flex:none;border:0;border-left:1px solid #ffffff40;padding:0 16px;background:#1d302c;color:#fff;font:600 12px Montserrat,Arial,sans-serif;cursor:pointer;min-width:76px}
+.hira-offer-strip:hover .hira-offer-track,.hira-offer-strip:focus-within .hira-offer-track,.hira-offer-strip.is-paused .hira-offer-track{animation-play-state:paused}
+.hira-offer-strip a:focus-visible,.hira-offer-toggle:focus-visible{outline:2px solid #fff;outline-offset:-5px}
+@keyframes hira-offer-drift{to{transform:translateX(-50%)}}
+@media(max-width:600px){.hira-offer-item{font-size:12px}.hira-offer-separator{padding:0 14px}.hira-offer-toggle{padding:0 12px;min-width:68px}}
+@media(prefers-reduced-motion:reduce){.hira-offer-track{animation:none}.hira-offer-window{overflow-x:auto}.hira-offer-group[aria-hidden]{display:none}.hira-offer-toggle{display:none}}
+</style>
+<script>(function(){const strip=document.querySelector('.hira-offer-strip');const button=strip.querySelector('.hira-offer-toggle');button.addEventListener('click',function(){const paused=strip.classList.toggle('is-paused');button.setAttribute('aria-pressed',String(paused));button.setAttribute('aria-label',paused?'Relancer le défilement des offres':'Mettre les offres en pause');button.textContent=paused?'Relancer':'Pause';});})();</script>
 </body></html>
