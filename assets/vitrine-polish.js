@@ -53,11 +53,12 @@
     document.getElementById('catalogue-search-reset').addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();search.focus();});
     document.querySelectorAll('.hira-hero-brandline a, .hira-brand-nav a, .catalogue-shortcuts a, .hira-guide-card').forEach(link=>link.addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();}));
     document.querySelectorAll('[data-catalog-mode]').forEach(button=>button.addEventListener('click',()=>{search.value='';brand.value='';category.value='';stock.value=button.dataset.catalogMode;filter();}));
-    document.querySelectorAll('[data-browse-brand]').forEach(link=>link.addEventListener('click',()=>{
+    document.addEventListener('click',event=>{
+      const link=event.target.closest('[data-browse-brand]');if(!link)return;
       const name=link.dataset.browseBrand;
       if(!Array.from(brand.options).some(option=>option.value===name)){const option=document.createElement('option');option.value=name;option.textContent=name;brand.appendChild(option);}
       search.value='';category.value='';stock.value='all';brand.value=name;filter();
-    }));
+    });
     stock.value='available';
     filter();
   }
