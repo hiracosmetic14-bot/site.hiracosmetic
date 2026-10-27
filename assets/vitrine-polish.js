@@ -18,6 +18,26 @@
       const option=document.createElement('option');option.value=name;option.textContent=name;brand.appendChild(option);
     });
     Array.from(new Set(cards.map(item=>item.category))).filter(Boolean).sort((a,b)=>a.localeCompare(b,'fr')).forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;category.appendChild(option);});
+    const filterOverview=document.createElement('div');
+    filterOverview.className='hira-applied-filters';filterOverview.setAttribute('aria-label','Filtres actifs');
+    status.after(filterOverview);
+    const recovery=document.createElement('button');
+    recovery.type='button';recovery.className='hira-search-recovery';recovery.hidden=true;
+    recovery.addEventListener('click',()=>{stock.value='all';filter();});
+    filterOverview.after(recovery);
+    function updateFilterOverview(terms,count){
+      filterOverview.replaceChildren();
+      [[search,search.value.trim()?'Recherche : '+search.value.trim():''],[brand,brand.value],[category,category.value],[stock,stock.value==='all'?'':stock.options[stock.selectedIndex].textContent]].forEach(([control,label])=>{
+        if(!label)return;
+        const button=document.createElement('button');button.type='button';button.textContent=label+' ×';
+        button.setAttribute('aria-label','Retirer le filtre '+label);
+        button.addEventListener('click',()=>{control.value=control===stock?'all':'';filter();});
+        filterOverview.appendChild(button);
+      });
+      const otherCount=stock.value==='all'?0:cards.filter(item=>terms.every(term=>item.text.includes(term))&&(!brand.value||item.brand===brand.value)&&(!category.value||item.category===category.value)&&item.stock!==stock.value).length;
+      recovery.hidden=!!count||!otherCount;
+      if(!recovery.hidden)recovery.textContent='Voir '+otherCount+' référence'+(otherCount>1?'s':'')+' dans les autres disponibilités';
+    }
     function filter() {
       const terms=normalize(search.value.trim()).split(/\s+/).filter(Boolean);
       let count=0, available=0, unconfirmed=0;
@@ -44,7 +64,8 @@
       const missingBrand=brand.value && !cards.some(item=>item.brand===brand.value);
       if(request){request.hidden=!missingBrand;if(missingBrand){document.getElementById('hira-brand-request-title').textContent=brand.value+' · Références sur demande';document.getElementById('hira-brand-request-link').href='mailto:info@hiracosmetic.be?subject='+encodeURIComponent('Demande de références : '+brand.value);}}
       document.querySelectorAll('.hira-catalog-mode button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.catalogMode===stock.value)));
-      status.textContent=count ? (stock.value==='available' ? count+' produits disponibles à commander' : count+' références affichées'+(unconfirmed?' · '+unconfirmed+' disponibilités à confirmer':'')) : 'Aucun produit ne correspond. Modifiez les filtres ou effacez la recherche.';
+      status.textContent=count ? (stock.value==='available' ? count+' produits disponibles à commander' : count+' références affichées'+(unconfirmed?' · '+unconfirmed+' disponibilités à confirmer':'')) : 'Aucun produit ne correspond aux filtres actuels. Retirez un filtre ou modifiez la recherche.';
+      updateFilterOverview(terms,count);
     }
     search.closest('.catalogue-search').hidden=false;
     const headerSearch=document.querySelector('a[href="#catalogue-search-input"]');
