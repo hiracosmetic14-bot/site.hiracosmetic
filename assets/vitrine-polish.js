@@ -141,3 +141,43 @@
     footer.append(guide);
   }
 })();
+
+/* Product-context assistance: no message is sent and no AI service is implied. */
+(() => {
+  const dialog = document.getElementById('product-detail-dialog');
+  const launcher = document.getElementById('hira-chat-launcher');
+  const panel = document.getElementById('hira-chat-panel');
+  if (!dialog || !launcher || !panel) return;
+  const guide = document.createElement('a');
+  guide.href = '/guide-coiffants.html';
+  guide.textContent = 'Bien choisir mon produit';
+  guide.className = 'hira-assistance-guide';
+  (panel.querySelector('.chat-links') || panel).append(guide);
+  const prompt = document.createElement('aside');
+  prompt.className = 'hira-product-help'; prompt.hidden = true;
+  prompt.setAttribute('aria-label', 'Aide au choix du produit');
+  const text = document.createElement('p');
+  text.textContent = 'Une question sur ce produit ? Consultez notre guide ou préparez une demande à HIRA COSMETIC.';
+  const link = document.createElement('a');
+  link.href = '/guide-coiffants.html'; link.textContent = 'M’aider à choisir';
+  const close = document.createElement('button'); close.type = 'button';
+  close.textContent = 'Fermer'; close.setAttribute('aria-label', 'Fermer cette invitation');
+  prompt.append(text, link, close); dialog.append(prompt);
+  let timer = null, shown = false;
+  try { shown = sessionStorage.getItem('hira-product-help-seen') === '1'; } catch (_) {}
+  function stop() { clearTimeout(timer); timer = null; }
+  function schedule() {
+    stop();
+    if (!dialog.open || document.hidden || shown) return;
+    timer = setTimeout(() => {
+      if (!dialog.open || document.hidden || shown) return;
+      shown = true; prompt.hidden = false;
+      try { sessionStorage.setItem('hira-product-help-seen', '1'); } catch (_) {}
+    }, 25000);
+  }
+  close.addEventListener('click', () => { prompt.hidden = true; });
+  new MutationObserver(() => { prompt.hidden = true; schedule(); }).observe(dialog, {attributes:true, attributeFilter:['open']});
+  document.addEventListener('visibilitychange', schedule);
+  dialog.addEventListener('close', () => { stop(); prompt.hidden = true; });
+  schedule();
+})();
