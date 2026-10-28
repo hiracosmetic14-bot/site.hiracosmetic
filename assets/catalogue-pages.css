@@ -28,3 +28,6 @@ input[type=search]{border-color:#8fa6b2;background:#fff;color:#25333c}
 .action:hover,button:hover{background:#103b4c;border-color:#103b4c}
 .catalogue-reset{background:#fff;color:#174f63;border-color:#8fa6b2}.catalogue-reset:hover{background:#edf4f7;color:#174f63}
 .catalogue-empty{color:#4d5e69}.price{color:#222c33}:focus-visible{outline-color:#176581}
+
+/* Live public boutique status. */
+.hira-live-catalogue-status{font-size:.9rem;line-height:1.6;padding:12px 16px;background:#f3f7f9;border:1px solid #d5e3e8;border-radius:10px;color:#234650}.stock[data-live-state=unknown]{background:#eef1f3;color:#44535d}.stock[data-live-state=unavailable]{background:#f4eeee;color:#634545}

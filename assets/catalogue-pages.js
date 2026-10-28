@@ -56,6 +56,7 @@
       render(false);
       cards.filter(card => !card.hidden)[shown]?.querySelector('a')?.focus({ preventScroll: true });
     });
+    document.addEventListener('hira:catalogue-stock-updated',()=>render(false));
     render(true);
   }
   document.querySelectorAll('img[data-fallback]').forEach(image => image.addEventListener('error', () => {
@@ -67,3 +68,6 @@
 })();
 /* Shared consent-gated measurement, loaded once on catalogue pages. */
 (() => { if (document.getElementById('hira-analytics-loader')) return; const script = document.createElement('script'); script.id = 'hira-analytics-loader'; script.src = '/assets/analytics.js'; script.defer = true; document.head.appendChild(script); })();
+
+(()=>{if(document.getElementById('hira-live-catalogue-loader'))return;const s=document.createElement('script');s.id='hira-live-catalogue-loader';s.src='/assets/catalogue-live.js';s.defer=true;document.head.append(s);})();
+

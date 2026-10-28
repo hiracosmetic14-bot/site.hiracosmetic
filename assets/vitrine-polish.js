@@ -41,6 +41,7 @@
           });
         });
         catalogueLoaded=true;
+        document.dispatchEvent(new CustomEvent('hira:catalogue-hydrated'));
       })().catch(error=>{cataloguePromise=null;throw error;});
       return cataloguePromise;
     }
@@ -76,7 +77,7 @@
       const terms=normalize(search.value.trim()).split(/\s+/).filter(Boolean);
       let count=0, available=0, unconfirmed=0;
       cards.forEach(item => {
-        const visible=terms.every(term=>item.text.includes(term)) && (!brand.value || item.brand===brand.value) && (stock.value==='all' || stock.value===item.stock) && (!category.value || item.category===category.value);
+        const visible=terms.every(term=>item.text.includes(term)) && (!brand.value || item.brand===brand.value) && (stock.value==='all' || (stock.value==='available' && document.documentElement.dataset.liveStockState==='failed' ? item.card.classList.contains('product-card') : stock.value===item.stock)) && (!category.value || item.category===category.value);
         item.card.hidden=!visible;
         if(visible){count++;if(item.available)available++;if(item.stock==='unconfirmed')unconfirmed++;}
       });
@@ -98,7 +99,7 @@
       const missingBrand=brand.value && !cards.some(item=>item.brand===brand.value);
       if(request){request.hidden=!missingBrand;if(missingBrand){document.getElementById('hira-brand-request-title').textContent=brand.value+' · Références sur demande';document.getElementById('hira-brand-request-link').href='mailto:info@hiracosmetic.be?subject='+encodeURIComponent('Demande de références : '+brand.value);}}
       document.querySelectorAll('.hira-catalog-mode button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.catalogMode===stock.value)));
-      status.textContent=count ? (stock.value==='available' ? count+' produits disponibles à commander' : count+' références affichées'+(unconfirmed?' · '+unconfirmed+' disponibilités à confirmer':'')) : 'Aucun produit ne correspond aux filtres actuels. Retirez un filtre ou modifiez la recherche.';
+      status.textContent=count ? (stock.value==='available' ? count+(document.documentElement.dataset.liveStockState==='ready'?' produits disponibles en boutique':' produits de la sélection') : count+' références affichées'+(unconfirmed?' · '+unconfirmed+' disponibilités à confirmer':'')) : 'Aucun produit ne correspond aux filtres actuels. Retirez un filtre ou modifiez la recherche.';
       updateFilterOverview(terms,count);
       document.dispatchEvent(new CustomEvent('hira:catalogue-results',{detail:{count,searchLength:search.value.trim().length}}));
     }
@@ -115,6 +116,7 @@
       if(!Array.from(brand.options).some(option=>option.value===name)){const option=document.createElement('option');option.value=name;option.textContent=name;brand.appendChild(option);}
       search.value='';category.value='';stock.value='all';brand.value=name;filter();
     });
+    document.addEventListener('hira:catalogue-stock-updated',()=>{cards=collectCards();filter();});
     stock.value='available';
     filter();
   }
@@ -393,3 +395,6 @@
 })();
 
 
+
+/* Read-only public catalogue updates. */
+(()=>{if(document.getElementById('hira-live-catalogue-loader'))return;const script=document.createElement('script');script.id='hira-live-catalogue-loader';script.src='/assets/catalogue-live.js';script.defer=true;document.head.append(script);})();
