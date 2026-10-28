@@ -163,19 +163,23 @@
   const close = document.createElement('button'); close.type = 'button';
   close.textContent = 'Fermer'; close.setAttribute('aria-label', 'Fermer cette invitation');
   prompt.append(text, link, close); dialog.append(prompt);
-  let timer = null, shown = false;
-  try { shown = sessionStorage.getItem('hira-product-help-seen') === '1'; } catch (_) {}
+  let timer = null, dismissed = false;
+  const shortcut = document.createElement('a');
+  shortcut.href = '/guide-coiffants.html';
+  shortcut.className = 'hira-product-help-shortcut';
+  shortcut.textContent = 'Besoin d’aide pour choisir ?';
+  const heading = dialog.querySelector('.product-detail-head');
+  if (heading) heading.after(shortcut); else dialog.prepend(shortcut);
   function stop() { clearTimeout(timer); timer = null; }
   function schedule() {
     stop();
-    if (!dialog.open || document.hidden || shown) return;
+    if (!dialog.open || document.hidden || dismissed) return;
     timer = setTimeout(() => {
-      if (!dialog.open || document.hidden || shown) return;
-      shown = true; prompt.hidden = false;
-      try { sessionStorage.setItem('hira-product-help-seen', '1'); } catch (_) {}
+      if (!dialog.open || document.hidden || dismissed) return;
+      prompt.hidden = false;
     }, 25000);
   }
-  close.addEventListener('click', () => { prompt.hidden = true; });
+  close.addEventListener('click', () => { dismissed = true; stop(); prompt.hidden = true; });
   new MutationObserver(() => { prompt.hidden = true; schedule(); }).observe(dialog, {attributes:true, attributeFilter:['open']});
   document.addEventListener('visibilitychange', schedule);
   dialog.addEventListener('close', () => { stop(); prompt.hidden = true; });
