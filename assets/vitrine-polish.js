@@ -192,15 +192,36 @@
   const oldLauncher = document.getElementById('hira-chat-launcher');
   if (!oldPanel || !oldLauncher) return;
   const panel = oldPanel.cloneNode(false);
+  panel.classList.add('hira-advisor');
   const launcher = oldLauncher.cloneNode(true);
   oldPanel.replaceWith(panel); oldLauncher.replaceWith(launcher);
   launcher.querySelector('span').textContent = 'Discuter avec HIRA';
   panel.setAttribute('aria-label', 'Assistant automatique HIRA COSMETIC');
-  panel.innerHTML = '<div class="chat-head"><div><div class="chat-head-brand">HIRA COSMETIC</div><div class="chat-head-sub">Assistant automatique · disponible à tout moment</div></div><button class="chat-close" type="button" aria-label="Fermer le chat">×</button></div><div class="hira-chat-log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation"></div><div class="hira-chat-quick" aria-label="Questions fréquentes"></div><form class="chat-form" id="hira-chat-form"><label for="hira-chat-message">Votre question</label><textarea id="hira-chat-message" name="message" maxlength="500" placeholder="Ex. : quelle différence entre cire et poudre ?" required></textarea><div class="chat-form-row"><span class="chat-email-note">Réponses automatiques à partir du site.</span><button class="chat-send" type="submit">Envoyer</button></div></form>';
+  panel.innerHTML = '<div class="chat-head"><div><div class="chat-head-brand">HIRA COSMETIC</div><div class="chat-head-sub">Conseiller coiffure · mode guidé</div></div><button class="chat-close" type="button" aria-label="Fermer le chat">×</button></div><div class="hira-chat-log" role="log" aria-live="polite" aria-relevant="additions" aria-label="Conversation"></div><div class="hira-chat-quick" aria-label="Questions fréquentes"></div><form class="chat-form" id="hira-chat-form"><label for="hira-chat-message">Votre question</label><textarea id="hira-chat-message" name="message" maxlength="500" placeholder="Ex. : quelle différence entre cire et poudre ?" required></textarea><div class="chat-form-row"><span class="chat-email-note">Réponses automatiques à partir du site.</span><button class="chat-send" type="submit">Envoyer</button></div></form>';
   const log = panel.querySelector('.hira-chat-log');
   const input = panel.querySelector('textarea');
   const productDialog = document.getElementById('product-detail-dialog');
-  let returnFocus = launcher, count = 0;
+  let returnFocus = launcher, count = 0, aiAvailable=false, aiConsent=false, busy=false;
+  const history=[];
+  let checkedAI=false;
+  async function discoverAI(){
+    if(checkedAI)return;checkedAI=true;
+    try{const r=await fetch('/api/hira-assistant',{signal:AbortSignal.timeout(4000)});if(!r.ok)return;const status=await r.json();aiAvailable=status.enabled===true;if(!aiAvailable)return;
+      const opt=document.createElement('label');opt.className='hira-ai-opt';const check=document.createElement('input');check.type='checkbox';
+      const text=document.createElement('span');text.textContent='Utiliser l’IA : mes questions seront transmises à Vercel AI Gateway et au fournisseur du modèle. Ne pas partager de données personnelles.';
+      opt.append(check,text);panel.querySelector('form').prepend(opt);check.addEventListener('change',()=>{aiConsent=check.checked;panel.querySelector('.chat-head-sub').textContent=aiConsent?'Conseiller coiffure · IA activée':'Conseiller coiffure · mode guidé';});
+    }catch(_){/* Guided advice remains available when the service is disabled. */}
+  }
+  async function answerAI(question){
+    if(!aiAvailable||!aiConsent)return false;
+    const product=productDialog?.open?productDialog.querySelector('#product-detail-title')?.textContent.trim():'';
+    const messages=[...history.slice(-5),{role:'user',content:question}].slice(-6);
+    try{const r=await fetch('/api/hira-assistant',{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(18000),body:JSON.stringify({consent:true,messages,product})});if(!r.ok)throw new Error('unavailable');const data=await r.json();
+      if(typeof data.answer!=='string')throw new Error('invalid');
+      const products=Array.isArray(data.products)?data.products.filter(p=>typeof p.url==='string'&&p.url.startsWith('https://hiracosmetic-store.myshopify.com/products/')):[];
+      say(data.answer,products.map(p=>[p.name,p.url]));history.push({role:'user',content:question.slice(0,700)},{role:'assistant',content:data.answer.slice(0,700)});return true;
+    }catch(_){say('L’IA est momentanément indisponible. Je peux continuer avec les informations du guide.');return false;}
+  }
   const normalize = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
   function say(text, links = [], user = false) {
     const item = document.createElement('div');
@@ -216,8 +237,38 @@
   }
   const helpLink = ['Contacter HIRA par e-mail','mailto:info@hiracosmetic.be'];
   const guideLink = ['Ouvrir le guide interactif','/guide-coiffants.html'];
+  const preference = {finish:'',family:''};
+  function productCards(family,finish) {
+    let products=[...document.querySelectorAll('.product-card')].map(card=>{
+      const title=card.querySelector('h3,h2'),image=card.querySelector('img'),buy=card.querySelector('a[href*="myshopify.com/products/"]');
+      return title&&buy?{title:title.textContent.trim(),image:image?.currentSrc||image?.src,url:buy.href}:null;
+    }).filter(Boolean);
+    if(family)products=products.filter(p=>normalize(p.title).includes(family));
+    if(finish==='mat')products=products.filter(p=>/mat/.test(normalize(p.title)));
+    if(finish==='brillant')products=products.filter(p=>/brillan/.test(normalize(p.title)));
+    if(!products.length){say('Je ne trouve pas de référence correspondant précisément à ces critères dans la sélection affichée. Comparez les autres familles dans le guide.',[guideLink]);return;}
+    const group=document.createElement('div');group.className='hira-chat-recommendations';
+    const caption=document.createElement('p');caption.textContent='À explorer dans notre catalogue';caption.className='hira-chat-selection-title';group.append(caption);
+    products.slice(0,2).forEach(product=>{
+      const card=document.createElement('a');card.className='hira-chat-reco';card.href=product.url;
+      if(product.image){const image=document.createElement('img');image.src=product.image;image.alt=product.title;image.loading='lazy';card.append(image);}
+      const info=document.createElement('span'),title=document.createElement('strong'),action=document.createElement('span');
+      title.textContent=product.title;action.textContent='Voir dans la boutique →';action.className='hira-chat-reco-action';info.append(title,action);card.append(info);group.append(card);
+    });
+    const note=document.createElement('small');note.textContent='Prix et disponibilité à vérifier dans la boutique.';group.append(note);log.append(group);log.scrollTop=log.scrollHeight;
+  }
   function reply(question) {
     const q = normalize(question);
+    if(/mat/.test(q))preference.finish='mat';
+    if(/brillan/.test(q))preference.finish='brillant';
+    if(/poudre|volume/.test(q))preference.family='poudre';
+    else if(/cire|souple|modeler/.test(q))preference.family='cire';
+    else if(/gel|fixation|fixer/.test(q))preference.family='gel';
+    if(/^(mat|mate|brillant|brillante|effet mat|finition mate|finition brillante)[.! ]*$/.test(q)){
+      const family=preference.finish==='brillant'&&preference.family==='poudre'?'cire':preference.family;
+      say(preference.finish==='mat'?'D’accord, vous recherchez une finition mate. Voici des références à comparer selon la tenue souhaitée.':'D’accord, vous recherchez de la brillance. Voici des références à explorer.');
+      productCards(family,preference.finish);return;
+    }
     if (/allerg|enceinte|grossesse|irrit|maladie|eczema|chute.*cheveu|danger|enfant|bebe/.test(q)) {
       say('Je ne peux pas évaluer une question de santé ou garantir qu’un produit vous convient. Consultez les précautions sur l’emballage et demandez conseil à un professionnel de santé.', [helpLink]); return;
     }
@@ -242,17 +293,17 @@
     if (/contact|humain|personne|telephone|whatsapp|email|e-mail/.test(q)) {
       say('Vous pouvez contacter directement HIRA COSMETIC. Le lien e-mail ouvre votre messagerie : vous vérifiez et envoyez le message vous-même.', [helpLink,['Contacter HIRA sur WhatsApp','https://wa.me/message/YPOEXFPVUT6OA1']]); return;
     }
-    if (/difference|choisir|conseil|hesit|quel produit/.test(q) || (/cire/.test(q) && /poudre|gel/.test(q))) {
+    if (/difference|choisir|trouver|conseil|hesit|quel produit/.test(q) || (/cire/.test(q) && /poudre|gel/.test(q))) {
       say('Pour modeler les mèches, comparez les cires et crèmes. Pour structurer une coiffure fixée, comparez les gels. Pour rechercher du volume et une texture mate, explorez les poudres. Le rendu dépend de la référence. Vous préférez une finition mate ou brillante ?', [guideLink]); return;
     }
     if (/poudre|volume/.test(q)) {
-      say('Les poudres coiffantes permettent de rechercher de la texture et du volume. Certaines références ont un effet mat. Suivez le mode d’emploi de votre produit et commencez par une petite quantité.', [['Voir les poudres','/categories/poudres-coiffantes.html'],guideLink]); return;
+      say('Les poudres coiffantes permettent de rechercher de la texture et du volume. Certaines références ont un effet mat. Suivez le mode d’emploi de votre produit et commencez par une petite quantité.', [['Voir les poudres','/categories/poudres-coiffantes.html'],guideLink]); productCards('poudre',preference.finish); return;
     }
     if (/cire|creme|brillan|mat\b|souple/.test(q)) {
-      say('Les cires et crèmes servent à modeler et définir la coiffure. Comparez la finition mate ou brillante et le niveau de tenue sur chaque fiche.', [['Voir les cires et crèmes','/categories/cires-et-cremes-coiffantes.html'],guideLink]); return;
+      say('Les cires et crèmes servent à modeler et définir la coiffure. Comparez la finition mate ou brillante et le niveau de tenue sur chaque fiche.', [['Voir les cires et crèmes','/categories/cires-et-cremes-coiffantes.html'],guideLink]); productCards('cire',preference.finish); return;
     }
     if (/gel|fixation|fixer/.test(q)) {
-      say('Les gels permettent de structurer une coiffure fixée. La tenue et le rendu varient selon la référence ; consultez sa fiche et les instructions de l’emballage.', [['Voir les gels','/categories/gels-coiffants.html'],guideLink]); return;
+      say('Les gels permettent de structurer une coiffure fixée. La tenue et le rendu varient selon la référence ; consultez sa fiche et les instructions de l’emballage.', [['Voir les gels','/categories/gels-coiffants.html'],guideLink]); productCards('gel',preference.finish); return;
     }
     if (/bonjour|salut|merci|bonsoir/.test(q)) {
       say('Bonjour ! Je peux vous orienter sur les coiffants, la livraison, les retours ou le contact. Quelle est votre question ?'); return;
@@ -269,7 +320,12 @@
     else say('Je n’ai pas de réponse vérifiée à cette question. Vous pouvez utiliser le guide ou contacter HIRA. Cet assistant fonctionne avec des réponses prédéfinies ; il ne consulte pas vos commandes.',[guideLink,helpLink]);
   }
   function openChat() {
+    discoverAI();
     returnFocus = document.activeElement;
+    const currentName = productDialog?.open ? productDialog.querySelector('#product-detail-title')?.textContent.trim() : '';
+    let context = panel.querySelector('.hira-advisor-context');
+    if(!context){context=document.createElement('div');context.className='hira-advisor-context';panel.querySelector('.chat-head').after(context);}
+    context.hidden=!currentName; context.textContent=currentName ? 'Vous consultez : '+currentName : '';
     if (productDialog?.open) productDialog.append(panel); else document.body.append(panel);
     panel.hidden = false; launcher.setAttribute('aria-expanded','true'); input.focus();
   }
@@ -281,11 +337,12 @@
   panel.querySelector('.chat-close').addEventListener('click',closeChat);
   panel.addEventListener('keydown', e => { if(e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closeChat(); } });
   productDialog?.addEventListener('close',()=>{closeChat();document.body.append(panel);});
-  panel.querySelector('form').addEventListener('submit',e=>{
-    e.preventDefault(); const question=input.value.trim(); if(!question)return;
-    input.value=''; say(question,[],true); reply(question); count++; input.focus();
+  panel.querySelector('form').addEventListener('submit',async e=>{
+    e.preventDefault();const question=input.value.trim();if(!question||busy)return;
+    input.value='';say(question,[],true);busy=true;const send=panel.querySelector('.chat-send');send.disabled=true;
+    try{if(!(await answerAI(question)))reply(question);count++;}finally{busy=false;send.disabled=false;input.focus();}
   });
-  ['Choisir mon coiffant','Livraison','Retours','Contacter HIRA'].forEach(question=>{
+  ['Trouver mon coiffant','Effet mat','Finition brillante','Livraison'].forEach(question=>{
     const button=document.createElement('button');button.type='button';button.textContent=question;
     button.addEventListener('click',()=>{say(question,[],true);reply(question);input.focus();});
     panel.querySelector('.hira-chat-quick').append(button);
@@ -296,5 +353,7 @@
   });
   const invite = document.querySelector('.hira-product-help p');
   if(invite) invite.textContent='Une question sur ce produit ? Notre assistant automatique peut vous orienter.';
-  say('Bonjour ! Je suis l’assistant automatique HIRA. Je vous aide à choisir un coiffant et à trouver les informations du site. Mes réponses sont prédéfinies, sans IA générative. Ne partagez pas de données personnelles ici.', [guideLink]);
+  say('Trouvons votre style. Vous recherchez du volume, une coiffure structurée ou des mèches à modeler ?',[guideLink]);
+  const modeNote=document.createElement('p');modeNote.className='hira-advisor-mode';modeNote.textContent='Mode guidé · sans IA générative. Ne partagez pas de données personnelles.';panel.querySelector('form').append(modeNote);
 })();
+
