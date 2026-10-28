@@ -128,3 +128,10 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 #hira-cover-title>small{font:500 clamp(25px,2.4vw,34px)/1.4 Arial,Helvetica,sans-serif;letter-spacing:.3em;margin-top:14px}
 #accueil .hira-logotype-intro{font-size:clamp(18px,1.55vw,21px);line-height:1.65;max-width:500px}
 @media(max-width:600px){#accueil .hira-logotype-kicker{font-size:14px;margin-bottom:18px}#hira-cover-title>span{font-size:clamp(76px,22vw,96px)}#hira-cover-title>small{font-size:clamp(23px,6.5vw,28px);letter-spacing:.23em}#accueil .hira-logotype-intro{font-size:18px;max-width:340px}}
+
+
+/* Audit improvements: product discovery and an explicit route to purchase. */
+.hira-category-shortcuts{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 24px}.hira-category-shortcuts a{display:inline-flex;align-items:center;min-height:46px;padding:10px 16px;border:1px solid #9bb7c4;background:#fff;color:#174f63;border-radius:6px;font:600 15px/1.6 Arial,sans-serif;text-decoration:none}.hira-category-shortcuts a:hover{background:#edf4f7;border-color:#174f63}.hira-category-shortcuts a:focus-visible{outline:3px solid #176581;outline-offset:3px}
+#produits .product-details-button{display:inline-flex!important;align-items:center;justify-content:center;background:white;color:#174f63;border:1px solid #9bb7c4;border-radius:6px;font:600 14px/1.5 Arial,sans-serif;min-height:44px;margin:14px 0 0;padding:10px 14px;cursor:pointer}#produits .product-details-button:hover{background:#edf4f7}#produits .product-link{background:#174f63;color:white;border-color:#174f63}#produits .product-link:hover{background:#103b4c}
+.hira-purchase-info{padding:16px;margin:20px 0;background:#edf4f7;border:1px solid #d5e0e5;border-radius:8px}.hira-purchase-info p{font-size:14px!important;margin:0 0 8px!important}.hira-purchase-info a{display:inline-flex;align-items:center;min-height:44px;margin-right:18px;color:#174f63;font:600 14px/1.6 Arial,sans-serif;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:600px){.hira-category-shortcuts{gap:8px}.hira-category-shortcuts a{font-size:14px;padding:10px 12px}.hira-purchase-info{padding:14px}header nav a{font-size:15px}}

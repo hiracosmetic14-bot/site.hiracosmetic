@@ -105,15 +105,16 @@
   start();
   document.addEventListener('click', event => {
     if (!(event.target instanceof Element)) return;
-    const details = event.target.closest('.product-details-button');
-    if (details) {
-      const card = details.closest('.product-card');
-      track('product_details_open', { product_name: card?.querySelector('h3')?.textContent.trim().slice(0, 100) || '' });
-    }
     const link = event.target.closest('a[href]');
     if (!link) return;
     let target;
     try { target = new URL(link.href, location.href); } catch (_) { return; }
+    if(target.protocol==='mailto:'||target.hostname==='wa.me'){
+      track('contact_click',{contact_method:target.protocol==='mailto:'?'email':'whatsapp'});
+    }
+    if(target.origin===location.origin&&/^\/(?:categories|marques|conseils)\//.test(target.pathname)){
+      track('navigation_select',{destination_path:target.pathname});
+    }
     if (target.hostname !== 'hiracosmetic-store.myshopify.com') return;
     // A click leaving the showcase is neither a cart addition nor a purchase.
     const parameters = { destination_path: target.pathname, product_handle: target.pathname.startsWith('/products/') ? target.pathname.split('/')[2] : '' };
@@ -127,4 +128,31 @@
       setTimeout(leave, 750);
     } else track('outbound_shop_click', parameters);
   });
+  // Observe the real modal state, including image and product-title triggers.
+  const productDialog=document.getElementById('product-detail-dialog');
+  if(productDialog){
+    let wasOpen=false;
+    new MutationObserver(()=>{
+      const open=productDialog.open;
+      if(open&&!wasOpen){
+        const name=document.getElementById('product-detail-title')?.textContent.trim().slice(0,100)||'';
+        let handle='';try{const url=new URL(document.getElementById('product-detail-buy').href);if(url.hostname==='hiracosmetic-store.myshopify.com'&&url.pathname.startsWith('/products/'))handle=url.pathname.split('/')[2];}catch(_){}
+        track('product_details_open',{product_name:name,product_handle:handle});
+        track('view_item',{items:[{item_id:handle||name,item_name:name}]});
+      }
+      wasOpen=open;
+    }).observe(productDialog,{attributes:true,attributeFilter:['open']});
+  }
+  let searchTimer=null;
+  document.addEventListener('hira:catalogue-results',event=>{
+    clearTimeout(searchTimer);
+    const count=event.detail?.count,length=event.detail?.searchLength;
+    if(!Number.isInteger(count)||!Number.isInteger(length)||length<2)return;
+    searchTimer=setTimeout(()=>track('catalogue_search',{result_count:Math.max(0,count),query_length_band:length<6?'2-5':length<16?'6-15':'16+'}),600);
+  });
+  document.addEventListener('submit',event=>{
+    if(event.target?.id==='contact-form'||event.target?.id==='professional-request')track('contact_form_prepare',{form_type:event.target.id==='contact-form'?'general':'professional'});
+  });
+
 })();
+

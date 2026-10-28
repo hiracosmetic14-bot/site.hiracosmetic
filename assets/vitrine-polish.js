@@ -7,13 +7,43 @@
     const brand = document.getElementById('hira-brand-filter');
     const category=document.getElementById('hira-category-filter');
     const status = document.getElementById('catalogue-search-status');
-    const cards = Array.from(document.querySelectorAll('#produits .product-card, #produits .gbs-card')).map(card => {
+    function collectCards(){return Array.from(document.querySelectorAll('#produits .product-card, #produits .gbs-card')).map(card => {
       const label = card.querySelector('.gbs-category');
       const name = card.dataset.catalogueBrand || (label ? label.textContent.trim() : 'Gummy Professional');
       const available=!!card.querySelector('.gbs-stock-available');
       const categoryName=card.closest('.hira-category-group')?.querySelector('h3')?.textContent.trim()||'';
       return {card, brand:name, category:categoryName,text:normalize(card.textContent), available,stock:card.dataset.stockStatus||(available?'available':'unavailable')};
-    });
+    });}
+    let cards=collectCards(), catalogueLoaded=false, cataloguePromise=null;
+    async function ensureCatalogue(){
+      if(catalogueLoaded)return;
+      if(cataloguePromise)return cataloguePromise;
+      cataloguePromise=(async()=>{
+        const response=await fetch('/assets/catalogue-complet.json');
+        if(!response.ok)throw new Error('catalogue');
+        const data=await response.json();
+        if(!Array.isArray(data.containers))throw new Error('catalogue');
+        data.containers.forEach(fragment=>{
+          if(!/^hira-lazy-grid-[0-9]+$/.test(fragment.id)||typeof fragment.html!=='string')return;
+          const grid=document.getElementById(fragment.id);if(!grid)return;
+          grid.insertAdjacentHTML('beforeend',fragment.html);
+          grid.querySelectorAll('.gbs-image').forEach(area=>{
+            if(area.querySelector('a,button'))return;
+            const image=area.querySelector('img');if(!image)return;
+            const link=document.createElement('a');link.href=image.dataset.originalPhoto||image.src;link.target='_blank';link.rel='noopener';link.setAttribute('aria-label','Agrandir : '+image.alt);image.before(link);link.append(image);
+          });
+        });
+        cards=collectCards();
+        [[brand,'brand'],[category,'category']].forEach(([control,key])=>{
+          Array.from(new Set(cards.map(item=>item[key]))).filter(Boolean).sort((a,b)=>a.localeCompare(b,'fr')).forEach(name=>{
+            if(Array.from(control.options).some(option=>option.value===name))return;
+            const option=document.createElement('option');option.value=name;option.textContent=name;control.append(option);
+          });
+        });
+        catalogueLoaded=true;
+      })().catch(error=>{cataloguePromise=null;throw error;});
+      return cataloguePromise;
+    }
     Array.from(new Set(cards.map(item => item.brand))).sort((a,b)=>a.localeCompare(b,'fr')).forEach(name => {
       const option=document.createElement('option');option.value=name;option.textContent=name;brand.appendChild(option);
     });
@@ -38,7 +68,11 @@
       recovery.hidden=!!count||!otherCount;
       if(!recovery.hidden)recovery.textContent='Voir '+otherCount+' référence'+(otherCount>1?'s':'')+' dans les autres disponibilités';
     }
-    function filter() {
+    async function filter() {
+      if(stock.value!=='available'&&!catalogueLoaded){
+        status.textContent='Chargement du catalogue complet…';
+        try{await ensureCatalogue();}catch(_){status.textContent='Le catalogue complet ne se charge pas. Réessayez ou utilisez le lien « Explorer par marque ou catégorie ». ';return;}
+      }
       const terms=normalize(search.value.trim()).split(/\s+/).filter(Boolean);
       let count=0, available=0, unconfirmed=0;
       cards.forEach(item => {
@@ -66,12 +100,13 @@
       document.querySelectorAll('.hira-catalog-mode button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.catalogMode===stock.value)));
       status.textContent=count ? (stock.value==='available' ? count+' produits disponibles à commander' : count+' références affichées'+(unconfirmed?' · '+unconfirmed+' disponibilités à confirmer':'')) : 'Aucun produit ne correspond aux filtres actuels. Retirez un filtre ou modifiez la recherche.';
       updateFilterOverview(terms,count);
+      document.dispatchEvent(new CustomEvent('hira:catalogue-results',{detail:{count,searchLength:search.value.trim().length}}));
     }
     search.closest('.catalogue-search').hidden=false;
     const headerSearch=document.querySelector('a[href="#catalogue-search-input"]');
     if(headerSearch)headerSearch.addEventListener('click',()=>{search.focus({preventScroll:true});});
     search.addEventListener('input',filter);stock.addEventListener('change',filter);brand.addEventListener('change',filter);category.addEventListener('change',filter);
-    document.getElementById('catalogue-search-reset').addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();search.focus();});
+    document.getElementById('catalogue-search-reset').addEventListener('click',()=>{search.value='';stock.value='available';brand.value='';category.value='';filter();search.focus();});
     document.querySelectorAll('.hira-hero-brandline a, .hira-brand-nav a, .catalogue-shortcuts a, .hira-guide-card').forEach(link=>link.addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();}));
     document.querySelectorAll('[data-catalog-mode]').forEach(button=>button.addEventListener('click',()=>{search.value='';brand.value='';category.value='';stock.value=button.dataset.catalogMode;filter();}));
     document.addEventListener('click',event=>{
@@ -356,4 +391,5 @@
   say('Trouvons votre style. Vous recherchez du volume, une coiffure structurée ou des mèches à modeler ?',[guideLink]);
   const modeNote=document.createElement('p');modeNote.className='hira-advisor-mode';modeNote.textContent='Mode guidé · sans IA générative. Ne partagez pas de données personnelles.';panel.querySelector('form').append(modeNote);
 })();
+
 
