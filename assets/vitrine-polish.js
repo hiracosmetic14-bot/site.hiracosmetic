@@ -93,27 +93,7 @@
     const body = 'Nom : ' + name + '\nE-mail : ' + email + '\n\n' + message;
     window.location.href = 'mailto:info@hiracosmetic.be?subject=' + encodeURIComponent('Demande depuis HIRA COSMETIC') + '&body=' + encodeURIComponent(body);
   });
-  const banner = document.getElementById('hira-cookie-consent');
-  if (banner) {
-    const key = 'hira-cookie-v1';
-    const detail = document.getElementById('hira-cookie-detail');
-    const analytics = document.getElementById('hira-cookie-analytics');
-    const marketing = document.getElementById('hira-cookie-marketing');
-    let choice = null;
-    try {choice = JSON.parse(localStorage.getItem(key) || 'null');} catch (_) {}
-    function sync() {analytics.checked = !!(choice && choice.analytics); marketing.checked = !!(choice && choice.marketing);}
-    function save(value) {
-      choice = value;
-      try {localStorage.setItem(key, JSON.stringify(value));} catch (_) {}
-      banner.hidden = true;
-      detail.hidden = true;
-      document.getElementById('hira-cookie-settings').focus();
-    }
-    banner.hidden = !!choice;
-    document.querySelector('[data-cookie-action=accept]').onclick = () => save({necessary:true,analytics:true,marketing:true});
-    document.querySelector('[data-cookie-action=reject]').onclick = () => save({necessary:true,analytics:false,marketing:false});
-    document.querySelector('[data-cookie-action=customize]').onclick = () => {sync(); detail.hidden = false; analytics.focus();};
-    document.querySelector('[data-cookie-action=save]').onclick = () => save({necessary:true,analytics:analytics.checked,marketing:marketing.checked});
-    document.getElementById('hira-cookie-settings').onclick = () => {sync(); banner.hidden = false; detail.hidden = false; analytics.focus();};
-  }
 })();
+
+/* Shared consent-gated measurement, loaded once on catalogue pages. */
+(()=>{if(document.getElementById('hira-analytics-loader'))return;const s=document.createElement('script');s.id='hira-analytics-loader';s.src='/assets/analytics.js';s.defer=true;document.head.appendChild(s);})();
