@@ -65,3 +65,59 @@ dialog .chat-panel{left:50%;right:auto;transform:translateX(-50%);width:min(370p
 .hira-chat-selection-title{margin:0 0 8px;color:#526975;font:700 11px/1.6 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase}.hira-chat-recommendations{margin:14px 0}.hira-chat-reco{display:flex;align-items:center;gap:14px;border:1px solid #d5e2e7;border-radius:14px;background:#fff;padding:12px;margin-bottom:10px;color:#163f4e;text-decoration:none}.hira-chat-reco img{width:74px;height:86px;object-fit:contain;border-radius:8px;background:#fff;flex-shrink:0}.hira-chat-reco strong{display:block;font:600 14px/1.6 Arial,sans-serif}.hira-chat-reco-action{display:block;font:600 12px/1.6 Arial,sans-serif;color:#17607b;margin-top:8px}.hira-chat-recommendations small{display:block;font:11px/1.5 Arial,sans-serif;color:#526975}.hira-advisor .hira-ai-opt{display:flex;align-items:flex-start;gap:8px;font:12px/1.5 Arial,sans-serif;margin-bottom:12px}.hira-ai-opt input{width:18px;height:18px;flex-shrink:0}
 dialog .hira-advisor{left:50%;right:auto;transform:translateX(-50%);width:min(430px,calc(100vw - 48px));bottom:11dvh;max-height:74dvh}
 @media(max-width:600px){.hira-advisor{right:8px;bottom:74px;width:calc(100vw - 16px);border-radius:16px;max-height:calc(100dvh - 90px)}.hira-advisor .chat-head{padding:14px 16px}.hira-advisor .hira-chat-log{max-height:38dvh;padding:14px}.hira-advisor .hira-chat-quick{padding:0 14px 12px}.hira-advisor .chat-form{padding:12px 14px}dialog .hira-advisor{bottom:10dvh;max-height:76dvh;width:calc(100vw - 40px)}}
+
+/* HIRA white / anthracite / petrol visual identity, 28 October 2026. */
+:root{--gold:#174f63;--gold-light:#c7e2eb;--black:#fff;--dark:#f3f7f9;--panel:#fff;--border:#d5e0e5;--text:#222c33;--muted:#4d5e69}
+body{background:#fff;color:#222c33;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.75}
+header{background:rgba(255,255,255,.98);border-bottom-color:#d5e0e5}
+header nav a,.header-icon{color:#25333c;font-family:Arial,Helvetica,sans-serif;font-weight:600}
+header nav a:hover,.header-icon:hover{color:#174f63;background:#edf5f8}
+h1,h2,h3,h4,.hira-category-heading h3,.hira-faq h2{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#222c33}
+.hira-logotype-hero{background:linear-gradient(115deg,#f1f7fa 0%,#fff 65%,#eef5f8 100%);border-bottom-color:#d5e0e5}
+#hira-cover-title{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#202b33;letter-spacing:.025em}
+.hira-logotype-kicker,.hira-partners>p,.eyebrow{color:#174f63;font-weight:700}
+.hira-logotype-intro,.section-head p{color:#4d5e69;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.8}
+.hira-logotype-cta,.hira-catalog-mode button[aria-pressed="true"],.btn.primary,#contact-form button{background:#174f63;border-color:#174f63;color:#fff;font-family:Arial,Helvetica,sans-serif;font-weight:600}
+.hira-logotype-cta:hover,.btn.primary:hover,#contact-form button:hover{background:#103b4c;border-color:#103b4c}
+.hira-offer-strip{background:#174f63;color:#fff;border-bottom-color:#174f63}
+.hira-offer-saving,.hira-offer-code,.hira-offer-action{color:#fff}.hira-offer-code{background:#ffffff14;border-color:#b7d5e0}.hira-offer-separator{color:#c8e0e9}
+.products,#questions-frequentes{background:#fff}
+.hira-brand-section{border-color:#d5e0e5;background:#fff}
+.hira-brand-section>summary{color:#25333c;background:#edf4f7;border-color:#d5e0e5;font-family:Arial,Helvetica,sans-serif;font-weight:600}
+.product-card,.gbs-card{background:#fff;border-color:#d5e0e5;box-shadow:none}
+.product-card:hover,.gbs-card:hover{border-color:#789cae;box-shadow:0 5px 20px #173f500c}
+#produits .product-info h3,#produits .gbs-info h4{color:#222c33;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:17px}
+#produits .product-info>p,#produits .gbs-description,#produits .gbs-format{color:#4d5e69;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.75}
+#produits .hira-price-line strong{color:#222c33;font-family:Arial,Helvetica,sans-serif;font-weight:700}
+#produits .hira-price-line span{color:#52616b;font-size:13px}
+.product-link,.gbs-enquiry{background:#fff;color:#174f63;border-color:#789cae}
+.product-link:hover,.gbs-enquiry:hover{background:#174f63;color:#fff;border-color:#174f63}
+.hira-catalog-mode button{color:#324852;border-color:#becfd7;background:#fff}
+.catalogue-search-row input,.hira-catalogue-filters select{background:#fff;border-color:#8fa6b2;color:#25333c;font:16px/1.6 Arial,Helvetica,sans-serif}
+.catalogue-search-row input::placeholder{color:#657680}
+.catalogue-search>label,.hira-catalogue-filters label,.hira-simple-filters>summary{font-size:16px;color:#25333c}
+.hira-static-brands{background:#f3f7f9;border-color:#d5e0e5}
+.hira-static-brands h2{color:#222c33;font-family:Arial,Helvetica,sans-serif;font-weight:700}
+.hira-static-brand-grid .hira-brand-link{background:#fff;border-color:#d5e0e5}
+.hira-static-brand-grid .hira-brand-link:hover,.hira-brand-link:hover{background:#fff;border-color:#789cae;box-shadow:0 5px 20px #173f500c}
+.hira-all-brands{color:#174f63;border-color:#789cae}
+.hira-faq-item{border-color:#d5e0e5}.hira-faq-item summary{color:#25333c;font-family:Arial,Helvetica,sans-serif;font-weight:600}
+.hira-faq-answer p{color:#4d5e69;font-size:16px}
+#contact{background:#edf4f7}.contact-box{background:#fff;border-color:#d5e0e5}.contact-info h2{color:#222c33}
+.contact-info p{color:#4d5e69;font-family:Arial,Helvetica,sans-serif;font-size:16px}
+#contact input,#contact textarea{background:#fff;border-color:#8fa6b2;color:#25333c;font-family:Arial,Helvetica,sans-serif;font-size:16px}
+.hira-shopping-help{border-bottom-color:#d5e0e5}.hira-shopping-help a,.hira-catalog-directory,.hira-catalog-directory a{color:#174f63}
+.hira-applied-filters button,.hira-search-recovery{background:#fff;border-color:#8fa6b2;color:#174f63;font-family:Arial,Helvetica,sans-serif}
+.hira-applied-filters button:hover,.hira-search-recovery:hover{background:#edf4f7;border-color:#174f63}
+.product-detail-dialog{background:#fff;border-color:#d5e0e5;color:#222c33}
+.product-detail-dialog h2,.product-detail-content h3{font-family:Arial,Helvetica,sans-serif;color:#222c33;font-weight:700}
+.product-detail-dialog .product-detail-category,.product-detail-dialog .product-detail-format{color:#174f63!important}
+.product-detail-dialog .product-detail-content p{color:#4d5e69;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.75}
+.product-detail-buy{background:#174f63;color:#fff}.product-detail-buy:hover{background:#103b4c}
+footer{background:#202d35;color:#e7f0f4}
+.footer-main,.footer-bottom,.payment-methods{background:transparent;border-color:#4d6572}
+footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#e0eaef;font-family:Arial,Helvetica,sans-serif}
+.footer-column h2{font-weight:700}footer a:hover{color:#fff}
+.chat-launcher{background:#174f63;color:#fff}
+:focus-visible{outline-color:#176581}
+@media(max-width:600px){.hira-logotype-intro{font-size:16px}header nav a{font-size:15px}#produits .product-info h3,#produits .gbs-info h4{font-size:17px}}

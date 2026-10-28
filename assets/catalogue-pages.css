@@ -14,3 +14,17 @@ header nav a[aria-current=page]{text-decoration:underline;text-decoration-thickn
 input[type=search]{font-size:16px;max-width:100%}
 @media(max-width:540px){.tools{width:100%;gap:16px}.tools>label:first-child{width:100%}input[type=search]{width:100%}.info{padding:20px}.crumb{gap:8px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}}
+
+/* Match the white / anthracite / petrol identity of the main storefront. */
+body{background:#fff;color:#222c33;font-family:Arial,Helvetica,sans-serif;font-size:17px}
+header,footer{border-color:#d5e0e5}a{color:#174f63}
+h1,h2{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#222c33}
+.intro,.meta{color:#4d5e69}.note{background:#edf4f7;border-color:#d5e0e5;color:#324852}
+.links a,.directory a{background:#fff;border-color:#b5c8d1;color:#174f63}
+.card{border-color:#d5e0e5}.info h2{font-family:Arial,Helvetica,sans-serif;font-weight:700;color:#222c33}
+input[type=search]{border-color:#8fa6b2;background:#fff;color:#25333c}
+.stock{background:#eef3f6;color:#40535e}.stock.available{background:#e7f2ec;color:#29583e}
+.action,button{background:#174f63;border-color:#174f63;color:#fff;font-family:Arial,Helvetica,sans-serif}
+.action:hover,button:hover{background:#103b4c;border-color:#103b4c}
+.catalogue-reset{background:#fff;color:#174f63;border-color:#8fa6b2}.catalogue-reset:hover{background:#edf4f7;color:#174f63}
+.catalogue-empty{color:#4d5e69}.price{color:#222c33}:focus-visible{outline-color:#176581}
