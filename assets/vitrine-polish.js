@@ -120,3 +120,24 @@
   });
   email.parentElement.after(button, status);
 })();
+
+/* Direct access to product advice and professional enquiries. */
+(() => {
+  const nav = document.querySelector('header nav[aria-label="Navigation principale"]');
+  if (nav && !nav.querySelector('a[href="/guide-coiffants.html"]')) {
+    const guide = document.createElement('a');
+    guide.href = '/guide-coiffants.html'; guide.textContent = 'Guide';
+    const pro = document.createElement('a');
+    pro.href = '/professionnels.html'; pro.textContent = 'Professionnels';
+    const help = nav.querySelector('a[href="#questions-frequentes"]');
+    if (help) help.before(guide, pro); else nav.append(guide, pro);
+  }
+  const footer = document.querySelector('footer nav[aria-label="À propos de HIRA COSMETIC"]');
+  if (footer) {
+    const duplicate = footer.querySelector('a[href="#contact"] + a[href="#contact"]');
+    if (duplicate) { duplicate.href = '/professionnels.html'; duplicate.textContent = 'Espace professionnels'; }
+    const guide = document.createElement('a');
+    guide.href = '/guide-coiffants.html'; guide.textContent = 'Choisir son coiffant';
+    footer.append(guide);
+  }
+})();
