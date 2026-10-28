@@ -121,3 +121,10 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 .chat-launcher{background:#174f63;color:#fff}
 :focus-visible{outline-color:#176581}
 @media(max-width:600px){.hira-logotype-intro{font-size:16px}header nav a{font-size:15px}#produits .product-info h3,#produits .gbs-info h4{font-size:17px}}
+
+/* Stronger homepage introduction, preserving the HIRA wordmark style. */
+#accueil .hira-logotype-kicker{font:700 clamp(14px,1.3vw,17px)/1.7 Arial,Helvetica,sans-serif;letter-spacing:.12em;margin-bottom:22px}
+#hira-cover-title>span{font-size:clamp(82px,8.2vw,116px);line-height:1;letter-spacing:.025em}
+#hira-cover-title>small{font:500 clamp(25px,2.4vw,34px)/1.4 Arial,Helvetica,sans-serif;letter-spacing:.3em;margin-top:14px}
+#accueil .hira-logotype-intro{font-size:clamp(18px,1.55vw,21px);line-height:1.65;max-width:500px}
+@media(max-width:600px){#accueil .hira-logotype-kicker{font-size:14px;margin-bottom:18px}#hira-cover-title>span{font-size:clamp(76px,22vw,96px)}#hira-cover-title>small{font-size:clamp(23px,6.5vw,28px);letter-spacing:.23em}#accueil .hira-logotype-intro{font-size:18px;max-width:340px}}
