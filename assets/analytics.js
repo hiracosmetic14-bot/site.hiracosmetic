@@ -43,8 +43,9 @@
     document.head.appendChild(script);
   }
   function track(name, parameters) {
-    if (!production || !consent || !started) return;
+    if (!production || !consent || !started) return false;
     window.gtag('event', name, { send_to: id, page_location: cleanPath(page), ...parameters });
+    return true;
   }
   function clearCookies() {
     document.cookie.split(';').forEach(part => {
@@ -115,6 +116,15 @@
     try { target = new URL(link.href, location.href); } catch (_) { return; }
     if (target.hostname !== 'hiracosmetic-store.myshopify.com') return;
     // A click leaving the showcase is neither a cart addition nor a purchase.
-    track('outbound_shop_click', { destination_path: target.pathname, product_handle: target.pathname.startsWith('/products/') ? target.pathname.split('/')[2] : '' });
+    const parameters = { destination_path: target.pathname, product_handle: target.pathname.startsWith('/products/') ? target.pathname.split('/')[2] : '' };
+    const sameTab = (!link.target || link.target === '_self') && event.button === 0 && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey;
+    if (production && consent && started && sameTab) {
+      // Give gtag a short bounded opportunity to send before leaving this page.
+      event.preventDefault();
+      let navigated = false;
+      const leave = () => { if (!navigated) { navigated = true; location.assign(link.href); } };
+      track('outbound_shop_click', { ...parameters, event_callback: leave, event_timeout: 700 });
+      setTimeout(leave, 750);
+    } else track('outbound_shop_click', parameters);
   });
 })();
