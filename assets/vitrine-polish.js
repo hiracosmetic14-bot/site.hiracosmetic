@@ -97,3 +97,26 @@
 
 /* Shared consent-gated measurement, loaded once on catalogue pages. */
 (()=>{if(document.getElementById('hira-analytics-loader'))return;const s=document.createElement('script');s.id='hira-analytics-loader';s.src='/assets/analytics.js';s.defer=true;document.head.appendChild(s);})();
+
+/* Small usability improvements; do not submit or send any contact message. */
+(() => {
+  'use strict';
+  document.querySelectorAll('.gbs-brand > summary span').forEach(label => {
+    label.textContent = label.textContent.replace(/\b1 références\b/g, '1 référence');
+  });
+  const email = document.querySelector('#contact a[href="mailto:info@hiracosmetic.be"]');
+  if (!email || !navigator.clipboard?.writeText) return;
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'hira-copy-email';
+  button.textContent = 'Copier l’adresse e-mail';
+  const status = document.createElement('span');
+  status.className = 'hira-copy-status';
+  status.setAttribute('role', 'status');
+  status.setAttribute('aria-live', 'polite');
+  button.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('info@hiracosmetic.be'); status.textContent = 'Adresse copiée : info@hiracosmetic.be'; }
+    catch (_) { status.textContent = 'Sélectionnez l’adresse e-mail ci-dessus pour la copier.'; }
+  });
+  email.parentElement.after(button, status);
+})();

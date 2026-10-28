@@ -36,3 +36,10 @@ footer .footer-links a { min-height:40px; display:inline-flex; align-items:cente
   .chat-panel .chat-links { gap:8px; }
   .chat-panel .chat-products { grid-template-columns:1fr; }
 }
+
+.hira-copy-email{display:inline-flex;align-items:center;min-height:44px;margin:4px 0 14px;padding:10px 14px;border:1px solid #64736e;border-radius:4px;background:#fff;color:#263b35;font:600 14px/1.5 Montserrat,Arial,sans-serif;cursor:pointer}
+.hira-copy-status{display:block;font-size:14px;line-height:1.7;color:#34483f;overflow-wrap:anywhere}
+.hira-copy-status:empty{display:none}
+.hira-copy-email:focus-visible{outline:3px solid #1768ae;outline-offset:3px}
+@media(max-width:600px){#contact-form input,#contact-form textarea{font-size:16px;min-width:0}.contact-form{min-width:0}.product-detail-dialog{max-height:85dvh;overflow-y:auto}.product-detail-content p,.product-detail-content a{overflow-wrap:anywhere}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}}
