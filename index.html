@@ -1338,6 +1338,19 @@ header .nav > .logo img {
 .hira-language-switch [aria-current] {text-decoration:underline;text-underline-offset:4px;}
 </style>
 <style id="hira-compact-product-cards">
+#produits .product-card .product-title-trigger {
+  font: 600 15px/1.4 Montserrat, Arial, sans-serif;
+  text-align: left;
+}
+#produits .product-card .hira-card-title-format {
+  display: block;
+  margin-top: 4px;
+  color: #62584f;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 #produits .product-card:has(.product-link[href*="hiracosmetic-store.myshopify.com"]) .product-info {
   padding: 14px 16px;
 }
@@ -1870,7 +1883,14 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
     const titleButton = document.createElement('button');
     titleButton.type = 'button';
     titleButton.className = 'product-title-trigger';
-    titleButton.textContent = name;
+    const size = name.match(/^(.+?)\s*·\s*(\d+(?:[.,]\d+)?\s*(?:ml|g|l))$/i);
+    titleButton.textContent = size ? size[1] : name;
+    if (size) {
+      const format = document.createElement('span');
+      format.className = 'hira-card-title-format';
+      format.textContent = ' ' + size[2];
+      titleButton.append(format);
+    }
     titleButton.setAttribute('aria-haspopup', 'dialog');
     titleButton.setAttribute('aria-controls', dialog.id);
     heading.replaceChildren(titleButton);
