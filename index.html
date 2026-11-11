@@ -1196,14 +1196,27 @@ header nav a{font-size:14px;line-height:1.5}
 </style><style>.hira-catalog-directory{margin:0 0 20px;font-size:14px;color:#684831}.hira-catalog-directory a{display:inline-flex;align-items:center;gap:16px;min-height:44px;text-decoration:underline;text-underline-offset:5px}</style><link rel="stylesheet" href="/assets/vitrine-polish.css?v=identite-20261028">
 <link rel="stylesheet" href="/assets/articles.css">
 <style id="hira-header-logo">
+header {
+  border-bottom: 0;
+  box-shadow: none;
+}
+header + .hira-offer-strip {
+  width: 100%;
+  margin: 0;
+}
 header .nav > .logo {
   flex: 0 0 auto;
   width: clamp(145px, 17vw, 218px);
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
 }
 header .nav > .logo img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
   mix-blend-mode: multiply;
 }
 @media (max-width: 700px) {
