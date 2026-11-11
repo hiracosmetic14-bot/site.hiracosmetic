@@ -35,8 +35,8 @@
     card.dataset.stockStatus=product.available?'available':'unavailable';card.dataset.available=String(product.available);
     const price=card.querySelector('.hira-price-line strong,.price');
     if(price){price.textContent=(product.priceVaries?'À partir de ':'')+money(product.price);if(price.classList.contains('price')){const unit=document.createElement('small');unit.textContent=' TTC · prix boutique';price.append(unit);}}
-    const unit=card.querySelector('.hira-price-line span');if(unit)unit.textContent='TTC · prix boutique';
-    link.textContent=product.available?'Choisir dans la boutique':'Voir dans la boutique';
+    const unit=card.querySelector('.hira-price-line span');if(unit)unit.textContent='TTC';
+    link.textContent=product.available?'Voir en boutique':'Voir dans la boutique';
     card.dataset.liveCheckedAt=snapshot.checkedAt;updated++;
   });
   const when=new Intl.DateTimeFormat('fr-BE',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Brussels'}).format(new Date(snapshot.checkedAt));
