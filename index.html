@@ -1332,6 +1332,11 @@ header .nav > .logo img {
   }
 }
 </style>
+<style>
+.hira-language-switch {display:inline-flex;flex:none;gap:8px;font:600 13px/1.2 Montserrat,Arial,sans-serif;}
+.hira-language-switch a {color:#4b3325;padding:6px 2px;}
+.hira-language-switch [aria-current] {text-decoration:underline;text-underline-offset:4px;}
+</style>
 </head>
 
 <body><a class="hira-skip-link" href="#contenu-principal">Aller au contenu</a>
@@ -1355,6 +1360,7 @@ header .nav > .logo img {
 <a href="#contact">Contact</a>
 </nav>
 
+<div class="hira-language-switch" role="group" aria-label="Langue / Taal"><a href="/?lang=fr" hreflang="fr" lang="fr" aria-current="true">FR</a><a href="/?lang=nl" hreflang="nl" lang="nl">NL</a></div>
 <div class="header-actions" aria-label="Raccourcis boutique">
 <a class="header-icon" href="#catalogue-search-input" aria-label="Rechercher un produit sur ce site" title="Rechercher un produit"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i></a>
 <a class="header-icon" href="https://hiracosmetic-store.myshopify.com/account/login" aria-label="Mon compte" title="Mon compte"><i class="fa-regular fa-user" aria-hidden="true"></i></a>
@@ -1894,5 +1900,55 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
 
 
 
+<script>
+(() => {
+  const switcher = document.querySelector('.hira-language-switch');
+  const current = new URL(location.href);
+  const language = current.searchParams.get('lang') === 'nl' ? 'nl' : 'fr';
+  for (const link of switcher.querySelectorAll('a')) {
+    const destination = new URL(location.href);
+    destination.searchParams.set('lang', link.lang);
+    link.href = destination.href;
+    if (link.lang === language) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+    link.addEventListener('click', () => {
+      destination.hash = location.hash;
+      link.href = destination.href;
+    });
+  }
+  if (language !== 'nl') return;
+  document.documentElement.lang = 'nl-BE';
+  document.title = 'HIRA COSMETIC | Haar- en baardproducten in België';
+  const translations = new Map(Object.entries({"Aller au contenu":"Naar de inhoud","Accueil":"Home","Produits":"Producten","Marques":"Merken","Conseils":"Advies","Aide":"Hulp","Contact":"Contact","Navigation principale":"Hoofdnavigatie","Raccourcis boutique":"Winkelsnelkoppelingen","Mon compte":"Mijn account","Panier":"Winkelwagen","Rechercher un produit sur ce site":"Zoek een product op deze site","Offre de bienvenue":"Welkomstaanbieding","sur votre première commande":"op je eerste bestelling","J’en profite":"Gebruik de korting","Livraison offerte":"Gratis levering","dès 70 € en Belgique":"vanaf € 70 in België","Voir les conditions":"Bekijk de voorwaarden","BIENVENUE CHEZ":"WELKOM BIJ","Bienvenue chez HIRA COSMETIC":"Welkom bij HIRA COSMETIC","L’essentiel pour vos cheveux, votre barbe et votre style.":"Alles voor je haar, baard en stijl.","Voir les produits disponibles":"Bekijk de beschikbare producten","Nos marques":"Onze merken","Toutes nos marques":"Al onze merken","Livraison en Belgique":"Levering in België","Retours et rétractation":"Retourneren en herroepingsrecht","Un conseil avant d’acheter":"Advies vóór je aankoop","Notre catalogue":"Onze catalogus","Nos produits":"Onze producten","Retrouvez les produits disponibles et explorez toutes nos références par marque.":"Bekijk de beschikbare producten en ontdek het volledige assortiment per merk.","Cires et crèmes":"Wax en stylingcrèmes","Cires et crèmes coiffantes":"Wax en stylingcrèmes","Gels coiffants":"Stylinggels","Poudres coiffantes":"Stylingpoeders","Barbe et rasage":"Baard en scheren","Guide de choix":"Keuzegids","Explorer par marque ou catégorie":"Ontdek per merk of categorie","Sélection boutique":"Winkelselectie","Catalogue complet":"Volledige catalogus","Rechercher un produit":"Zoek een product","Tout effacer":"Alles wissen","Filtrer par marque ou catégorie":"Filter op merk of categorie","Disponibilité":"Beschikbaarheid","Tous les produits":"Alle producten","Indisponibles":"Niet beschikbaar","Disponibilité à confirmer":"Beschikbaarheid te bevestigen","Marque":"Merk","Toutes les marques":"Alle merken","Catégorie":"Categorie","Toutes les catégories":"Alle categorieën","Disponible en boutique":"Beschikbaar in de webshop","EN STOCK":"OP VOORRAAD","Acheter en ligne":"Online kopen","Choisir dans la boutique":"Bekijk in de webshop","Détails du produit":"Productdetails","TTC · prix boutique":"Incl. btw · webshopprijs","TTC · à l’unité":"Incl. btw · per stuk","Demander les références":"Vraag naar het assortiment","Vous recherchez un modèle ou une référence précise ? Contactez-nous pour connaître les produits et disponibilités de cette marque.":"Zoek je een specifiek model of product? Neem contact met ons op voor het assortiment en de beschikbaarheid.","Demander un conseil":"Vraag advies","Conseils & inspiration":"Advies en inspiratie","Vos questions, simplement.":"Veelgestelde vragen","Accéder à la boutique":"Naar de webshop","Votre nom":"Je naam","Votre adresse e-mail":"Je e-mailadres","Votre message":"Je bericht","Professionnels":"Professionals"}));
+  function translate(value) {
+    const translated = translations.get(value.trim());
+    return translated ? value.replace(value.trim(), translated) : value;
+  }
+  function translateNode(root) {
+    if (root.nodeType === Node.TEXT_NODE) {
+      if (root.parentElement?.closest('script, style, textarea')) return;
+      const translated = translate(root.data);
+      if (translated !== root.data) root.data = translated;
+      return;
+    }
+    if (!(root instanceof Element) || root.matches('script, style, textarea')) return;
+    for (const attribute of ['aria-label', 'title', 'placeholder']) {
+      const value = root.getAttribute(attribute);
+      if (value) {
+        const translated = translate(value);
+        if (translated !== value) root.setAttribute(attribute, translated);
+      }
+    }
+    for (const child of root.childNodes) translateNode(child);
+  }
+  translateNode(document.body);
+  new MutationObserver(records => {
+    for (const record of records) {
+      if (record.type === 'characterData') translateNode(record.target);
+      else for (const node of record.addedNodes) translateNode(node);
+    }
+  }).observe(document.body, {subtree: true, childList: true, characterData: true});
+})();
+</script>
 </body></html>
 
