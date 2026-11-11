@@ -27,6 +27,13 @@
           if(!/^hira-lazy-grid-[0-9]+$/.test(fragment.id)||typeof fragment.html!=='string')return;
           const grid=document.getElementById(fragment.id);if(!grid)return;
           grid.insertAdjacentHTML('beforeend',fragment.html);
+          grid.querySelectorAll('.gbs-info h4, .gbs-info .gbs-format').forEach(label=>{
+            const heading = label.closest('.gbs-info').querySelector('h4');
+            if (!heading || !/powder wax|poudre coiffante/i.test(heading.textContent)) return;
+            const formatted = label.textContent.replace(/\s*(?:·\s*)?(\d+)\s*(?:gr|g)$/i,
+              label === heading ? ' · $1 g' : '$1 g');
+            if (formatted !== label.textContent) label.textContent = formatted;
+          });
           grid.querySelectorAll('.gbs-image').forEach(area=>{
             if(area.querySelector('a,button'))return;
             const image=area.querySelector('img');if(!image)return;
