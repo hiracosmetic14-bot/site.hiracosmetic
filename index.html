@@ -1940,6 +1940,14 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
       }
     }
     if (root.matches('option:not([value])')) root.value = root.value;
+    if (root.matches('a[href]')) {
+      const destination = new URL(root.href, location.href);
+      if (destination.hostname === 'hiracosmetic-store.myshopify.com' &&
+          !/^\/nl(?:\/|$)/.test(destination.pathname)) {
+        destination.pathname = '/nl' + destination.pathname;
+        root.href = destination.href;
+      }
+    }
     for (const child of root.childNodes) translateNode(child);
   }
   translateNode(document.body);
