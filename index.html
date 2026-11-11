@@ -1212,10 +1212,28 @@ header .nav > .logo img {
   }
 }
 </style>
-<style>
+<style id="hira-cover-alignment">
+.hira-logotype-copy {
+  display: grid;
+  justify-items: center;
+  gap: 20px;
+  text-align: center;
+}
+.hira-logotype-copy .hira-logotype-kicker,
+.hira-logotype-copy .hira-logotype-intro {
+  margin: 0;
+}
+.hira-logotype-copy .hira-logotype-intro {
+  max-width: 36ch;
+  text-wrap: balance;
+}
+#hira-cover-title {
+  width: 100%;
+}
 .hira-cover-logo {
   display: block;
   width: min(100%, 360px);
+  margin-inline: auto;
   height: auto;
   mix-blend-mode: multiply;
 }
