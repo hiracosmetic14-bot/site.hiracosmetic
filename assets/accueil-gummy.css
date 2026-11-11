@@ -1,0 +1,86 @@
+.hira-gummy-hero {
+  background: #171717;
+  color: #fff;
+}
+
+.hira-gummy-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 5vw, 72px);
+  align-items: center;
+  padding-block: clamp(30px, 6vw, 72px);
+}
+
+.hira-gummy-label {
+  margin: 0 0 14px;
+  color: #ddd;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+#hira-gummy-title {
+  margin: 0 0 24px;
+  color: #fff;
+  font-size: clamp(2.1rem, 5vw, 4.2rem);
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.hira-gummy-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  padding: 10px 20px;
+  background: #fff;
+  color: #171717;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.hira-gummy-photo {
+  display: block;
+  width: 100%;
+  height: clamp(250px, 33vw, 430px);
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.hira-gummy-paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding-block: 24px;
+}
+
+.hira-gummy-paths > a {
+  display: grid;
+  gap: 6px;
+  padding: 22px;
+  background: #252525;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.hira-gummy-paths > a:hover,
+.hira-gummy-paths > a:focus-visible {
+  background: #3a3a3a;
+}
+
+.hira-gummy-paths strong {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+}
+
+.hira-home-brands {
+  padding-block: 20px 32px;
+}
+
+@media (max-width: 650px) {
+  .hira-gummy-layout,
+  .hira-gummy-paths {
+    grid-template-columns: 1fr;
+  }
+}
