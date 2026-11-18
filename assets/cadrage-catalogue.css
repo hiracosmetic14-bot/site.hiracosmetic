@@ -21,10 +21,11 @@ main .grid .card > .photo {
   overflow: hidden;
   background: #ede7de !important;
 }
+#produits :is(.product-image, .gbs-image) img,
+main .grid .card > .photo img { mix-blend-mode: multiply !important; }
 #produits :is(.product-image, .gbs-image) img[data-catalogue-cropped],
 main .grid .card > .photo img[data-catalogue-cropped] {
   object-position: center !important;
-  mix-blend-mode: multiply !important;
   scale: var(--hira-photo-zoom);
   translate: var(--hira-photo-offset);
 }
