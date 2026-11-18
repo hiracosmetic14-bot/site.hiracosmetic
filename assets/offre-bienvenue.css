@@ -2,23 +2,48 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0 24px;
-  padding: 4px 14px;
+  gap: 0 20px;
+  padding: 6px 14px;
+  border-bottom: 1px solid #ffc178;
+  background: linear-gradient(110deg, #772232, #a12e29 60%, #76223b);
+  color: #fff8ed;
   font-size: 13px;
   line-height: 1.4;
 }
 .hira-offer-fixed a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   min-height: 44px;
   color: #fff8ed;
-  text-decoration: underline;
   text-underline-offset: 3px;
 }
-.hira-offer-main small { white-space: nowrap; }
-.hira-offer-main .hira-offer-saving,
-.hira-offer-main .hira-offer-code { flex-shrink: 0; }
+.hira-offer-fixed .hira-offer-main { gap: 13px; text-decoration: none; }
+.hira-offer-main .hira-offer-saving {
+  flex-shrink: 0;
+  color: #ffe19a;
+  font-size: clamp(30px, 4vw, 44px);
+  font-weight: 800;
+  line-height: 1;
+}
+.hira-offer-terms { font-weight: 700; }
+.hira-offer-terms small { display: block; font-weight: 500; }
+.hira-offer-buy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  background: #ffe19a;
+  color: #492018;
+  font-weight: 800;
+  text-align: center;
+}
+.hira-offer-main:hover .hira-offer-buy,
+.hira-offer-main:focus-visible .hira-offer-buy { background: #fff0c9; }
+.hira-offer-fixed > a:not(.hira-offer-main) { text-decoration: underline; }
 #hira-offer-dialog {
   position: fixed;
   inset: 0;
@@ -51,5 +76,11 @@
 }
 @media (max-width: 600px) {
   .hira-offer-strip.hira-offer-fixed { gap: 0 12px; font-size: 11px; }
-  .hira-offer-fixed .hira-offer-main { justify-content: center; width: 100%; }
+  .hira-offer-fixed .hira-offer-main {
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding-top: 4px;
+  }
+  .hira-offer-buy { padding-inline: 8px; }
 }
