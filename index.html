@@ -1939,7 +1939,7 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
     const titleButton = document.createElement('button');
     titleButton.type = 'button';
     titleButton.className = 'product-title-trigger';
-    const size = name.match(/^(.+?)\s*·\s*(\d+(?:[.,]\d+)?\s*(?:ml|g|l))$/i);
+    const size = name.match(/^(.+?)\s*·\s*(\d+(?:[ \u00a0\u202f]\d{3})*(?:[.,]\d+)?\s*(?:ml|g|l))$/i);
     titleButton.textContent = size ? size[1] : name;
     if (size) {
       const format = document.createElement('span');
