@@ -37,7 +37,14 @@
     function render(fresh) {
       if (fresh) limit = 24;
       const terms = norm(input.value.trim()).split(/\s+/).filter(Boolean);
-      const matched = cards.filter(card => terms.every(term => norm(card.textContent).includes(term)) && (!stock.checked || card.dataset.available === 'true'));
+      const ordered = [...cards].sort((a, b) =>
+        Number(b.dataset.available === 'true') - Number(a.dataset.available === 'true'));
+      const grid = cards[0]?.parentElement;
+      if (grid && ordered.some((card, index) => card !== grid.children[index])) {
+        grid.append(...ordered);
+      }
+      const matched = ordered.filter(card => terms.every(term => norm(card.textContent).includes(term)) &&
+        (!stock.checked || card.dataset.available === 'true'));
       cards.forEach(card => { card.hidden = true; });
       matched.slice(0, limit).forEach(card => { card.hidden = false; });
       status.textContent = matched.length ? matched.length + ' référence' + (matched.length > 1 ? 's' : '') + ' · ' + Math.min(limit, matched.length) + ' affichée' + (Math.min(limit, matched.length) > 1 ? 's' : '') : 'Aucune référence ne correspond à votre recherche.';
@@ -45,6 +52,7 @@
       reset.hidden = !input.value && !stock.checked;
       more.hidden = matched.length <= limit;
       if (!more.hidden) more.textContent = 'Afficher ' + Math.min(24, matched.length - limit) + ' référence' + (Math.min(24, matched.length - limit) > 1 ? 's' : '') + ' de plus';
+      return matched;
     }
     reset.addEventListener('click', () => { input.value = ''; stock.checked = false; render(true); input.focus(); });
     input.addEventListener('input', () => render(true));
@@ -53,8 +61,7 @@
     more.addEventListener('click', () => {
       const shown = cards.filter(card => !card.hidden).length;
       limit += 24;
-      render(false);
-      cards.filter(card => !card.hidden)[shown]?.querySelector('a')?.focus({ preventScroll: true });
+      render(false)[shown]?.querySelector('a')?.focus({ preventScroll: true });
     });
     document.addEventListener('hira:catalogue-stock-updated',()=>render(false));
     render(true);
