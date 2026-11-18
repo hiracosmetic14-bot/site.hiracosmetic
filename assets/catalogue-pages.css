@@ -31,3 +31,17 @@ input[type=search]{border-color:#8fa6b2;background:#fff;color:#25333c}
 
 /* Live public boutique status. */
 .hira-live-catalogue-status{font-size:.9rem;line-height:1.6;padding:12px 16px;background:#f3f7f9;border:1px solid #d5e3e8;border-radius:10px;color:#234650}.stock[data-live-state=unknown]{background:#eef1f3;color:#44535d}.stock[data-live-state=unavailable]{background:#f4eeee;color:#634545}
+
+/* Product cards remain side by side on narrow category and brand pages. */
+@media (max-width: 540px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .grid .photo { height: clamp(120px, 34vw, 176px); padding: 10px; }
+  .grid .photo img { height: 100%; }
+  .grid .info { padding: 10px; overflow-wrap: anywhere; }
+  .grid .info h2 { font-size: 14px; line-height: 1.4; }
+  .grid .meta, .grid .stock { font-size: 12px; }
+  .grid .action { text-align: center; padding-inline: 8px; font-size: 13px; }
+}

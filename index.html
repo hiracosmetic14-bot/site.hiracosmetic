@@ -1372,6 +1372,42 @@ header .nav > .logo img {
   padding: 8px 12px;
 }
 </style>
+<style id="hira-category-product-layout">
+#produits .hira-category-group > .hira-unified-grid:not([hidden]) {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(10px, 2vw, 22px);
+}
+#produits .hira-unified-grid > :is(.product-card, .gbs-card) { min-width: 0; }
+#produits .hira-unified-grid :is(.product-image, .gbs-image) {
+  height: clamp(132px, 21vw, 230px) !important;
+  min-height: 0 !important;
+  padding: clamp(10px, 2vw, 18px) !important;
+}
+#produits .hira-unified-grid :is(.product-info, .gbs-info) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 1020px) {
+  #produits .hira-category-group > .hira-unified-grid:not([hidden]) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 700px) {
+  #produits .hira-category-group > .hira-unified-grid:not([hidden]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #produits .hira-brand-categories { padding-inline: 8px; }
+  #produits .hira-unified-grid :is(.product-card .product-info, .gbs-card .gbs-info) {
+    padding: 10px;
+  }
+  #produits .product-card:has(.product-link[href*="hiracosmetic-store.myshopify.com"]) .product-info {
+    padding-inline: 10px;
+  }
+  #produits .hira-unified-grid :is(.product-link, .gbs-link) { white-space: normal; }
+}
+</style>
 <link rel="stylesheet" href="/assets/offre-bienvenue.css?v=3">
 </head>
 
