@@ -72,19 +72,29 @@
         button.addEventListener('click',()=>{control.value=control===stock?'all':'';filter();});
         filterOverview.appendChild(button);
       });
-      const otherCount=stock.value==='all'?0:cards.filter(item=>terms.every(term=>item.text.includes(term))&&(!brand.value||item.brand===brand.value)&&(!category.value||item.category===category.value)&&item.stock!==stock.value).length;
+      const otherCount=stock.value==='all'?0:cards.filter(item=>terms.every(term=>item.text.includes(term))&&(!brand.value||item.brand===brand.value)&&(!category.value||item.category===category.value)&&!matchesStock(item)).length;
       recovery.hidden=!!count||!otherCount;
       if(!recovery.hidden)recovery.textContent='Voir '+otherCount+' référence'+(otherCount>1?'s':'')+' dans les autres disponibilités';
     }
+    function matchesStock(item) {
+      const mode = stock.value;
+      if (mode === 'all' || (mode === 'featured' && item.brand === 'Gummy Professional')) return true;
+      if (mode === 'featured' || mode === 'available') {
+        return document.documentElement.dataset.liveStockState === 'failed'
+          ? item.card.classList.contains('product-card')
+          : item.stock === 'available';
+      }
+      return item.stock === mode;
+    }
     async function filter() {
-      if(stock.value!=='available'&&!catalogueLoaded){
+      if(stock.value!=='available'&&stock.value!=='featured'&&!catalogueLoaded){
         status.textContent='Chargement du catalogue complet…';
         try{await ensureCatalogue();}catch(_){status.textContent='Le catalogue complet ne se charge pas. Réessayez ou utilisez le lien « Explorer par marque ou catégorie ». ';return;}
       }
       const terms=normalize(search.value.trim()).split(/\s+/).filter(Boolean);
       let count=0, available=0, unconfirmed=0;
       cards.forEach(item => {
-        const visible=terms.every(term=>item.text.includes(term)) && (!brand.value || item.brand===brand.value) && (stock.value==='all' || (stock.value==='available' && document.documentElement.dataset.liveStockState==='failed' ? item.card.classList.contains('product-card') : stock.value===item.stock)) && (!category.value || item.category===category.value);
+        const visible=terms.every(term=>item.text.includes(term)) && (!brand.value || item.brand===brand.value) && matchesStock(item) && (!category.value || item.category===category.value);
         item.card.hidden=!visible;
         if(visible){count++;if(item.available)available++;if(item.stock==='unconfirmed')unconfirmed++;}
       });
@@ -114,7 +124,7 @@
     const headerSearch=document.querySelector('a[href="#catalogue-search-input"]');
     if(headerSearch)headerSearch.addEventListener('click',()=>{search.focus({preventScroll:true});});
     search.addEventListener('input',filter);stock.addEventListener('change',filter);brand.addEventListener('change',filter);category.addEventListener('change',filter);
-    document.getElementById('catalogue-search-reset').addEventListener('click',()=>{search.value='';stock.value='available';brand.value='';category.value='';filter();search.focus();});
+    document.getElementById('catalogue-search-reset').addEventListener('click',()=>{search.value='';stock.value='featured';brand.value='';category.value='';filter();search.focus();});
     document.querySelectorAll('.hira-hero-brandline a, .hira-brand-nav a, .catalogue-shortcuts a, .hira-guide-card').forEach(link=>link.addEventListener('click',()=>{search.value='';stock.value='all';brand.value='';category.value='';filter();}));
     document.querySelectorAll('[data-catalog-mode]').forEach(button=>button.addEventListener('click',()=>{search.value='';brand.value='';category.value='';stock.value=button.dataset.catalogMode;filter();}));
     document.addEventListener('click',event=>{
@@ -124,7 +134,7 @@
       search.value='';category.value='';stock.value='all';brand.value=name;filter();
     });
     document.addEventListener('hira:catalogue-stock-updated',()=>{cards=collectCards();filter();});
-    stock.value='available';
+    stock.value='featured';
     filter();
   }
   const form = document.getElementById('contact-form');
