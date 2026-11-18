@@ -86,3 +86,7 @@
  document.addEventListener('visibilitychange',()=>{if(!document.hidden&&Date.now()-lastAttempt>120000)refresh();});
  refresh();
 })();
+
+if (document.querySelector('#produits .product-image, main .grid .card > .photo')) {
+ import('/assets/cadrage-catalogue.js').catch(() => {});
+}
