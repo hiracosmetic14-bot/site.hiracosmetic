@@ -84,3 +84,14 @@
   }
   .hira-offer-buy { padding-inline: 8px; }
 }
+
+.hira-offer-dialog-saving { color: #b60026; font-size: 28px; line-height: 1; }
+.hira-offer-dialog-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+#hira-offer-dialog .hira-offer-dialog-actions a { margin-right: 0; }
+.hira-offer-checkout {
+  padding: 0 12px;
+  border-radius: 4px;
+  background: #b60026;
+  color: #fff8ed;
+  font-weight: 700;
+}
