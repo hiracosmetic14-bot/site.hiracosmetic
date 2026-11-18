@@ -1,3 +1,28 @@
+/* Keep catalogue prices, quantities and units together on narrow cards. */
+(() => {
+ const labels = '#produits :is(.product-info, .gbs-info), main .grid .info';
+ const measures = /(?<![\p{L}\d])((?:\d{1,3}(?:[ \u00a0\u202f]\d{3})+|\d+)(?:[.,]\d+)?)[ \u00a0\u202f]*(ml|cl|kg|gr|g|l|€|%)(?![\p{L}\d])/giu;
+ function formatCatalogue() {
+  for (const label of document.querySelectorAll(labels)) {
+   const walker = document.createTreeWalker(label, NodeFilter.SHOW_TEXT);
+   while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const value = node.data.replace(measures, (_, number, unit) => {
+     const [integer, fraction] = number.split(/[.,]/);
+     const grouped = integer.replace(/[ \u00a0\u202f]/g, '')
+      .replace(/\B(?=(\d{3})+(?!\d))/g, '\u202f');
+     const normalizedNumber = fraction === undefined ? grouped : grouped + ',' + fraction;
+     const key = unit.toLowerCase();
+     return normalizedNumber + '\u00a0' + (key === 'l' ? 'L' : key === 'gr' ? 'g' : key);
+    });
+    if (value !== node.data) node.data = value;
+   }
+  }
+ }
+ formatCatalogue();
+ document.addEventListener('hira:catalogue-hydrated', formatCatalogue);
+})();
+
 /* Public Shopify price/availability. No Admin token and no visitor data are forwarded. */
 (() => {
  'use strict';

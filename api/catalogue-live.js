@@ -15,6 +15,7 @@ const handles=[
  "gummy-gel-coiffant-fixation-maximale-220-ml",
  "gummy-professional-beard-oil-50-ml",
  "gummy-professional-bloom-shave-gel",
+ "gummy-gel-de-rasage-savour-avec-pompe-1000-ml",
  "derby-professional-platinum-100-lames-de-rasage",
  "dita-lemon-cologne-80-eau-de-cologne-5-l",
  "gummy-hair-wax-lot-de-3-pots-de-150-ml",
