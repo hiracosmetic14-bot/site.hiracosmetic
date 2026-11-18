@@ -45,3 +45,6 @@ input[type=search]{border-color:#8fa6b2;background:#fff;color:#25333c}
   .grid .meta, .grid .stock { font-size: 12px; }
   .grid .action { text-align: center; padding-inline: 8px; font-size: 13px; }
 }
+
+.grid .photo { box-sizing: border-box; flex-shrink: 0; overflow: hidden; }
+.grid .photo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }

@@ -78,10 +78,12 @@
     }
     function matchesStock(item) {
       const mode = stock.value;
-      if (mode === 'all' || (mode === 'featured' && item.brand === 'Gummy Professional')) return true;
+      if (mode === 'all') return true;
+      if (mode === 'featured' && (item.brand === 'Gummy Professional' ||
+          item.card.hasAttribute('data-inventory-selection'))) return true;
       if (mode === 'featured' || mode === 'available') {
         return document.documentElement.dataset.liveStockState === 'failed'
-          ? item.card.classList.contains('product-card')
+          ? item.card.classList.contains('product-card') && !item.card.hasAttribute('data-inventory-selection')
           : item.stock === 'available';
       }
       return item.stock === mode;
