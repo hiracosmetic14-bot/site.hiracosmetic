@@ -2,7 +2,8 @@
   'use strict';
   const search = document.getElementById('catalogue-search-input');
   if (search) {
-    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr');
+    const normalize = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr')
+      .replace(/(?<![\p{L}\d])(\d{1,3}(?:[ \u00a0\u202f]\d{3})+|\d+)\s*(ml|cl|kg|gr|g|l)\b/gu, (_, number, unit) => number.replace(/\s/g, '') + (unit === 'gr' ? 'g' : unit));
     const stock = document.getElementById('hira-stock-filter');
     const brand = document.getElementById('hira-brand-filter');
     const category=document.getElementById('hira-category-filter');

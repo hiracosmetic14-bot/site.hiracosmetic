@@ -21,7 +21,8 @@
   const cards = [...document.querySelectorAll('.card')];
   if (input && stock && more && status) {
     let limit = 24;
-    const norm = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const norm = value => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+      .replace(/(?<![\p{L}\d])(\d{1,3}(?:[ \u00a0\u202f]\d{3})+|\d+)\s*(ml|cl|kg|gr|g|l)\b/gu, (_, number, unit) => number.replace(/\s/g, '') + (unit === 'gr' ? 'g' : unit));
     const reset = document.createElement('button');
     reset.type = 'button';
     reset.className = 'catalogue-reset';
