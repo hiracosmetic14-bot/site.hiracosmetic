@@ -480,6 +480,18 @@
   }
   welcome.classList.add('hira-home-front');
 
+  const social = document.createElement('nav');
+  social.className = 'hira-home-social';
+  social.setAttribute('aria-label', 'Réseaux sociaux HIRA COSMETIC');
+  social.innerHTML = `
+    <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i><span>Instagram</span>
+    </a>
+    <a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener">
+      <i class="fa-brands fa-tiktok" aria-hidden="true"></i><span>TikTok</span>
+    </a>`;
+  carousel.before(social);
+
   const brands = welcome.querySelector('.hira-partners');
   const brandGrid = brands?.querySelector('.hira-partners-grid');
   if (brandGrid) {
