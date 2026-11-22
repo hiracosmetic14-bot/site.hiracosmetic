@@ -240,3 +240,29 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
   font-family: Jost, Roboto, Arial, sans-serif;
 }
 #produits .section-head h2 { letter-spacing: -.025em; }
+
+/* Campaign photography and colour continue behind the offer copy. */
+.hira-offer { --hira-stage-colour: #171616; background: var(--hira-stage-colour); }
+.hira-offer--gummy { --hira-stage-colour: #14171b; }
+.hira-offer--derby { --hira-stage-colour: #10201e; }
+.hira-offer-copy { position: relative; z-index: 1; }
+.hira-offer-copy h2, .hira-offer-copy p, .hira-offer-copy a, .hira-offer-controls button {
+  text-transform: uppercase;
+}
+.hira-offer-copy h2 {
+  max-width: 15ch;
+  font-size: clamp(32px, 4.35vw, 64px);
+  font-weight: 700;
+  letter-spacing: -.018em;
+}
+.hira-offer-copy p:not(.hira-offer-price) { font-size: .84rem; letter-spacing: .055em; }
+.hira-offer-copy a { background: transparent; border: 1px solid #d5c29c; color: #f1e1c0; letter-spacing: .07em; }
+.hira-offer-copy a:hover { background: #f1e1c0; color: #191a1b; }
+.hira-offer-photo, .hira-offer--gummy .hira-offer-photo { background: var(--hira-stage-colour); }
+.hira-offer-photo img { object-fit: cover; }
+@media (min-width: 651px) {
+  .hira-offer-photo img { mask-image: linear-gradient(to right, transparent, #000 14%); }
+}
+@media (max-width: 650px) {
+  .hira-offer-copy h2 { max-width: none; font-size: clamp(30px, 7.5vw, 43px); }
+}
