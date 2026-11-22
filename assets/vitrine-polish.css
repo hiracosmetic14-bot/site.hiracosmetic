@@ -309,3 +309,35 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
   margin: 22px auto 0;
   text-align: center;
 }
+
+/* Social shortcuts at the top of the homepage, including narrow screens. */
+.hira-home-front .hira-home-social {
+  width: min(1260px, 92%);
+  margin: 0 auto 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.hira-home-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 6px 15px;
+  border: 1px solid #292b2c;
+  border-radius: 4px;
+  background: #242627;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: .045em;
+  font: 700 .8rem Roboto, Arial, sans-serif;
+}
+.hira-home-social a:hover { background: #45494a; }
+.hira-home-social a:focus-visible { outline: 2px solid #214f61; outline-offset: 2px; }
+.hira-home-social i { font-size: 1rem; }
+@media (max-width: 650px) {
+  .hira-home-front .hira-home-social { justify-content: center; }
+  .hira-home-social a { flex: 1 1 0; }
+}
