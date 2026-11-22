@@ -484,11 +484,11 @@
   social.className = 'hira-home-social';
   social.setAttribute('aria-label', 'Réseaux sociaux HIRA COSMETIC');
   social.innerHTML = `
-    <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener">
-      <i class="fa-brands fa-instagram" aria-hidden="true"></i><span>Instagram</span>
+    <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener" aria-label="Instagram HIRA COSMETIC" title="Instagram">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
     </a>
-    <a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener">
-      <i class="fa-brands fa-tiktok" aria-hidden="true"></i><span>TikTok</span>
+    <a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener" aria-label="TikTok HIRA COSMETIC" title="TikTok">
+      <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
     </a>`;
   carousel.before(social);
 
