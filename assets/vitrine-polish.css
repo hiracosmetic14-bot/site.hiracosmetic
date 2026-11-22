@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Roboto:wght@400;500;600;700&display=swap');
 
+@import url('/assets/titres-hira.css');
+
 .catalogue-search{max-width:680px;margin:0 0 24px}
 .catalogue-search[hidden],.product-card[hidden],.product-grid[hidden],.section-head[hidden]{display:none!important}
 .catalogue-search label{display:block;margin-bottom:10px;font-size:15px;font-weight:600;color:#26313d}

@@ -1,0 +1,12 @@
+/* Uppercase display for HIRA titles and navigation. */
+:is(h1, h2, h3, h4, h5, h6, legend),
+header nav a,
+footer nav a,
+.catalogue-filters summary,
+.catalogue-filters .tools > label,
+.families summary strong,
+.brand-directory > summary,
+:is(.eyebrow, .kicker, .hira-home-heading, .hira-offer-brand),
+:where(main) :is(.btn, .button, .action, .hira-logotype-cta) {
+  text-transform: uppercase;
+}
