@@ -313,14 +313,9 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 
 /* Keep the two social links in one subtle group above WhatsApp. */
 .hira-home-front .hira-home-social {
-  position: fixed;
-  z-index: 2998;
-  right: max(8px, env(safe-area-inset-right));
-  bottom: 152px;
   display: flex;
-  flex-direction: column;
-  width: auto;
-  margin: 0;
+  width: max-content;
+  margin: 0 max(4%, calc((100% - 1260px) / 2)) 8px auto;
   border: 1px solid #e7e4df;
   border-radius: 24px;
   background: #fff;
@@ -339,8 +334,15 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 .hira-home-social a:hover { opacity: .75; }
 .hira-home-social a:focus-visible { outline: 2px solid #214f61; outline-offset: -4px; border-radius: 50%; }
 .hira-home-social i { font-size: 17px; }
-@media (max-width: 700px) {
-  .hira-home-front .hira-home-social { bottom: 142px; }
+@media (min-width: 1400px) {
+  .hira-home-front .hira-home-social {
+    position: fixed;
+    z-index: 2998;
+    right: max(8px, env(safe-area-inset-right));
+    bottom: 152px;
+    flex-direction: column;
+    margin: 0;
+  }
 }
 
 .hira-back-to-top {
