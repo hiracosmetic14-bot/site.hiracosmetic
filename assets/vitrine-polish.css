@@ -311,35 +311,33 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 }
 
 
-/* Social links sit above WhatsApp and keep the banner unobstructed. */
+/* Keep the two social links in one subtle group above WhatsApp. */
 .hira-home-front .hira-home-social {
   position: fixed;
   z-index: 2998;
   right: 24px;
   bottom: 152px;
   display: flex;
-  gap: 6px;
   width: auto;
   margin: 0;
+  border: 1px solid #e7e4df;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 2px 8px #0001;
 }
 .hira-home-social a {
   display: grid;
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 50%;
-  color: #fff;
+  color: #151515;
   text-decoration: none;
-  box-shadow: 0 3px 10px #0003;
 }
-.hira-home-social a:first-child {
-  background: radial-gradient(circle at 25% 100%, #ffdc80 0%, #f77737 25%, #e1306c 51%, #833ab4 77%, #405de6 100%);
-}
-.hira-home-social a:last-child { background: #121212; }
+.hira-home-social .fa-instagram { color: #c53477; }
 .hira-home-social .fa-tiktok { text-shadow: -1px -1px #25f4ee, 1px 1px #fe2c55; }
-.hira-home-social a:hover { filter: brightness(1.15); }
-.hira-home-social a:focus-visible { outline: 2px solid #214f61; outline-offset: 3px; }
-.hira-home-social i { font-size: 20px; }
+.hira-home-social a:hover { opacity: .75; }
+.hira-home-social a:focus-visible { outline: 2px solid #214f61; outline-offset: -4px; border-radius: 50%; }
+.hira-home-social i { font-size: 17px; }
 @media (max-width: 700px) {
   .hira-home-front .hira-home-social { right: 15px; bottom: 142px; }
 }
