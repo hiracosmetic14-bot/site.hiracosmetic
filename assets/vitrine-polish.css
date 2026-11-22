@@ -311,58 +311,36 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 }
 
 
-/* Keep the two social links in one subtle group above WhatsApp. */
-.hira-home-front .hira-home-social {
+/* Footer actions leave the catalogue unobstructed. */
+#hira-footer-tools {
   display: flex;
-  width: max-content;
-  margin: 0 max(4%, calc((100% - 1260px) / 2)) 8px auto;
-  border: 1px solid #e7e4df;
-  border-radius: 24px;
-  background: #fff;
-  box-shadow: 0 2px 8px #0001;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 18px;
+  padding-block: 8px;
+  border-top: 1px solid #e5e2dc;
 }
-.hira-home-social a {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  color: #151515;
+#hira-footer-tools .hira-home-social { display: flex; }
+#hira-footer-tools :is(a, button, #hira-chat-launcher, #hira-analytics-settings) {
+  position: static;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  width: auto;
+  margin: 0;
+  padding: 6px 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font: 600 13px/1.35 Roboto, Arial, sans-serif;
   text-decoration: none;
-}
-.hira-home-social .fa-instagram { color: #c53477; }
-.hira-home-social .fa-tiktok { text-shadow: -1px -1px #25f4ee, 1px 1px #fe2c55; }
-.hira-home-social a:hover { opacity: .75; }
-.hira-home-social a:focus-visible { outline: 2px solid #214f61; outline-offset: -4px; border-radius: 50%; }
-.hira-home-social i { font-size: 17px; }
-@media (min-width: 1400px) {
-  .hira-home-front .hira-home-social {
-    position: fixed;
-    z-index: 2998;
-    right: max(8px, env(safe-area-inset-right));
-    bottom: 152px;
-    flex-direction: column;
-    margin: 0;
-  }
-}
-
-.hira-back-to-top {
-  position: fixed;
-  z-index: 950;
-  left: max(16px, env(safe-area-inset-left));
-  bottom: calc(92px + env(safe-area-inset-bottom, 0px));
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 1px solid #fff;
-  border-radius: 50%;
-  background: #242627;
-  color: #fff;
-  box-shadow: 0 4px 12px #0003;
-  font: 600 27px/1 system-ui, sans-serif;
   cursor: pointer;
 }
-.hira-back-to-top[hidden] { display: none; }
-.hira-back-to-top:hover { background: #424749; }
-.hira-back-to-top:focus-visible { outline: 2px solid #214f61; outline-offset: 3px; }
+#hira-footer-tools .hira-home-social a { width: 44px; font-size: 18px; }
+#hira-footer-tools .fa-instagram { color: #c53477; }
+#hira-footer-tools .fa-tiktok { text-shadow: -1px -1px #25f4ee, 1px 1px #fe2c55; }
+#hira-footer-tools #hira-chat-launcher i { color: inherit; }
+#hira-footer-tools :is(a, button):hover { text-decoration: underline; }

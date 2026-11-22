@@ -97,7 +97,8 @@
   const style = document.createElement('style');
   style.textContent = '#hira-cookie-consent,#hira-cookie-settings{display:none!important}#hira-analytics-preferences[hidden]{display:none!important}#hira-analytics-preferences{position:fixed;bottom:64px;left:16px;right:16px;max-width:640px;z-index:10020;background:#fff;color:#202020;border:1px solid #767676;border-radius:8px;padding:22px;box-shadow:0 6px 26px #0003;font:16px/1.6 Arial,sans-serif;max-height:75vh;overflow:auto}#hira-analytics-preferences h2{font:600 21px/1.3 Arial,sans-serif;margin:0 0 12px;color:#202020}#hira-analytics-preferences p{margin:0 0 16px;color:#202020;font:16px/1.6 Arial,sans-serif}#hira-analytics-preferences a{color:#174b88;text-decoration:underline}#hira-analytics-preferences>div{display:flex;flex-wrap:wrap;gap:12px}#hira-analytics-preferences button,#hira-analytics-settings{background:#fff;color:#202020;border:1px solid #555;border-radius:5px;padding:12px 16px;min-height:44px;font:600 15px/1.4 Arial,sans-serif;cursor:pointer}#hira-analytics-preferences button:focus-visible,#hira-analytics-settings:focus-visible{outline:3px solid #1768ae;outline-offset:3px}#hira-analytics-settings{position:fixed;bottom:12px;left:16px;z-index:10019;box-shadow:0 2px 8px #0002}';
   document.head.appendChild(style);
-  document.body.append(panel, settings);
+  document.body.append(panel);
+  (document.getElementById('hira-footer-tools') || document.body).append(settings);
   let known = false;
   try { known = typeof JSON.parse(localStorage.getItem(key) || 'null')?.analytics === 'boolean'; } catch (_) {}
   panel.querySelector('[data-hira-close]').hidden = !known;

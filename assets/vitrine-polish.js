@@ -480,18 +480,6 @@
   }
   welcome.classList.add('hira-home-front');
 
-  const social = document.createElement('nav');
-  social.className = 'hira-home-social';
-  social.setAttribute('aria-label', 'Réseaux sociaux HIRA COSMETIC');
-  social.innerHTML = `
-    <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener" aria-label="Instagram HIRA COSMETIC" title="Instagram">
-      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-    </a>
-    <a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener" aria-label="TikTok HIRA COSMETIC" title="TikTok">
-      <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
-    </a>`;
-  carousel.before(social);
-
   const brands = welcome.querySelector('.hira-partners');
   const brandGrid = brands?.querySelector('.hira-partners-grid');
   if (brandGrid) {
@@ -553,30 +541,49 @@
   }, 6500);
 })();
 
-/* Bring shoppers back to the navigation after browsing the catalogue. */
+/* Keep contact and navigation actions in the footer. */
 (() => {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'hira-back-to-top';
-  button.setAttribute('aria-label', 'Retour en haut de la page');
-  button.title = 'Retour en haut de la page';
-  button.textContent = '↑';
-  button.hidden = true;
-  document.body.append(button);
+  const footer = document.querySelector('footer');
+  if (!footer) return;
+  const tools = document.createElement('div');
+  tools.id = 'hira-footer-tools';
+  tools.className = 'container';
+  const social = document.createElement('nav');
+  social.className = 'hira-home-social';
+  social.setAttribute('aria-label', 'Réseaux sociaux HIRA COSMETIC');
+  social.innerHTML = `
+    <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener" aria-label="Instagram HIRA COSMETIC" title="Instagram">
+      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+    </a>
+    <a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener" aria-label="TikTok HIRA COSMETIC" title="TikTok">
+      <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+    </a>`;
+  tools.append(social);
 
-  function updateVisibility() {
-    button.hidden = window.scrollY < 500 && document.activeElement !== button;
+
+  const whatsapp = document.querySelector('.whatsapp-float');
+  if (whatsapp) {
+    whatsapp.classList.remove('whatsapp-float');
+    tools.append(whatsapp);
   }
+  const chat = document.getElementById('hira-chat-launcher');
+  if (chat) tools.append(chat);
 
-  window.addEventListener('scroll', updateVisibility, { passive: true });
-  button.addEventListener('blur', updateVisibility);
-  button.addEventListener('click', () => {
-    const navigation = document.querySelector('header a[href="/"]') || document.querySelector('header a');
-    navigation?.focus({ preventScroll: true });
+  const cookies = document.getElementById('hira-analytics-settings');
+  if (cookies) tools.append(cookies);
+
+  const top = document.createElement('button');
+  top.type = 'button';
+  top.textContent = 'Retour en haut ↑';
+  top.addEventListener('click', () => {
+    document.querySelector('header a')?.focus({ preventScroll: true });
     window.scrollTo({
       top: 0,
       behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
     });
   });
-  updateVisibility();
+  tools.append(top);
+  const bottom = footer.querySelector('.footer-bottom');
+  if (bottom) bottom.before(tools);
+  else footer.append(tools);
 })();
