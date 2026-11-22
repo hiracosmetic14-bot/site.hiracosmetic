@@ -548,19 +548,6 @@
   const tools = document.createElement('div');
   tools.id = 'hira-footer-tools';
   tools.className = 'container';
-  const social = document.createElement('nav');
-  social.className = 'hira-home-social';
-  social.setAttribute('aria-label', 'Réseaux sociaux HIRA COSMETIC');
-  social.innerHTML = `
-    <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener" aria-label="Instagram HIRA COSMETIC" title="Instagram">
-      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
-    </a>
-    <a href="https://www.tiktok.com/@hiracosmetic14" target="_blank" rel="noopener" aria-label="TikTok HIRA COSMETIC" title="TikTok">
-      <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
-    </a>`;
-  tools.append(social);
-
-
   const whatsapp = document.querySelector('.whatsapp-float');
   if (whatsapp) {
     whatsapp.classList.remove('whatsapp-float');
