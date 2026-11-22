@@ -426,20 +426,20 @@
 
   const offers = [
     {
-      brand: 'Gummy Professional', title: 'Pack découverte 3 cires',
-      description: 'Trois cires coiffantes de 150 ml à découvrir.',
-      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-coffret-gummy-3-cires-anthracite.png?v=1794170359&width=720',
+      key: 'jrl', tab: 'JRL', brand: 'JRL Professional', title: 'Diamante Combo noir',
+      price: '239,90 € TTC', description: 'Livraison offerte en Belgique',
+      image: '/assets/jrl-diamante-coffret-noir.webp',
+      link: '/marques/jrl.html', action: 'Voir le coffret'
+    },
+    {
+      key: 'gummy', tab: 'Gummy', brand: 'Gummy Professional', title: 'Pack découverte 3 cires',
+      description: 'Mat, naturel et ultra-fort · 3 × 150 ml',
+      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-coffret-gummy-3-cires-anthracite.png?v=1794170359&width=1000',
       link: 'https://hiracosmetic-store.myshopify.com/products/gummy-pack-decouverte-3-cires-150-ml',
       action: 'Voir le pack'
     },
     {
-      brand: 'JRL Professional', title: 'Diamante Combo noir',
-      description: '239,90 € TTC · Livraison offerte en Belgique',
-      image: 'https://www.harotec.be/items/jpg/020.010@JR-10550.jpg',
-      link: '/marques/jrl.html', action: 'Voir le coffret'
-    },
-    {
-      brand: 'Derby Professional', title: 'Lames de rasage Derby',
+      key: 'derby', tab: 'Derby', brand: 'Derby Professional', title: 'Lames de rasage Derby',
       description: '100 lames simples pour shavette.',
       image: '/assets/derby-boite-verte.jpg',
       link: '/marques/derby.html', action: 'Voir les lames'
@@ -452,10 +452,11 @@
   carousel.innerHTML = `
     <div class="hira-offer-stage" id="hira-offer-stage">
       ${offers.map(offer => `
-        <article class="hira-offer" hidden>
+        <article class="hira-offer hira-offer--${offer.key}" hidden>
           <div class="hira-offer-copy">
             <p class="hira-offer-brand">${offer.brand}</p>
             <h2>${offer.title}</h2>
+            ${offer.price ? `<p class="hira-offer-price">${offer.price}</p>` : ''}
             <p>${offer.description}</p>
             <a href="${offer.link}">${offer.action} <span aria-hidden="true">↗</span></a>
           </div>
@@ -464,7 +465,7 @@
     </div>
     <div class="hira-offer-controls">
       <div class="hira-offer-tabs" role="group" aria-label="Choisir une offre">
-        ${['Gummy', 'JRL', 'Derby'].map((brand, number) => `<button type="button" data-offer-index="${number}" aria-pressed="false" aria-controls="hira-offer-stage">${brand}</button>`).join('')}
+        ${offers.map((offer, number) => `<button type="button" data-offer-index="${number}" aria-pressed="false" aria-controls="hira-offer-stage">${offer.tab}</button>`).join('')}
       </div>
       <button type="button" class="hira-offer-play" aria-controls="hira-offer-stage"></button>
     </div>`;
