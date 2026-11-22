@@ -418,3 +418,89 @@
 
 /* Read-only public catalogue updates. */
 (()=>{if(document.getElementById('hira-live-catalogue-loader'))return;const script=document.createElement('script');script.id='hira-live-catalogue-loader';script.src='/assets/catalogue-live.js';script.defer=true;document.head.append(script);})();
+
+/* Homepage offers. */
+(() => {
+  const welcome = document.querySelector('#accueil.hira-logotype-hero');
+  if (!welcome) return;
+
+  const offers = [
+    {
+      brand: 'Gummy Professional', title: 'Pack découverte 3 cires',
+      description: 'Trois cires coiffantes de 150 ml à découvrir.',
+      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-coffret-gummy-3-cires-anthracite.png?v=1794170359&width=720',
+      link: 'https://hiracosmetic-store.myshopify.com/products/gummy-pack-decouverte-3-cires-150-ml',
+      action: 'Voir le pack'
+    },
+    {
+      brand: 'JRL Professional', title: 'Diamante Combo noir',
+      description: '239,90 € TTC · Livraison offerte en Belgique',
+      image: '/assets/catalogue/5b33b3a71180d0f8.webp',
+      link: '/marques/jrl.html', action: 'Voir le coffret'
+    },
+    {
+      brand: 'Uppercut Deluxe', title: 'Pomades et argile coiffante',
+      description: 'Découvrez Deluxe Pomade, Matte Pomade et Clay.',
+      image: 'https://cdn.shopify.com/s/files/1/0351/3391/5269/products/DP-F.jpg?v=1588652176&width=640',
+      link: '/marques/uppercut-deluxe.html', action: 'Découvrir Uppercut'
+    }
+  ];
+
+  const carousel = document.createElement('section');
+  carousel.className = 'hira-offers';
+  carousel.setAttribute('aria-label', 'À découvrir chez HIRA COSMETIC');
+  carousel.innerHTML = `
+    <div class="hira-offer-stage" id="hira-offer-stage">
+      ${offers.map(offer => `
+        <article class="hira-offer" hidden>
+          <div class="hira-offer-copy">
+            <p class="hira-offer-brand">${offer.brand}</p>
+            <h2>${offer.title}</h2>
+            <p>${offer.description}</p>
+            <a href="${offer.link}">${offer.action} <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="hira-offer-photo"><img src="${offer.image}" alt="" width="640" height="640" decoding="async"></div>
+        </article>`).join('')}
+    </div>
+    <div class="hira-offer-controls">
+      <button type="button" data-offer-step="-1" aria-label="Offre précédente" aria-controls="hira-offer-stage">‹</button>
+      <span class="hira-offer-position" aria-live="off"></span>
+      <button type="button" data-offer-step="1" aria-label="Offre suivante" aria-controls="hira-offer-stage">›</button>
+      <button type="button" class="hira-offer-play" aria-controls="hira-offer-stage"></button>
+    </div>`;
+  welcome.before(carousel);
+
+  const slides = [...carousel.querySelectorAll('.hira-offer')];
+  const position = carousel.querySelector('.hira-offer-position');
+  const play = carousel.querySelector('.hira-offer-play');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let index = 0;
+  let playing = !reducedMotion.matches;
+
+  function show(next) {
+    index = (next + slides.length) % slides.length;
+    slides.forEach((slide, number) => { slide.hidden = number !== index; });
+    position.textContent = (index + 1) + ' / ' + slides.length;
+  }
+
+  function setPlaying(value) {
+    playing = value;
+    play.textContent = playing ? 'Pause' : 'Lancer le défilement';
+  }
+
+  carousel.querySelectorAll('[data-offer-step]').forEach(button => {
+    button.addEventListener('click', () => {
+      setPlaying(false);
+      show(index + Number(button.dataset.offerStep));
+    });
+  });
+  play.addEventListener('click', () => setPlaying(!playing));
+  reducedMotion.addEventListener('change', event => {
+    if (event.matches) setPlaying(false);
+  });
+  setPlaying(playing);
+  show(0);
+  window.setInterval(() => {
+    if (playing && !document.hidden && !carousel.matches(':hover, :focus-within')) show(index + 1);
+  }, 6500);
+})();
