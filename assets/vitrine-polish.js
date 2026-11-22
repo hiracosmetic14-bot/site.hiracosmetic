@@ -428,20 +428,20 @@
     {
       key: 'jrl', tab: 'JRL', brand: 'JRL Professional', title: 'Diamante Combo noir',
       price: '239,90 € TTC', description: 'Livraison offerte en Belgique',
-      image: '/assets/jrl-diamante-coffret-noir.webp',
+      image: '/assets/accueil-jrl.webp',
       link: '/marques/jrl.html', action: 'Voir le coffret'
     },
     {
       key: 'gummy', tab: 'Gummy', brand: 'Gummy Professional', title: 'Pack découverte 3 cires',
       description: 'Mat, naturel et ultra-fort · 3 × 150 ml',
-      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-coffret-gummy-3-cires-anthracite.png?v=1794170359&width=1000',
+      image: '/assets/accueil-gummy.webp',
       link: 'https://hiracosmetic-store.myshopify.com/products/gummy-pack-decouverte-3-cires-150-ml',
       action: 'Voir le pack'
     },
     {
       key: 'derby', tab: 'Derby', brand: 'Derby Professional', title: 'Lames de rasage Derby',
       description: '100 lames simples pour shavette.',
-      image: '/assets/derby-boite-verte.jpg',
+      image: '/assets/accueil-derby.webp',
       link: '/marques/derby.html', action: 'Voir les lames'
     }
   ];
@@ -460,7 +460,7 @@
             <p>${offer.description}</p>
             <a href="${offer.link}">${offer.action} <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="hira-offer-photo"><img src="${offer.image}" alt="" width="640" height="640" decoding="async"></div>
+          <div class="hira-offer-photo"><img src="${offer.image}" alt="" width="1200" height="840" decoding="async"></div>
         </article>`).join('')}
     </div>
     <div class="hira-offer-controls">
