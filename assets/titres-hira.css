@@ -22,3 +22,10 @@ footer nav a,
 .hira-home-front .hira-partners > .hira-home-heading {
   text-transform: uppercase;
 }
+
+/* Apply the same case to the short descriptive text inside every product card. */
+#produits :is(.product-card, .gbs-card),
+main .grid > .card,
+#product-detail-dialog {
+  text-transform: uppercase;
+}
