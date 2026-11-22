@@ -435,14 +435,14 @@
     {
       brand: 'JRL Professional', title: 'Diamante Combo noir',
       description: '239,90 € TTC · Livraison offerte en Belgique',
-      image: '/assets/catalogue/5b33b3a71180d0f8.webp',
+      image: 'https://www.harotec.be/items/jpg/020.010@JR-10550.jpg',
       link: '/marques/jrl.html', action: 'Voir le coffret'
     },
     {
-      brand: 'Uppercut Deluxe', title: 'Pomades et argile coiffante',
-      description: 'Découvrez Deluxe Pomade, Matte Pomade et Clay.',
-      image: 'https://cdn.shopify.com/s/files/1/0351/3391/5269/products/DP-F.jpg?v=1588652176&width=640',
-      link: '/marques/uppercut-deluxe.html', action: 'Découvrir Uppercut'
+      brand: 'Derby Professional', title: 'Lames de rasage Derby',
+      description: '100 lames simples pour shavette.',
+      image: '/assets/derby-boite-verte.jpg',
+      link: '/marques/derby.html', action: 'Voir les lames'
     }
   ];
 
@@ -463,15 +463,38 @@
         </article>`).join('')}
     </div>
     <div class="hira-offer-controls">
-      <button type="button" data-offer-step="-1" aria-label="Offre précédente" aria-controls="hira-offer-stage">‹</button>
-      <span class="hira-offer-position" aria-live="off"></span>
-      <button type="button" data-offer-step="1" aria-label="Offre suivante" aria-controls="hira-offer-stage">›</button>
+      <div class="hira-offer-tabs" role="group" aria-label="Choisir une offre">
+        ${['Gummy', 'JRL', 'Derby'].map((brand, number) => `<button type="button" data-offer-index="${number}" aria-pressed="false" aria-controls="hira-offer-stage">${brand}</button>`).join('')}
+      </div>
       <button type="button" class="hira-offer-play" aria-controls="hira-offer-stage"></button>
     </div>`;
-  welcome.before(carousel);
+  const copy = welcome.querySelector('.hira-logotype-copy');
+  const title = copy?.querySelector('h1');
+  if (title) {
+    title.classList.add('hira-home-visually-hidden');
+    welcome.prepend(title, carousel);
+    copy.hidden = true;
+  } else {
+    welcome.prepend(carousel);
+  }
+  welcome.classList.add('hira-home-front');
+
+  const brands = welcome.querySelector('.hira-partners');
+  const brandGrid = brands?.querySelector('.hira-partners-grid');
+  if (brandGrid) {
+    brands.setAttribute('aria-label', 'Nos marques');
+    const cell = document.createElement('div');
+    cell.className = 'hira-logo-cell';
+    const brand = document.createElement('a');
+    brand.className = 'hira-brand-link hira-uppercut-mark';
+    brand.href = '/marques/uppercut-deluxe.html';
+    brand.textContent = 'Uppercut Deluxe';
+    cell.append(brand);
+    brandGrid.append(cell);
+  }
 
   const slides = [...carousel.querySelectorAll('.hira-offer')];
-  const position = carousel.querySelector('.hira-offer-position');
+  const tabs = [...carousel.querySelectorAll('[data-offer-index]')];
   const play = carousel.querySelector('.hira-offer-play');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let index = 0;
@@ -480,7 +503,7 @@
   function show(next) {
     index = (next + slides.length) % slides.length;
     slides.forEach((slide, number) => { slide.hidden = number !== index; });
-    position.textContent = (index + 1) + ' / ' + slides.length;
+    tabs.forEach((tab, number) => tab.setAttribute('aria-pressed', String(number === index)));
   }
 
   function setPlaying(value) {
@@ -488,10 +511,10 @@
     play.textContent = playing ? 'Pause' : 'Lancer le défilement';
   }
 
-  carousel.querySelectorAll('[data-offer-step]').forEach(button => {
+  tabs.forEach(button => {
     button.addEventListener('click', () => {
       setPlaying(false);
-      show(index + Number(button.dataset.offerStep));
+      show(Number(button.dataset.offerIndex));
     });
   });
   play.addEventListener('click', () => setPlaying(!playing));

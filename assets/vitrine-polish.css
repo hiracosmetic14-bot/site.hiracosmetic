@@ -139,68 +139,100 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 @media(max-width:600px){.hira-category-shortcuts{gap:8px}.hira-category-shortcuts a{font-size:14px;padding:10px 12px}.hira-purchase-info{padding:14px}header nav a{font-size:15px}}
 .hira-live-catalogue-status{font:14px/1.7 Arial,sans-serif;color:#4d5e69;padding:12px 16px;border:1px solid #d5e0e5;border-radius:7px;background:#f3f7f9;margin:12px 0 20px}.gbs-stock[data-live-state="unknown"],.stock[data-live-state="unknown"]{background:#eef3f6;color:#40535e}.gbs-stock[data-live-state="unavailable"],.stock[data-live-state="unavailable"]{background:#f3f5f6;color:#4d5e69}
 
-/* Homepage offers share the catalogue typography. */
-.hira-offers {
-  width: min(1200px, 92%);
-  margin: 24px auto;
+/* Editorial homepage: featured product and brand directory. */
+.hira-logotype-hero.hira-home-front { padding: 24px 0 32px; background: #f7f7f5; }
+.hira-home-front .hira-logotype-layout { display: block; }
+.hira-home-front .hira-logotype-copy[hidden], .hira-offer[hidden] { display: none; }
+.hira-home-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
   overflow: hidden;
-  border-radius: 10px;
-  background: #202225;
-  color: #f8f7f4;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.hira-offers {
+  width: min(1260px, 92%);
+  margin: 0 auto 30px;
+  background: #191a1b;
+  color: #f7f6f2;
   font-family: Roboto, Arial, sans-serif;
 }
-.hira-offer { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; }
-.hira-offer[hidden] { display: none; }
-.hira-offer-copy { align-self: center; padding: clamp(24px, 5vw, 64px); }
-.hira-offer-copy p { margin: 0 0 14px; color: #e0dfdd; }
+.hira-offer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+.hira-offer-copy { align-self: center; padding: clamp(26px, 5vw, 72px); }
+.hira-offer-copy p { margin: 0 0 16px; color: #d5d4cf; }
 .hira-offer-copy h2 {
-  margin: 0 0 14px;
+  max-width: 13ch;
+  margin: 0 0 16px;
   color: #fff;
-  font: 700 clamp(36px, 5vw, 67px)/1.05 Jost, Roboto, Arial, sans-serif;
+  font: 600 clamp(38px, 5.2vw, 76px)/.98 Jost, Roboto, Arial, sans-serif;
+  letter-spacing: -.035em;
 }
-.hira-offer-copy .hira-offer-brand { font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.hira-offer-copy .hira-offer-brand {
+  color: #ddd9ce;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
 .hira-offer-copy a {
   display: inline-flex;
-  gap: 10px;
+  gap: 14px;
   align-items: center;
   min-height: 44px;
-  margin-top: 12px;
-  padding: 8px 14px;
-  border-radius: 4px;
-  background: #f7f5ef;
-  color: #202225;
+  margin-top: 8px;
+  padding: 9px 16px;
+  background: #f7f6f2;
+  color: #191a1b;
   font-weight: 700;
 }
+.hira-offer-copy a:hover { background: #e4e2da; }
 .hira-offer-photo {
   display: grid;
   place-items: center;
-  min-height: clamp(260px, 33vw, 400px);
-  padding: 18px 30px;
-  background: #f2f0ec;
+  height: clamp(330px, 36vw, 510px);
+  overflow: hidden;
+  background: #f3f2ef;
 }
-.hira-offer-photo img { width: 100%; height: clamp(225px, 30vw, 370px); object-fit: contain; }
-.hira-offer-controls { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 10px; }
+.hira-offer-photo img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.hira-offer:first-child .hira-offer-photo { background: #292a2b; }
+.hira-offer:not(:first-child) .hira-offer-photo img { width: 80%; height: 80%; mix-blend-mode: multiply; }
+.hira-offer-controls { display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 0 clamp(12px, 3vw, 40px); border-top: 1px solid #48494a; }
+.hira-offer-tabs { display: flex; }
 .hira-offer-controls button {
-  min-height: 44px;
-  min-width: 44px;
-  padding: 4px 10px;
-  border: 1px solid #aaa;
-  border-radius: 4px;
-  color: #fff;
+  min-height: 46px;
+  padding: 4px clamp(8px, 1.4vw, 18px);
+  border: 0;
   background: transparent;
-  font: 600 15px Roboto, Arial, sans-serif;
+  color: #e4e4df;
+  font: 600 .88rem Roboto, Arial, sans-serif;
   cursor: pointer;
 }
-.hira-offer-controls button:hover { background: #36393c; }
-.hira-offer-controls :focus-visible, .hira-offer-copy a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-.hira-offer-position { min-width: 45px; text-align: center; font-variant-numeric: tabular-nums; }
+.hira-offer-tabs button { border-bottom: 2px solid transparent; }
+.hira-offer-tabs button[aria-pressed="true"] { border-color: #f4f0df; color: #fff; }
+.hira-offer-controls button:hover { background: #303133; }
+.hira-offer-controls :focus-visible, .hira-offer-copy a:focus-visible { outline: 2px solid #fff; outline-offset: -3px; }
+.hira-home-front .hira-partners { padding: 0; background: transparent; }
+.hira-home-front .hira-partners-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+.hira-home-front .hira-uppercut-mark { font: 700 1rem/1.1 Jost, Arial, sans-serif; color: #242424; text-align: center; }
 @media (prefers-reduced-motion: no-preference) {
-  .hira-offer:not([hidden]) { animation: hira-offer-in 240ms ease-out; }
-  @keyframes hira-offer-in { from { opacity: .3; } to { opacity: 1; } }
+  .hira-offer:not([hidden]) .hira-offer-copy,
+  .hira-offer:not([hidden]) .hira-offer-photo { animation: hira-feature-in 290ms ease-out; }
+  @keyframes hira-feature-in { from { opacity: .45; } to { opacity: 1; } }
+}
+@media (max-width: 850px) {
+  .hira-home-front .hira-partners-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 650px) {
-  .hira-offers { margin-top: 12px; }
+  .hira-logotype-hero.hira-home-front { padding-top: 12px; }
   .hira-offer { grid-template-columns: minmax(0, 1fr); }
-  .hira-offer-photo { min-height: 172px; padding: 10px; }
-  .hira-offer-photo img { height: 160px; }
+  .hira-offer-photo { grid-row: 1; height: clamp(170px, 50vw, 240px); }
+  .hira-offer-copy { padding: 20px 22px 24px; }
+  .hira-offer-copy h2 { max-width: none; font-size: clamp(34px, 8vw, 46px); }
+  .hira-offer-copy p, .hira-offer-copy h2 { margin-bottom: 10px; }
+  .hira-home-front .hira-partners-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+#produits .section-head h2, .hira-home-front .hira-home-heading {
+  font-family: Jost, Roboto, Arial, sans-serif;
+}
+#produits .section-head h2 { letter-spacing: -.025em; }
