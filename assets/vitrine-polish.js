@@ -489,10 +489,22 @@
     const brand = document.createElement('a');
     brand.className = 'hira-brand-link hira-uppercut-mark';
     brand.href = '/marques/uppercut-deluxe.html';
-    brand.textContent = 'Uppercut Deluxe';
+    const logo = document.createElement('img');
+    logo.className = 'hira-partner-logo';
+    logo.src = '/assets/uppercut-deluxe-logo.png';
+    logo.alt = 'Uppercut Deluxe';
+    logo.loading = 'lazy';
+    logo.decoding = 'async';
+    brand.append(logo);
     cell.append(brand);
     brandGrid.append(cell);
   }
+
+  const pro = document.createElement('a');
+  pro.className = 'hira-logotype-cta hira-pro-entry';
+  pro.href = '/professionnels.html#demande';
+  pro.textContent = 'INSCRIPTION PROFESSIONNELLE ↗';
+  (brands || carousel).after(pro);
 
   const slides = [...carousel.querySelectorAll('.hira-offer')];
   const tabs = [...carousel.querySelectorAll('[data-offer-index]')];

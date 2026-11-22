@@ -302,3 +302,10 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
     margin-bottom: 12px;
   }
 }
+
+.hira-home-front .hira-uppercut-mark img { max-width: 112px; width: 88%; height: auto; }
+.hira-home-front .hira-pro-entry {
+  display: table;
+  margin: 22px auto 0;
+  text-align: center;
+}
