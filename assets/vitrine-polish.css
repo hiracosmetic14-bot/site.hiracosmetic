@@ -268,3 +268,18 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 @media (max-width: 650px) {
   .hira-offer-copy h2 { max-width: none; font-size: clamp(30px, 7.5vw, 43px); }
 }
+
+/* Apply capitals directly on the homepage cards and their quick-view panel. */
+#produits :is(.product-card, .gbs-card) :is(.product-info, .gbs-info),
+#produits :is(.product-info, .gbs-info) :is(h3, h4, p, a, button, .gbs-format),
+#product-detail-dialog :is(h2, h3, p, a, .product-detail-format) {
+  text-transform: uppercase;
+}
+
+/* Catalogue shortcuts, view modes and search controls on the homepage. */
+#produits :is(.hira-category-shortcuts, .catalogue-search, .catalogue-return),
+#produits :is(a, button, label, summary, select) {
+  text-transform: uppercase;
+}
+#produits input::placeholder { text-transform: uppercase; }
+#produits input { text-transform: none; }
