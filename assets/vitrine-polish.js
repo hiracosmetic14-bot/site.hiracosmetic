@@ -552,3 +552,31 @@
     if (playing && !document.hidden && !carousel.matches(':hover, :focus-within')) show(index + 1);
   }, 6500);
 })();
+
+/* Bring shoppers back to the navigation after browsing the catalogue. */
+(() => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'hira-back-to-top';
+  button.setAttribute('aria-label', 'Retour en haut de la page');
+  button.title = 'Retour en haut de la page';
+  button.textContent = '↑';
+  button.hidden = true;
+  document.body.append(button);
+
+  function updateVisibility() {
+    button.hidden = window.scrollY < 500 && document.activeElement !== button;
+  }
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  button.addEventListener('blur', updateVisibility);
+  button.addEventListener('click', () => {
+    const navigation = document.querySelector('header a[href="/"]') || document.querySelector('header a');
+    navigation?.focus({ preventScroll: true });
+    window.scrollTo({
+      top: 0,
+      behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+    });
+  });
+  updateVisibility();
+})();
