@@ -48,3 +48,63 @@ input[type=search]{border-color:#8fa6b2;background:#fff;color:#25333c}
 
 .grid .photo { box-sizing: border-box; flex-shrink: 0; overflow: hidden; }
 .grid .photo img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; }
+
+/* Shared product browsing across brand and category pages. */
+.catalogue-layout {
+  display: grid;
+  grid-template-columns: minmax(210px, 245px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(18px, 3vw, 36px);
+  margin-block: 28px;
+}
+.catalogue-filters { border: 1px solid #d8dadd; border-radius: 8px; background: #f7f7f6; }
+.catalogue-filters summary {
+  padding: 14px 16px;
+  color: #212426;
+  font-weight: 700;
+  cursor: pointer;
+}
+.catalogue-filters .tools { display: grid; gap: 14px; margin: 0; padding: 0 16px 16px; }
+.catalogue-filters .tools label { font-size: .875rem; color: #282b2e; }
+.catalogue-filters input[type=search],
+.catalogue-filters select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #93989d;
+  border-radius: 4px;
+  background: #fff;
+  color: #222c33;
+  font: inherit;
+  font-size: 1rem;
+}
+.catalogue-filters input[type=checkbox] { accent-color: #282b2e; }
+.catalogue-filters .catalogue-reset:not([hidden]) { width: 100%; }
+.catalogue-results { min-width: 0; }
+.catalogue-results > #resultats { margin: 4px 0 16px; color: #4d5358; font-size: .9rem; }
+.catalogue-results .grid { gap: clamp(10px, 1.8vw, 20px); }
+.catalogue-results .card { border-color: #dddfe1; border-radius: 8px; }
+.catalogue-results .photo { height: clamp(155px, 19vw, 250px); background: #fbfbfb; }
+.catalogue-results .info { padding: clamp(10px, 1.45vw, 18px); }
+.catalogue-results .action {
+  width: 100%;
+  text-align: center;
+  background: #272a2c;
+  border-color: #272a2c;
+}
+.catalogue-results .action:hover { background: #42474a; border-color: #42474a; }
+@media (max-width: 950px) {
+  .catalogue-results .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .catalogue-layout { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .catalogue-filters .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .catalogue-filters .tools > label:first-child { grid-column: 1 / -1; }
+}
+@media (max-width: 420px) {
+  .catalogue-filters .tools { grid-template-columns: minmax(0, 1fr); }
+  .catalogue-results .photo { height: 135px; }
+}
