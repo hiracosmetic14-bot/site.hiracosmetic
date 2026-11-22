@@ -283,3 +283,22 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 }
 #produits input::placeholder { text-transform: uppercase; }
 #produits input { text-transform: none; }
+
+/* Keep product actions compact when two cards share a mobile row. */
+@media (max-width: 700px) {
+  #produits :is(.product-info, .gbs-info) > :is(.product-link, .gbs-enquiry) {
+    flex: 0 0 auto;
+    margin-top: auto;
+    min-height: 48px;
+    padding: 8px 6px;
+    justify-content: center;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.25;
+    gap: 5px;
+    white-space: normal;
+  }
+  #produits :is(.product-info, .gbs-info) > .hira-price-line {
+    margin-bottom: 12px;
+  }
+}
