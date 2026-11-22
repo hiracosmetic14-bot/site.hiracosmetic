@@ -469,6 +469,14 @@
       <button type="button" class="hira-offer-play" aria-controls="hira-offer-stage"></button>
     </div>`;
   welcome.before(carousel);
+  const catalogueLink = welcome.querySelector('.hira-logotype-cta');
+  if (catalogueLink) {
+    const proLink = document.createElement('a');
+    proLink.className = 'hira-logotype-cta';
+    proLink.href = '/professionnels.html#demande';
+    proLink.textContent = 'Ouvrir un compte pro ↗';
+    catalogueLink.after(document.createTextNode(' '), proLink);
+  }
 
   const slides = [...carousel.querySelectorAll('.hira-offer')];
   const position = carousel.querySelector('.hira-offer-position');
