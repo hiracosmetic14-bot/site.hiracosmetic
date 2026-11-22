@@ -315,9 +315,10 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 .hira-home-front .hira-home-social {
   position: fixed;
   z-index: 2998;
-  right: 24px;
+  right: max(8px, env(safe-area-inset-right));
   bottom: 152px;
   display: flex;
+  flex-direction: column;
   width: auto;
   margin: 0;
   border: 1px solid #e7e4df;
@@ -339,7 +340,7 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 .hira-home-social a:focus-visible { outline: 2px solid #214f61; outline-offset: -4px; border-radius: 50%; }
 .hira-home-social i { font-size: 17px; }
 @media (max-width: 700px) {
-  .hira-home-front .hira-home-social { right: 15px; bottom: 142px; }
+  .hira-home-front .hira-home-social { bottom: 142px; }
 }
 
 .hira-back-to-top {
