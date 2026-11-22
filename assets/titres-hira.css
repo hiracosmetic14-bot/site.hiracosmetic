@@ -10,3 +10,15 @@ footer nav a,
 :where(main) :is(.btn, .button, .action, .hira-logotype-cta) {
   text-transform: uppercase;
 }
+
+/* Product names, short details and actions, including the quick-view dialog. */
+:is(.product-card, .gbs-card, .catalogue-results .card, .product-detail-dialog)
+  :is(h2, h3, h4, .meta, .stock, .price, .product-category, .product-link,
+      .gbs-category, .gbs-format, .gbs-stock, .gbs-enquiry, .hira-price-line,
+      .product-detail-category, .product-detail-format, .product-detail-buy) {
+  text-transform: uppercase;
+}
+#produits .section-head .hira-home-heading,
+.hira-home-front .hira-partners > .hira-home-heading {
+  text-transform: uppercase;
+}
