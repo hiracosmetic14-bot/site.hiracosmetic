@@ -469,16 +469,17 @@
             <p>${offer.description}</p>
             <a href="${offer.link}">${offer.action} <span aria-hidden="true">↗</span></a>
           </div>
-          <div class="hira-offer-photo"><img src="${offer.image}" alt="" width="1200" height="840" decoding="async"></div>
+          <div class="hira-offer-photo"><img src="${offer.image}" alt="" width="1200" height="840" decoding="async">
+      <div class="hira-offer-arrows" role="group" aria-label="Parcourir les offres">
+        <button type="button" data-offer-step="-1" aria-label="Offre précédente">←</button>
+        <button type="button" data-offer-step="1" aria-label="Offre suivante">→</button>
+      </div>
+          </div>
         </article>`).join('')}
     </div>
     <div class="hira-offer-controls">
       <div class="hira-offer-tabs" role="group" aria-label="Choisir une offre">
         ${offers.map((offer, number) => `<button type="button" data-offer-index="${number}" aria-pressed="false" aria-controls="hira-offer-stage">${offer.tab}</button>`).join('')}
-      </div>
-      <div class="hira-offer-arrows" role="group" aria-label="Parcourir les offres">
-        <button type="button" data-offer-step="-1" aria-label="Offre précédente">←</button>
-        <button type="button" data-offer-step="1" aria-label="Offre suivante">→</button>
       </div>
       <button type="button" class="hira-offer-play" aria-controls="hira-offer-stage"></button>
     </div>`;
@@ -546,7 +547,9 @@
   carousel.querySelectorAll('[data-offer-step]').forEach(button => {
     button.addEventListener('click', () => {
       setPlaying(false);
-      show(index + Number(button.dataset.offerStep));
+      const step = button.dataset.offerStep;
+      show(index + Number(step));
+      slides[index].querySelector(`[data-offer-step="${step}"]`).focus({ preventScroll: true });
     });
   });
   play.addEventListener('click', () => setPlaying(!playing));
