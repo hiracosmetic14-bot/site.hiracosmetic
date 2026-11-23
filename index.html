@@ -1479,9 +1479,7 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
 .hira-offer-strip.hira-offer-fixed .hira-offer-shipping{justify-content:center}
 
 .hira-offer-strip.hira-offer-fixed{font-size:15px;font-weight:700}
-.hira-offer-fixed .hira-offer-saving{display:inline-block;padding:4px 10px;border-radius:6px;background:#ffcf42;color:#201700;font-size:clamp(30px,4.5vw,52px);font-weight:900;letter-spacing:-.04em;white-space:nowrap}
-.hira-offer-fixed .hira-offer-terms{text-transform:uppercase}
-.hira-offer-fixed .hira-offer-terms small{text-transform:none}
+.hira-offer-fixed .hira-offer-saving{font-weight:800;color:#ffe08a}
 .hira-offer-fixed .hira-offer-terms,.hira-offer-fixed .hira-offer-shipping{font-weight:800}
 .hira-offer-fixed .hira-offer-terms small{font-weight:700}
 .hira-offer-fixed .hira-offer-buy{background:#ffe08a;font-weight:800}
@@ -1506,14 +1504,6 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
 
   function highlightMessage() {
     const highlight = messages[active].querySelector('.hira-offer-saving') || messages[active];
-    if (highlight.classList.contains('hira-offer-saving')) {
-      highlight.animate([
-        {boxShadow:'0 0 0 0 #ffd44700'},
-        {boxShadow:'0 0 20px 4px #ffd447b3', offset:.4},
-        {boxShadow:'0 0 0 0 #ffd44700'}
-      ], {duration:750});
-      return;
-    }
     highlight.animate([{color:'#ffe08a',textShadow:'0 0 14px #ffe08a'}, {color:'#fff8ec',textShadow:'0 0 3px transparent'}, {color:'#ffe08a',textShadow:'0 0 14px #ffe08a'}, {textShadow:'none'}], {duration:1000});
   }
 
