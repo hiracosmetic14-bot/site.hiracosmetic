@@ -426,13 +426,6 @@
 
   const offers = [
     {
-      key: 'duo-rasage', tab: 'Duo rasage', brand: 'Gummy + Derby', title: 'Duo rasage',
-      price: '9,90 € TTC', description: 'Gel Gummy Bloom 1 L + 100 lames Derby Professional Platinum',
-      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-duo-rasage-instagram.png?v=1795426707',
-      link: 'https://hiracosmetic-store.myshopify.com/products/duo-rasage-gummy-bloom-derby-100-lames',
-      action: 'Acheter le duo'
-    },
-    {
       key: 'jrl', tab: 'JRL', brand: 'JRL Professional', title: 'Diamante Combo noir',
       price: '239,90 € TTC', description: 'Livraison offerte en Belgique',
       image: '/assets/accueil-jrl.webp',
@@ -452,6 +445,13 @@
       description: '100 lames simples pour shavette.',
       image: '/assets/accueil-derby.webp',
       link: '/marques/derby.html', action: 'Voir les lames'
+    },
+    {
+      key: 'duo-rasage', tab: 'Duo rasage', brand: 'Gummy + Derby', title: 'Duo rasage',
+      price: '9,90 € TTC', description: 'Gel Gummy Bloom 1 L + 100 lames Derby Professional Platinum',
+      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-duo-rasage-instagram.png?v=1795426707',
+      link: 'https://hiracosmetic-store.myshopify.com/products/duo-rasage-gummy-bloom-derby-100-lames',
+      action: 'Acheter le duo'
     }
   ];
 
@@ -475,6 +475,10 @@
     <div class="hira-offer-controls">
       <div class="hira-offer-tabs" role="group" aria-label="Choisir une offre">
         ${offers.map((offer, number) => `<button type="button" data-offer-index="${number}" aria-pressed="false" aria-controls="hira-offer-stage">${offer.tab}</button>`).join('')}
+      </div>
+      <div class="hira-offer-arrows" role="group" aria-label="Parcourir les offres">
+        <button type="button" data-offer-step="-1" aria-label="Offre précédente">←</button>
+        <button type="button" data-offer-step="1" aria-label="Offre suivante">→</button>
       </div>
       <button type="button" class="hira-offer-play" aria-controls="hira-offer-stage"></button>
     </div>`;
@@ -537,6 +541,12 @@
     button.addEventListener('click', () => {
       setPlaying(false);
       show(Number(button.dataset.offerIndex));
+    });
+  });
+  carousel.querySelectorAll('[data-offer-step]').forEach(button => {
+    button.addEventListener('click', () => {
+      setPlaying(false);
+      show(index + Number(button.dataset.offerStep));
     });
   });
   play.addEventListener('click', () => setPlaying(!playing));
