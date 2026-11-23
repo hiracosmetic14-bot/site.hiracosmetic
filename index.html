@@ -1475,6 +1475,13 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
 </section>
 <style>
 .hira-offer-fixed [hidden]{display:none!important}
+.hira-offer-strip.hira-offer-fixed{font-size:15px;font-weight:700}
+.hira-offer-fixed .hira-offer-saving{font-weight:800;color:#ffe08a}
+.hira-offer-fixed .hira-offer-terms,.hira-offer-fixed .hira-offer-shipping{font-weight:800}
+.hira-offer-fixed .hira-offer-terms small{font-weight:700}
+.hira-offer-fixed .hira-offer-buy{background:#ffe08a;font-weight:800}
+@media(max-width:600px){.hira-offer-strip.hira-offer-fixed{font-size:13px}}
+
 .hira-offer-fixed.is-rotating{position:relative;align-content:center;min-height:64px;padding-inline:82px}
 .hira-offer-fixed.is-rotating .hira-offer-main{flex-wrap:wrap;justify-content:center}
 .hira-banner-rotation{position:absolute;inset-inline-end:8px;top:50%;transform:translateY(-50%);min-height:44px;padding:4px 8px;border:0;background:transparent;color:inherit;text-decoration:underline;cursor:pointer}
@@ -1491,6 +1498,11 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
   const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let active = 0;
   let paused = false;
+
+  function highlightMessage() {
+    const highlight = messages[active].querySelector('.hira-offer-saving') || messages[active];
+    highlight.animate([{color:'#ffe08a',textShadow:'0 0 14px #ffe08a'}, {color:'#fff8ec',textShadow:'0 0 3px transparent'}, {color:'#ffe08a',textShadow:'0 0 14px #ffe08a'}, {textShadow:'none'}], {duration:1000});
+  }
 
   function showMessage(index) {
     messages.forEach((message, i) => { message.hidden = i !== index; });
@@ -1511,11 +1523,12 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
 
   motion.addEventListener('change', applyPreference);
   applyPreference();
+  if (!motion.matches) highlightMessage();
   window.setInterval(() => {
     if (motion.matches || paused || document.hidden || banner.matches(':hover, :focus-within')) return;
     active = (active + 1) % messages.length;
     showMessage(active);
-    messages[active].animate([{ opacity: 0.25 }, { opacity: 1 }], { duration: 240 });
+    highlightMessage();
   }, 7000);
 }
 </script>
