@@ -1404,7 +1404,15 @@ header .nav > .logo img {
 }
 </style>
 <link rel="stylesheet" href="/assets/offre-bienvenue.css?v=3">
-<link rel="stylesheet" href="/assets/gummy-rasage.css"></head>
+<link rel="stylesheet" href="/assets/gummy-rasage.css"><style>
+.hira-offer--duo-rasage { --hira-stage-colour: #191713; }
+.hira-offer--duo-rasage .hira-offer-photo img { object-fit: contain; mask-image: none; }
+.hira-offer-tabs { flex-wrap: wrap; }
+@media (max-width: 650px) {
+  .hira-offer--duo-rasage .hira-offer-photo { aspect-ratio: 4 / 5; max-height: 440px; }
+}
+</style>
+</head>
 
 <body><a class="hira-skip-link" href="#contenu-principal">Aller au contenu</a>
 
@@ -1999,7 +2007,7 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
 
 
 
-<script src="/assets/vitrine-polish.js?v=nos-marques-contact"></script>
+<script src="/assets/vitrine-polish.js?v=duo-rasage"></script>
 
 
 
