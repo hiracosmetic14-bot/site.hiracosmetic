@@ -426,6 +426,13 @@
 
   const offers = [
     {
+      key: 'duo-rasage', tab: 'Duo rasage', brand: 'Gummy + Derby', title: 'Duo rasage',
+      price: '9,90 € TTC', description: 'Gel Gummy Bloom 1 L + 100 lames Derby Professional Platinum',
+      image: 'https://cdn.shopify.com/s/files/1/1061/1310/6251/files/hira-duo-rasage-instagram.png?v=1795426707',
+      link: 'https://hiracosmetic-store.myshopify.com/products/duo-rasage-gummy-bloom-derby-100-lames',
+      action: 'Acheter le duo'
+    },
+    {
       key: 'jrl', tab: 'JRL', brand: 'JRL Professional', title: 'Diamante Combo noir',
       price: '239,90 € TTC', description: 'Livraison offerte en Belgique',
       image: '/assets/accueil-jrl.webp',
