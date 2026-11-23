@@ -1490,8 +1490,20 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
 .hira-offer-fixed.is-rotating .hira-offer-main{flex-wrap:wrap;justify-content:center}
 .hira-banner-rotation{position:absolute;inset-inline-end:8px;top:50%;transform:translateY(-50%);min-width:44px;min-height:44px;padding:4px 8px;border:0;background:transparent;color:inherit;font-size:16px;cursor:pointer}
 @media(max-width:600px){
-  .hira-offer-fixed.is-rotating{min-height:104px;padding-inline:12px 60px}
-  .hira-offer-fixed.is-rotating .hira-offer-buy{min-height:32px}
+  .hira-offer-fixed.is-rotating{min-height:100px;padding:8px 44px;gap:2px}
+  .hira-offer-fixed.is-rotating .hira-offer-main{display:grid;grid-template-columns:auto minmax(0,1fr);width:auto;column-gap:8px;row-gap:4px;padding:0;text-align:left}
+  .hira-offer-fixed.is-rotating .hira-offer-buy{grid-column:1/-1;justify-self:center;min-height:28px;padding:3px 8px}
+  .hira-offer-fixed .hira-offer-saving{font-size:30px}
+  .hira-offer-fixed .hira-offer-terms{font-size:14px}
+  .hira-offer-strip.hira-offer-fixed #hira-offer-news{font-size:13px;min-height:28px;width:100%;justify-content:center}
+  .hira-banner-rotation{inset-inline-end:0}
+  .hira-offer .hira-offer-photo{aspect-ratio:16/10}
+  .hira-offer--duo-rasage .hira-offer-photo{aspect-ratio:5/4;max-height:320px}
+  .hira-offer .hira-offer-copy{padding:16px 18px 20px}
+  .hira-offer .hira-offer-copy h2{font-size:clamp(25px,7vw,36px)}
+  .hira-offers .hira-offer-controls{justify-content:center}
+  .hira-offer-controls .hira-offer-tabs{justify-content:center}
+  .hira-offer-controls .hira-offer-play{margin-inline-start:0}
 }
 </style>
 <script>
