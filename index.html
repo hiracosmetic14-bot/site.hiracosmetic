@@ -1408,7 +1408,15 @@ header .nav > .logo img {
 .hira-offer--duo-rasage { --hira-stage-colour: #191713; }
 .hira-offer--duo-rasage .hira-offer-photo img { object-fit: contain; mask-image: none; }
 .hira-offer-tabs { flex-wrap: wrap; }
-.hira-offer-controls { flex-wrap: wrap; }
+.hira-offer-controls { flex-wrap: wrap; row-gap: 4px; }
+.hira-offer-tabs button[aria-pressed="true"] { background: #303133; }
+.hira-offer-controls .hira-offer-play { margin-inline-start: auto; }
+body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
+@media (max-width: 650px) {
+  .hira-offer-controls { padding-block: 4px; }
+  .hira-offer-tabs button { font-size: .76rem; }
+  .hira-offer-copy a { margin-top: 4px; }
+}
 .hira-offer-arrows { position: absolute; z-index: 2; inset-inline: 8px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: none; }
 .hira-offer-arrows button { pointer-events: auto; width: 44px; height: 44px; padding: 0; border: 1px solid #ffffff70; border-radius: 50%; background: #161616d9; color: #fff; font: 600 24px/1 Arial, sans-serif; cursor: pointer; }
 .hira-offer-arrows button:hover { background: #343434; }
