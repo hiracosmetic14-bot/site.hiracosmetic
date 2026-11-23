@@ -1508,6 +1508,16 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
     highlight.animate([{color:'#ffe08a',textShadow:'0 0 14px #ffe08a'}, {color:'#fff8ec',textShadow:'0 0 3px transparent'}, {color:'#ffe08a',textShadow:'0 0 14px #ffe08a'}, {textShadow:'none'}], {duration:1000});
   }
 
+  window.setInterval(() => {
+    const offer = messages[0];
+    if (motion.matches || paused || document.hidden || offer.hidden || banner.matches(':hover, :focus-within')) return;
+    offer.querySelector('.hira-offer-terms').animate([
+      { color: '#fff8ec', textShadow: 'none' },
+      { color: '#ffe08a', textShadow: '0 0 12px #ffca55', offset: 0.35 },
+      { color: '#fff8ec', textShadow: 'none' }
+    ], { duration: 550 });
+  }, 2400);
+
   function showMessage(index) {
     messages.forEach((message, i) => { message.hidden = i !== index; });
   }
