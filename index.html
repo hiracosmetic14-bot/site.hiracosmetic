@@ -1504,6 +1504,14 @@ footer .hira-social-rail .fa-whatsapp { color:#56e28e; }
   footer .hira-social-rail { position:fixed; inset-inline-end:6px; bottom:92px; z-index:80; flex-direction:column; gap:5px; padding:0; }
 }
 </style>
+<style>
+footer .hira-social-footer { display: none; }
+footer .hira-social-rail .fa-facebook-f { color: #8ab8ff; }
+@media(min-width:1100px) {
+  footer .hira-social-rail .hira-facebook-mobile { display: none; }
+  footer .hira-social-footer { display: flex; position: static; flex-direction: row; padding: 8px; }
+}
+</style>
 </head>
 
 <body><a class="hira-skip-link" href="#contenu-principal">Aller au contenu</a>
@@ -1922,7 +1930,8 @@ Préparer mon e-mail
   <a href="https://www.instagram.com/hira_.cosmetic/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
   <a href="https://www.tiktok.com/@hira.cosmetic" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
   <a href="https://wa.me/message/YPOEXFPVUT6OA1" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
-</nav><nav class="container hira-footer-services" aria-label="Services boutique">
+  <a class="hira-facebook-mobile" href="https://www.facebook.com/1339523552583260" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+</nav><div class="hira-social-rail hira-social-footer"><a class="hira-facebook-desktop" href="https://www.facebook.com/1339523552583260" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a></div><nav class="container hira-footer-services" aria-label="Services boutique">
 <a href="/livraison.html"><i class="fa-solid fa-truck" aria-hidden="true"></i> Livraison en Belgique</a>
 <a href="/retours-remboursement.html"><i class="fa-solid fa-box" aria-hidden="true"></i> Retours et rétractation</a>
 <a href="#contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Nous contacter</a>
