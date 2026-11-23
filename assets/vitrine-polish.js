@@ -440,6 +440,7 @@
     },
     {
       key: 'gummy', tab: 'Gummy', brand: 'Gummy Professional', title: 'Pack découverte 3 cires',
+      price: '9,90 € TTC',
       description: 'Mat, naturel et ultra-fort · 3 × 150 ml',
       image: '/assets/accueil-gummy.webp',
       link: 'https://hiracosmetic-store.myshopify.com/products/gummy-pack-decouverte-3-cires-150-ml',
@@ -447,6 +448,7 @@
     },
     {
       key: 'derby', tab: 'Derby', brand: 'Derby Professional', title: 'Lames de rasage Derby',
+      price: '5,50 € TTC',
       description: '100 lames simples pour shavette.',
       image: '/assets/accueil-derby.webp',
       link: '/marques/derby.html', action: 'Voir les lames'
