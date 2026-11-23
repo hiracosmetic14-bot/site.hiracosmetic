@@ -1409,8 +1409,10 @@ header .nav > .logo img {
 .hira-offer--duo-rasage .hira-offer-photo img { object-fit: contain; mask-image: none; }
 .hira-offer-tabs { flex-wrap: wrap; }
 .hira-offer-controls { flex-wrap: wrap; }
-.hira-offer-arrows { display: flex; gap: 4px; margin-inline-start: auto; }
-.hira-offer-arrows button { min-width: 44px; font-size: 1.25rem; }
+.hira-offer-arrows { position: absolute; z-index: 2; inset-inline: 8px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: none; }
+.hira-offer-arrows button { pointer-events: auto; width: 44px; height: 44px; padding: 0; border: 1px solid #ffffff70; border-radius: 50%; background: #161616d9; color: #fff; font: 600 24px/1 Arial, sans-serif; cursor: pointer; }
+.hira-offer-arrows button:hover { background: #343434; }
+.hira-offer-arrows button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (max-width: 650px) {
   .hira-offer--duo-rasage .hira-offer-photo { aspect-ratio: 4 / 5; max-height: 440px; }
 }
@@ -2010,7 +2012,7 @@ document.addEventListener('keydown',function(event){if(event.key==='Escape'&&mai
 
 
 
-<script src="/assets/vitrine-polish.js?v=fleches-jrl"></script>
+<script src="/assets/vitrine-polish.js?v=fleches-photo"></script>
 
 
 
