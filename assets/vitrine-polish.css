@@ -142,7 +142,7 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 .hira-live-catalogue-status{font:14px/1.7 Arial,sans-serif;color:#4d5e69;padding:12px 16px;border:1px solid #d5e0e5;border-radius:7px;background:#f3f7f9;margin:12px 0 20px}.gbs-stock[data-live-state="unknown"],.stock[data-live-state="unknown"]{background:#eef3f6;color:#40535e}.gbs-stock[data-live-state="unavailable"],.stock[data-live-state="unavailable"]{background:#f3f5f6;color:#4d5e69}
 
 /* Editorial homepage: featured product and brand directory. */
-.hira-logotype-hero.hira-home-front { padding: 24px 0 32px; background: #f7f7f5; }
+.hira-logotype-hero.hira-home-front { padding: 0 0 32px; background: #f7f7f5; }
 .hira-home-front .hira-logotype-layout { display: block; }
 .hira-home-front .hira-logotype-copy[hidden], .hira-offer[hidden] { display: none; }
 .hira-home-visually-hidden {
@@ -154,13 +154,13 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
   white-space: nowrap;
 }
 .hira-offers {
-  width: min(1260px, 92%);
+  width: 100%;
   margin: 0 auto 30px;
   background: #191a1b;
   color: #f7f6f2;
   font-family: Roboto, Arial, sans-serif;
 }
-.hira-offer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); }
+.hira-offer { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); }
 .hira-offer-copy { align-self: center; padding: clamp(26px, 5vw, 72px); }
 .hira-offer-copy p { margin: 0 0 16px; color: #d5d4cf; }
 .hira-offer-copy h2 {
@@ -190,13 +190,12 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
 }
 .hira-offer-copy a:hover { background: #e4e2da; }
 .hira-offer-photo {
-  display: grid;
-  place-items: center;
-  height: clamp(330px, 36vw, 510px);
+  position: relative;
+  min-height: clamp(330px, 38vw, 550px);
   overflow: hidden;
   background: #dedbd5;
 }
-.hira-offer-photo img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.hira-offer-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
 .hira-offer--gummy .hira-offer-photo { background: #303030; }
 .hira-offer-copy .hira-offer-price {
   margin: 0 0 4px;
@@ -230,9 +229,8 @@ footer p,.footer-column h2,.footer-links a,.footer-bottom,.payment-label{color:#
   .hira-home-front .hira-partners-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media (max-width: 650px) {
-  .hira-logotype-hero.hira-home-front { padding-top: 12px; }
   .hira-offer { grid-template-columns: minmax(0, 1fr); }
-  .hira-offer-photo { grid-row: 1; height: auto; aspect-ratio: 10 / 7; }
+  .hira-offer-photo { grid-row: 1; min-height: 0; aspect-ratio: 10 / 7; }
   .hira-offer-copy { padding: 20px 22px 24px; }
   .hira-offer-copy h2 { max-width: none; font-size: clamp(34px, 8vw, 46px); }
   .hira-offer-copy p, .hira-offer-copy h2 { margin-bottom: 10px; }
