@@ -4,9 +4,9 @@
   justify-content: center;
   gap: 0 20px;
   padding: 6px 14px;
-  border-bottom: 1px solid #ffc178;
-  background: linear-gradient(110deg, #a90020, #d40824 60%, #b60026);
-  color: #fff8ed;
+  border-bottom: 1px solid #a28d67;
+  background: #262524;
+  color: #fbf8f2;
   font-size: 13px;
   line-height: 1.4;
 }
@@ -15,13 +15,13 @@
   align-items: center;
   gap: 10px;
   min-height: 44px;
-  color: #fff8ed;
+  color: #fbf8f2;
   text-underline-offset: 3px;
 }
 .hira-offer-fixed .hira-offer-main { gap: 13px; text-decoration: none; }
 .hira-offer-main .hira-offer-saving {
   flex-shrink: 0;
-  color: #ffe19a;
+  color: #e7d5b4;
   font-size: clamp(30px, 4vw, 44px);
   font-weight: 800;
   line-height: 1;
@@ -36,13 +36,13 @@
   min-height: 44px;
   padding: 6px 12px;
   border-radius: 5px;
-  background: #ffe19a;
-  color: #492018;
+  background: #e7d5b4;
+  color: #28231c;
   font-weight: 800;
   text-align: center;
 }
 .hira-offer-main:hover .hira-offer-buy,
-.hira-offer-main:focus-visible .hira-offer-buy { background: #fff0c9; }
+.hira-offer-main:focus-visible .hira-offer-buy { background: #f1e3c9; }
 .hira-offer-fixed > a:not(.hira-offer-main) { text-decoration: underline; }
 #hira-offer-dialog {
   position: fixed;
@@ -54,7 +54,7 @@
   margin: auto;
   padding: 32px clamp(18px, 6vw, 36px) 12px;
   border: 1px solid #e5d9ce;
-  border-top: 5px solid #d40824;
+  border-top: 5px solid #a28d67;
   border-radius: 12px;
   background: #fffdf8;
   color: #32271f;
@@ -74,7 +74,7 @@
 #hira-offer-details { margin: 0 0 20px; }
 .hira-offer-dialog-saving {
   display: block;
-  color: #b60026;
+  color: #534431;
   font-size: clamp(48px, 13vw, 72px);
   font-weight: 800;
   line-height: 1;
@@ -100,14 +100,14 @@
   text-decoration: none;
 }
 #hira-offer-dialog .hira-offer-checkout {
-  border-color: #b60026;
-  background: #b60026;
+  border-color: #534431;
+  background: #534431;
   color: #fff;
 }
-#hira-offer-dialog .hira-offer-checkout:hover { background: #8f001d; }
+#hira-offer-dialog .hira-offer-checkout:hover { background: #3d3226; }
 #hira-offer-dialog .hira-offer-signup {
   border-color: #d9c8b9;
-  color: #492018;
+  color: #28231c;
 }
 #hira-offer-dialog .hira-offer-signup:hover { background: #fbf1e8; }
 #hira-offer-dialog .hira-offer-privacy {
@@ -120,7 +120,7 @@
   text-underline-offset: 3px;
 }
 #hira-offer-dialog :is(a, button):focus-visible {
-  outline: 2px solid #492018;
+  outline: 2px solid #28231c;
   outline-offset: 2px;
 }
 .hira-offer-close {
