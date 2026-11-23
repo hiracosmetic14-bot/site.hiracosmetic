@@ -1471,7 +1471,7 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
   </a>
   <a class="hira-offer-shipping" href="https://hiracosmetic-store.myshopify.com/policies/shipping-policy">Livraison offerte dès 70 € en Belgique</a>
   <a id="hira-offer-news" href="https://hiracosmetic-store.myshopify.com/#contact_form">Recevoir les offres</a>
-  <button type="button" class="hira-banner-rotation" hidden aria-pressed="false">Pause</button>
+  <button type="button" class="hira-banner-rotation" hidden aria-label="Mettre la bannière en pause" aria-pressed="false"><span aria-hidden="true">⏸</span></button>
 </section>
 <style>
 .hira-offer-fixed [hidden]{display:none!important}
@@ -1487,7 +1487,7 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
 
 .hira-offer-fixed.is-rotating{position:relative;align-content:center;min-height:64px;padding-inline:82px}
 .hira-offer-fixed.is-rotating .hira-offer-main{flex-wrap:wrap;justify-content:center}
-.hira-banner-rotation{position:absolute;inset-inline-end:8px;top:50%;transform:translateY(-50%);min-height:44px;padding:4px 8px;border:0;background:transparent;color:inherit;text-decoration:underline;cursor:pointer}
+.hira-banner-rotation{position:absolute;inset-inline-end:8px;top:50%;transform:translateY(-50%);min-width:44px;min-height:44px;padding:4px 8px;border:0;background:transparent;color:inherit;font-size:16px;cursor:pointer}
 @media(max-width:600px){
   .hira-offer-fixed.is-rotating{min-height:104px;padding-inline:12px 60px}
   .hira-offer-fixed.is-rotating .hira-offer-buy{min-height:32px}
@@ -1522,6 +1522,7 @@ body:has(.hira-offer--duo-rasage) .hira-rasage-offer { display: none; }
   toggle.addEventListener('click', () => {
     paused = !paused;
     toggle.setAttribute('aria-pressed', String(paused));
+    toggle.querySelector('span').textContent = paused ? '▶' : '⏸';
   });
 
   motion.addEventListener('change', applyPreference);
